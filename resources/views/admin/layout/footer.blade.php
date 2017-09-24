@@ -44,7 +44,7 @@
 <!--common script for all pages-->
 <script src="supadmin/style-shorten/js/common-scripts.js"></script>
 <!--this page  script only-->
-<script src="supadmin/style-shorten/js/advanced-form-components.js"></script>
+<!-- <script src="supadmin/style-shorten/js/advanced-form-components.js"></script> -->
 
 
 <!-- vuejs-->

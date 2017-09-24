@@ -13,7 +13,7 @@ class RoleSeed extends Seeder
     {
         DB::table('roles')->insert([
         	[
-        		'name'=>'Subper Admin'
+        		'name'=>'Super Admin'
         	],
         	[
         		'name'=>'Admin'

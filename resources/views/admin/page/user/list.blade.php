@@ -21,11 +21,6 @@ User List | Admin
       </div>
       <div class="clearfix"> </div>
     </div>
-    @if(session('thongbao'))
-    <div class="alert alert-success">
-      <strong>{{session('thongbao')}}</strong>
-    </div>
-    @endif
     <div id="contentajax">
       <table class="table table-hover display table-bordered">
         <thead>
@@ -101,10 +96,13 @@ User List | Admin
           <div ng-show="success" class="text-success text-center">
            [[thongbao]]
          </div>
+         <div class="alert alert-success" ng-show="alert">
+          <strong>[[thongbao]]</strong>
+        </div>
          <div class="form-group">
           <label for="name" class="col-sm-3 control-label">Họ tên</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="name" name="name" ng-minlength="2" ng-maxlength="50" placeholder="Vui lòng nhập họ tên" ng-model="UserByid.name" ng-required="true" />
+            <input type="text" class="form-control" id="name" name="name" ng-minlength="2" ng-maxlength="50" placeholder="Vui lòng nhập họ tên" ng-model="UserByid.name" />
             <i class="fa fa-check text-success" ng-show=" frmUser.name.$valid"></i>
             <span id="helpBlock2" class="help-block"  ng-show="frmUser.name.$error.required">Vui lòng nhập họ tên</span>
             <span id="helpBlock2" class="help-block"  ng-show="frmUser.name.$error.minlength">Tên tối thiểu 2 ký tự</span>
@@ -124,7 +122,7 @@ User List | Admin
         <div class="form-group" ng-if="!add">
           <label for="email" class="col-sm-3 control-label">Email</label>
           <div class="col-sm-9">
-            <input type="email" class="form-control" id="email" name="email" placeholder="Vui lòng nhập Email" ng-model="UserByid.email" ng-required="true" />
+            <input type="email" class="form-control" id="email" name="email" placeholder="Vui lòng nhập Email" ng-model="UserByid.email" ng-required="true" ng-disabled="true" />
             <i class="fa fa-check text-success" ng-show=" frmUser.email.$valid"></i>
             <span id="helpBlock2" class="help-block" ng-show="frmUser.email.$error.required">Vui lòng nhập email</span>
             <span id="helpBlock2" class="help-block" ng-show="frmUser.email.$error.email">Đây không phải là định dạng Email</span>
@@ -137,98 +135,93 @@ User List | Admin
             ng-options="item.name for item in role track by item.id" ng-required="true" >
 
           </select>
+          <i class="fa fa-check text-success" ng-show=" frmUser.role_id.$valid"></i>
+          <span id="helpBlock2" class="help-block" ng-show="frmUser.selectedItem.$error.required">Vui lòng chọn quyền người dùng</span>
+        </div>
+      </div>
+      <div ng-if="add">
+        <div class="form-group" >
+          <label for="password" class="col-sm-3 control-label">Nhập mật khẩu</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" id="password" name="password" ng-minlength="6" ng-maxlength="32" placeholder="Vui lòng nhập mật khẩu"  ng-model="p.password" ng-required="true" />
+            <i class="fa fa-check text-success" ng-show=" frmUser.password.$valid"></i>
+            <span id="helpBlock2" class="help-block" ng-show="frmUser.password.$error.required">Vui lòng nhập mật khẩu</span>
 
-
-              <!-- <select  name="role_id" id="role_id" class="form-control" ng-required="true" ng-model="UserByid.role_id">
-                      <option ng-repeat="rr in role" value="[[rr.id]]">[[rr.name]]</option>
-                    </select> -->
-
-                    <i class="fa fa-check text-success" ng-show=" frmUser.role_id.$valid"></i>
-                    <span id="helpBlock2" class="help-block" ng-show="frmUser.selectedItem.$error.required">Vui lòng chọn quyền người dùng</span>
-                  </div>
-                </div>
-                <div ng-if="add">
-                  <div class="form-group" >
-                    <label for="password" class="col-sm-3 control-label">Nhập mật khẩu</label>
-                    <div class="col-sm-9">
-                      <input type="password" class="form-control" id="password" name="password" ng-minlength="6" ng-maxlength="32" placeholder="Vui lòng nhập mật khẩu"  ng-model="p.password" ng-required="true" />
-                      <i class="fa fa-check text-success" ng-show=" frmUser.password.$valid"></i>
-                      <span id="helpBlock2" class="help-block" ng-show="frmUser.password.$error.required">Vui lòng nhập mật khẩu</span>
-
-                      <span id="helpBlock2" class="help-block" ng-show="frmUser.password.$error.minlength">Mật khẩu tối thiẻu 6 ký tự</span>
-                      <span id="helpBlock2" class="help-block" ng-show="frmUser.password.$error.maxlength">Mật khẩu tối đa 32 ký tự </span>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="repassword" class="col-sm-3 control-label">Nhập lại mật khẩu</label>
-                    <div class="col-sm-9" >
-                      <input type="password"  class="form-control" id="repassword" name="repassword"  placeholder="Vui lòng nhập mật khẩu" ng-model="p.repassword" ng-required="true" />
-                      <span id="helpBlock2"  class="help-block" ng-if="p.password != p.repassword">Không khớp mật khẩu</span>
-                    </div>
-                  </div>
-                </div>
-
-
-
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" ng-disabled="frmUser.$invalid || p.password != p.repassword " ng-click="save(state,id)">Lưu</button>
-            </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
-
-
-      <!-- Modal recordDel-->
-      <div class="modal fade" id="recordDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title">Delete [[idd]]</h4>
-            </div>
-            <div class="modal-body">
-              Bạn có muốn xóa link trong danh sách chờ duyệt hay không? [[idd]]
-              <input type="hidden" id="idRecord" name="idRecord" value="">
-            </div>
-            <div class="modal-footer">
-              <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-              <button class="btn btn-danger btn-delete" type="button" ng-click="confirmDelete(idd)"> Ok</button>
-            </div>
+            <span id="helpBlock2" class="help-block" ng-show="frmUser.password.$error.minlength">Mật khẩu tối thiẻu 6 ký tự</span>
+            <span id="helpBlock2" class="help-block" ng-show="frmUser.password.$error.maxlength">Mật khẩu tối đa 32 ký tự </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="repassword" class="col-sm-3 control-label">Nhập lại mật khẩu</label>
+          <div class="col-sm-9" >
+            <input type="password"  class="form-control" id="repassword" name="repassword"  placeholder="Vui lòng nhập mật khẩu" ng-model="p.repassword" ng-required="true" />
+            <span id="helpBlock2"  class="help-block" ng-if="p.password != p.repassword">Không khớp mật khẩu</span>
           </div>
         </div>
       </div>
-      <!-- .modal recordDel-->
-    </div>
 
 
 
+    </form>
+  </div>
+  <div class="modal-footer">
+  <button type="button" class="btn btn-primary" ng-click="close()">Cancle</button>
+    <button type="button" class="btn btn-primary" ng-disabled="frmUser.$invalid || p.password != p.repassword " ng-click="save(state,id)">Lưu</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
-
-    <!-- Modal -->
-    <div class="modal fade " id="contentSeederr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close close-content-seeder" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Thông tin seeder</h4>
-          </div>
-          <div class="modal-body contentSeederBody">
-            Body goes here...
-          </div>
-          <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-          </div>
-        </div>
+<!-- Modal recordDel-->
+<div class="modal fade" id="recordDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Delete </h4>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn xóa link trong danh sách chờ duyệt hay không?
+        <input type="hidden" id="idRecord" name="idRecord" value="">
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+        <button class="btn btn-danger btn-delete" type="button" ng-click="confirmDelete(idd)"> Ok</button>
       </div>
     </div>
-    <!-- .modal content seeder-->
+  </div>
+</div>
+<!-- .modal recordDel-->
+</div>
 
-    <!-- page end-->
-    @endsection
 
-    @section('script')
-    <script type="text/javascript" src="app/controllers/UserController.js"></script>
-    @endsection
+
+
+
+
+<!-- Modal -->
+<div class="modal fade " id="contentSeederr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close close-content-seeder" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Thông tin seeder</h4>
+      </div>
+      <div class="modal-body contentSeederBody">
+        Body goes here...
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- .modal content seeder-->
+
+<!-- page end-->
+@endsection
+
+@section('script')
+<script type="text/javascript" src="app/controllers/UserController.js"></script>
+@endsection

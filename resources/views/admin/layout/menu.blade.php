@@ -15,7 +15,7 @@
                       </a>
                       <ul class="sub">
                       @foreach($menuuser as $mn)
-                          <li><a href="{{$mn->menu->src}}"  >{{$mn->menu->name}}</a></li>
+                          <li><a href="admin/{{$mn->menu->src}}"  >{{$mn->menu->name}}</a></li>
                       @endforeach
                       </ul>
                   </li>

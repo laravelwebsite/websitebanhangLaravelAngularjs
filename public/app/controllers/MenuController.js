@@ -1,9 +1,9 @@
 app.controller('UserController' ,function ($scope,$http,API) {
 
 	//hiển thị danh sách
-	$http.get(API + 'admin/user/tbUser').then(function (response) {
-		$scope.users = response.data;
-
+	$http.get(API + 'admin/menu/tbMenu').then(function (response) {//index api
+		$scope.menus = response.data;
+		console.log(response.data);
 	});
 	
 	/*$scope.init = function () {
@@ -14,42 +14,28 @@ app.controller('UserController' ,function ($scope,$http,API) {
 	$scope.modal = function (state,id) {
 		$scope.state = state;
 		
-		$http.get(API+ 'admin/user/tbRole').then(function(response){
-
-			$scope.role=response.data;
-			$scope.role_id=$scope.role[0];
-			$scope.p={};
-			$scope.UserByid={};
-
-		});
-
 		switch (state) {
 			case "add" :
-			$scope.frmTitle = "Thêm User";
-			$scope.passtitle="Đặt mật khẩu";
-
+			$scope.frmTitle = "Thêm Menu";
 			$scope.add=true;
-
-
-
+			$scope.menubyId={};
 			break;
 			case "edit" :
-			$scope.frmTitle = "Sửa User";
-			$scope.passtitle="Check vào để đổi mật khẩu";
-			$scope.id = id;
+			$scope.frmTitle = "Sửa Menu";
 			$scope.add=false;
-			$http.get(API + 'admin/user/tbUser/' + id).then(function (response) {
-				$scope.UserByid = response.data;
-				$scope.role_id = $scope.UserByid.role;
+			$scope.id = id;
+			$http.get(API + 'admin/menu/tbMenu/' + id).then(function (response) {//show api
+				$scope.menubyId = response.data;
 
 			});
+			
 			break;
 			default :
 			$scope.frmTitle = "Không Biết";
 			break;
 		}
-
-		$("#myModal").modal('show');
+	$("#myModal").modal('show');
+		
 	}
 
 	// sự kiện xóa
@@ -64,18 +50,15 @@ app.controller('UserController' ,function ($scope,$http,API) {
 	}
 	//sự kiện click nút lưu khi thêm,sửa
 	$scope.save = function (state,id) {
+		console.log($scope.menubyId.name);
 		if (state == "add") {
-
-			var url = API + 'admin/user/tbUser';
+			var url = API + 'admin/menu/tbMenu';//store api
 			$http({
 				method : 'POST',
 				url : url,
 				params : {
-					'name':$scope.UserByid.name,
-					'email':$scope.UserByid.email,
-					'role_id':$scope.role_id.id,
-					'password':$scope.p.password,
-					
+					'name':$scope.menubyId.name,
+					'src':$scope.menubyId.src
 				},
 				headers : {'Content-Type':'application/x-www-form-urlencoded'}
 			})
@@ -85,19 +68,16 @@ app.controller('UserController' ,function ($scope,$http,API) {
 			})
 			
 		}
-
+		//var url = API + 'admin/menu/tbMenu/create'; (get) create api
+		//var url = API + 'admin/menu/tbMenu/' + id + '/edit'; (get) edit api
 		if (state == "edit") {
-			var url = API + 'admin/user/tbUser/' + id;
-			var data = $.param($scope.UserByid);
-			console.log($scope.UserByid.role_id);
+			var url = API + 'admin/menu/tbMenu/' + id;//update api
 			$http({
 				method : 'PUT',
 				url : url,
 				params : {
-					'name':$scope.UserByid.name,
-					'email':$scope.UserByid.email,
-					'role_id':$scope.role_id.id,
-					
+					'name':$scope.menubyId.name,
+					'src':$scope.menubyId.src				
 				},
 				headers : {'Content-Type':'application/x-www-form-urlencoded'}
 			})
@@ -112,7 +92,7 @@ app.controller('UserController' ,function ($scope,$http,API) {
 	//xác nhận xoa
 	$scope.confirmDelete = function (idd) {
 		
-		$http.delete(API + 'admin/user/tbUser/' + idd)
+		$http.delete(API + 'admin/menu/tbMenu/' + idd)//destroy api
 		.then(function (response) {
 			location.reload();
 		})
@@ -125,13 +105,13 @@ app.controller('UserController' ,function ($scope,$http,API) {
                     }
 });
 
-app.directive('userExist', function($http, $q,API) {
+app.directive('nameExist', function($http, $q,API) {
 	return {
 		restrict:'AE',
 		require: 'ngModel',
 		link: function(scope, element, attrs, ngModel) {
-			ngModel.$asyncValidators.userExist = function(modelValue, viewValue) {
-				return $http.post(API + 'admin/user/checkemail', {email: viewValue})
+			ngModel.$asyncValidators.nameExist = function(modelValue, viewValue) {
+				return $http.post(API + 'admin/menu/checknamemenu', {name: viewValue})
 				.then(
 					function(response) {
 						console.log(response.data);
@@ -143,6 +123,31 @@ app.directive('userExist', function($http, $q,API) {
 						if (response.data==1)
 						{
 							ngModel.$setValidity("nametaken",true); 
+						}
+					}
+					);
+			};
+		}
+	};
+});
+app.directive('srcExist', function($http, $q,API) {
+	return {
+		restrict:'AE',
+		require: 'ngModel',
+		link: function(scope, element, attrs, ngModel) {
+			ngModel.$asyncValidators.srcExist = function(modelValue, viewValue) {
+				return $http.post(API + 'admin/menu/checksrcmenu', {src: viewValue})
+				.then(
+					function(response) {
+						console.log(response.data);
+						if (response.data==0 )
+						{
+							
+							ngModel.$setValidity("srctaken",false); 
+						}
+						if (response.data==1)
+						{
+							ngModel.$setValidity("srctaken",true); 
 						}
 					}
 					);

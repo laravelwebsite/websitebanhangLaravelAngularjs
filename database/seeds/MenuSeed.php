@@ -14,15 +14,19 @@ class MenuSeed extends Seeder
         DB::table('menus')->insert([
         	[
         		'name'=>'User',
-        		'src'=>'admin/user/list'
+        		'src'=>'user'
         	],
         	[
         		'name'=>'Menu',
-        		'src'=>'admin/menu/list'
+        		'src'=>'menu'
         	],
             [
                             'name'=>'Role',
-                            'src'=>'admin/role/list'
+                            'src'=>'role'
+            ],
+            [
+                            'name'=>'User_Menu',
+                            'src'=>'UserMenu'
             ],
         ]);
     }

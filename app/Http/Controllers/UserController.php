@@ -34,54 +34,6 @@ class UserController extends Controller
 		Auth::logout();
 		return redirect('admin/login-admin');
 	}
-	public function postList()
-	{
-
-		if(Auth::user()->role_id==3)
-		{
-			$listUser=User::orderBy('role_id','DESC')->get();
-			
-		}
-		if(Auth::user()->role_id==2)
-		{
-			$listUser=User::where('role_id',1)->orderBy('role_id','DESC')->get();
-		}
-		foreach($listUser as $list)
-		{
-			$list->role;
-		}
-
-		return $listUser;
-	}
-
-	public function postAdd(Request $request)
-	{
-		//bcrypt($request->password);
-		$user=new User;
-		$user->name=$request->name;
-		$user->email=$request->email;
-		$user->role_id=$request->role_id;
-		$user->password=bcrypt($request->password);
-		$user->save();
-		return "Thêm thành công";
-	}
-	public function getEdit($id)
-	{
-		$user=User::find($id);
-		$user->role;
-		return $user;
-	}
-	public function postEdit(Request $request,$id)
-	{
-
-	}
-	public function getDelete($id)
-	{
-		$user = User::findOrFail($id);
-		$user->delete();
-		return "Xóa thành công";
-	}
-
 	public function postCheckemail(Request $request)
 	{
 		$check=true;
@@ -95,5 +47,18 @@ class UserController extends Controller
 			$status=1;
 		}
 		return json_encode($status);
+	}
+	public function getUser()
+	{
+		if(Auth::user()->role_id==3)
+		{
+			$listUser=User::where('role_id',2)->orWhere('role_id',3)->get();
+
+		}
+		foreach($listUser as $list)
+		{
+			$list->role;
+		}
+		return $listUser;
 	}
 }
