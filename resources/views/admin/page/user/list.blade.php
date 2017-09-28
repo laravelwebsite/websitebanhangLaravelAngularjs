@@ -25,6 +25,7 @@ User List | Admin
       <table class="table table-hover display table-bordered">
         <thead>
           <tr>
+           <th ><i class="fa fa-bookmark"></i>CheckAll <input type="checkbox" id="checkall" name="checkall" ng-model="checkall" /></th>
             <th ng-click="sort('id')"><i class="fa fa-bookmark"></i>ID
               <span class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
               </span>
@@ -48,6 +49,7 @@ User List | Admin
           <sample-text></sample-text>
           <div orientable></div>
           <tr dir-paginate="ds in users|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+          <td class="text-center" ><input type="checkbox" ng-checked="checkall" /></td>
             <td class="text-center"><span>[[ds.id]]</span></td>
             <td class="text-center"><span>[[ds.name]]</span></td>
             <td class="text-center"><span>[[ds.email]]</span> </td>
@@ -102,7 +104,7 @@ User List | Admin
          <div class="form-group">
           <label for="name" class="col-sm-3 control-label">Họ tên</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="name" name="name" ng-minlength="2" ng-maxlength="50" placeholder="Vui lòng nhập họ tên" ng-model="UserByid.name" />
+            <input type="text" class="form-control" id="name" name="name" ng-minlength="2" ng-maxlength="50" ng-required="true" placeholder="Vui lòng nhập họ tên" ng-model="UserByid.name" />
             <i class="fa fa-check text-success" ng-show=" frmUser.name.$valid"></i>
             <span id="helpBlock2" class="help-block"  ng-show="frmUser.name.$error.required">Vui lòng nhập họ tên</span>
             <span id="helpBlock2" class="help-block"  ng-show="frmUser.name.$error.minlength">Tên tối thiểu 2 ký tự</span>

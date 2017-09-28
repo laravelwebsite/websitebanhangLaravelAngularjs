@@ -26,6 +26,7 @@ User Menu | Admin
       <table class="table table-hover display table-bordered">
         <thead>
           <tr>
+         
             <th ><i class="fa fa-bookmark"></i>CheckAll <input type="checkbox" id="checkall" name="checkall" ng-model="checkall" /></th>
             <th ng-click="sort('id')"><i class="fa fa-bookmark"></i>ID
               <span class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
@@ -47,6 +48,7 @@ User Menu | Admin
           <div orientable></div>
           <tr dir-paginate="um in usermenus|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
             <td class="text-center" ><input type="checkbox" ng-checked="checkall" /></td>
+            
             <td class="text-center"><span>[[um.id]]</span></td>
             <td class="text-center"><span>[[um.user.email]]</span></td>
             <td class="text-center"><span>[[um.menu.name]]</span></td>
