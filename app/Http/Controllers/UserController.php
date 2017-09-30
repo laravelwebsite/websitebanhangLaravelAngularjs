@@ -50,9 +50,9 @@ class UserController extends Controller
 	}
 	public function getUser()
 	{
-		if(Auth::user()->role_id==3)
+		if(Auth::user()->role_id==4)
 		{
-			$listUser=User::where('role_id',2)->orWhere('role_id',3)->get();
+			$listUser=User::where('role_id',3)->orWhere('role_id',4)->get();
 
 		}
 		foreach($listUser as $list)

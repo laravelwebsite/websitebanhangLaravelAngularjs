@@ -20,7 +20,10 @@ class RoleSeed extends Seeder
         	],
         	[
         		'name'=>'User'
-        	]
+        	],
+            [
+                        'name'=>'Store'
+            ]
         ]);
     }
 }

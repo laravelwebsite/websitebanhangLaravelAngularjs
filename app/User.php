@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Menu;
 use App\Role;
+use App\Product;
+use App\Store;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -32,5 +34,13 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class,'role_id','id');
+    }
+    public function product()
+    {
+        return $this->hasMany(Product::class,'user_id','id');
+    }
+    public function store()
+    {
+        return $this->hasOne(Store::class,'user_id','id');
     }
 }
