@@ -18,8 +18,18 @@ class CategoryControllerAPI extends Controller
         {
             foreach($cate->subcategory as $sub)
             {
-                
-                
+                foreach($sub->detailsubcategory as $detail)  
+                {
+                    $i=0;
+                    foreach($detail->product as $pro)
+                    {
+                        if($i>=3)
+                        {
+                            break;
+                        }
+                        $i++;
+                    }
+                }
             }
         }
         //$categories->subcategory;

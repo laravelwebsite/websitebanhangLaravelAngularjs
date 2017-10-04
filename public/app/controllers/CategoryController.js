@@ -3,8 +3,8 @@ app.controller('CategoryController' ,function ($scope,$http,API) {
 	//hiển thị danh sách
 	$http.get(API + 'tbCategory').then(function (response) {//index api
 		$scope.categories = response.data;
-		console.log($scope.categories);
 	});
+	
 	$scope.loadCompleted = function(){
 		$(".megamenu").megamenu();
 	}

@@ -19,8 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('slug',255);
             $table->string('title',255);
             $table->text('description');
+            $table->double('price');
             $table->text('image');
-            $table->integer('album_id')->references('id')->on('album_images')->onDelete('cascade');
             $table->string('status',255)->nullable();//hot,khuyến mãi,bán chạy,mới nhất
             $table->boolean('active');//khóa hay hoạt động
             $table->integer('detail_sub_categories_id')->references('id')->on('detail_sub_categories')->onDelete('cascade');

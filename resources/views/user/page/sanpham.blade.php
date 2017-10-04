@@ -1,19 +1,8 @@
-@extends('user.layout.index')
 
-@section('slide')
-@include('user.layout.slide')
-@endsection
+<div class="cont span_2_of_3" >
 
-@section('contentleft')
-@include('user.layout.contentleft')
-@endsection
-@section('contentright')
-
-<div class="cont span_2_of_3" ng-controller="ProductController" >
-@include('user.layout.sort')
   <div class="box1" >
-    <div class="clear"></div>
-    <div class="col_1_of_single1 span_1_of_single1" dir-paginate="product in products|orderBy:sortKey:reverse|filter:searchproduct|itemsPerPage:perpage"><a href="san-pham/[[product.id]]/[[product.slug]]">
+   <div class="col_1_of_single1 span_1_of_single1" ng-repeat="product in products"><a href="">
      <div class="view1 view-fifth1">
       <div class="top_box">
         <h3 class="m_1">[[product.name]]</h3>
@@ -38,6 +27,7 @@
     <label for="rating-input-1-2" class="rating-star"></label>
     <input type="radio" class="rating-input" id="rating-input-1-1" name="rating-input-1">
     <label for="rating-input-1-1" class="rating-star"></label>&nbsp;
+    (45)
   </span>
 
   <ul class="list2" >
@@ -46,32 +36,16 @@
       <ul class="icon1 sub-icon1 profile_img">
         <li><a class="active-icon c1" href="#">Add cart </a>
           <ul class="sub-icon1 list">
-            <li><h3>Thêm vào giỏ hàng</h3><a href=""></a></li>
-            <li><p>Thêm vào giỏ hàng để mua sản phẩm của bạn<a href=""> Xem giỏ hàng </a></p></li>
+            <li><h3>sed diam nonummy</h3><a href=""></a></li>
+            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
           </ul>
         </li>
       </ul>
     </li>
-
+      
   </ul>
   <div class="clear"></div>
-  
-</a> <div class="clear"></div>
-</div>
-
+</a> <div class="clear"></div></div><div class="clear"></div>
 <div class="clear"></div>
 </div>
-<div class="clear"></div>
-<div class="box1" style="padding: 20px">
-    <dir-pagination-controls
-    max-size="5"
-    direction-links="true"
-    boundary-links="true" >
-  </dir-pagination-controls>
 </div>
-</div>
-@endsection
-
-@section('script')
-<script type="text/javascript" src="app/controllers/ProductController.js"></script>
-@endsection

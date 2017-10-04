@@ -10,22 +10,12 @@
 							<div class="h_nav" >
 								<h4 style="color: rgb(255, 153, 51)">[[sub.name]]</h4>
 								<ul>
-									<li><a href="shop.html">new arrivals</a></li>
-									<li><a href="shop.html">men</a></li>
-									<li><a href="shop.html">women</a></li>
-									<li><a href="shop.html">accessories</a></li>
-									<li><a href="shop.html">kids</a></li>
-									<li><a href="shop.html">login</a></li>
+									<li ng-repeat="detail in sub.detailsubcategory"><a href="" ui-sref="products">[[detail.name]]</a></li>
 								</ul>	
 							</div>
 			
 						</div>
-						
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<div class="col1"></div>
-						<img src="user/images/nav_img.jpg" alt=""/>
+				
 					</div>
 				</div>
 			</li>
