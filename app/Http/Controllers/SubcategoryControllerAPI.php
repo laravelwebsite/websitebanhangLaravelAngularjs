@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
 use App\SubCategory;
 use App\DetailSubCategory;
 use App\Product;
-class CategoryControllerAPI extends Controller
+class SubcategoryControllerAPI extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,19 +15,12 @@ class CategoryControllerAPI extends Controller
      */
     public function index()
     {
-        $categories=Category::orderBy('created_at','DESC')->get();
-        foreach($categories as $cate)
+        $sub=SubCategory::orderBy('created_at','DESC')->get();
+        foreach($sub as $s)
         {
-            foreach($cate->subcategory as $sub)
-            {
-                foreach($sub->detailsubcategory as $detail)  
-                {
-                    
-                }
-            }
+            $s->category;
         }
-        //$categories->subcategory;
-        return json_encode($categories);
+        return json_encode($sub);
     }
 
     /**
@@ -49,9 +41,10 @@ class CategoryControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-        $category=new Category;
-        $category->name=$request->name;
-        $category->save();
+        $sub=new SubCategory;
+        $sub->name=$request->name;
+        $sub->categories_id=$request->categories_id;
+        $sub->save();
         return "Thêm thành công";
     }
 
@@ -63,8 +56,9 @@ class CategoryControllerAPI extends Controller
      */
     public function show($id)
     {
-        $category=Category::findBySlug($id);
-        return json_encode($category);
+        $sub=SubCategory::findBySlug($id);
+        $sub->category;
+        return json_encode($sub);
     }
 
     /**
@@ -87,10 +81,11 @@ class CategoryControllerAPI extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category=Category::findBySlug($id);
-        $category->name=$request->name;
-        $category->slug=null;
-        $category->save();
+        $sub=SubCategory::findBySlug($id);
+        $sub->name=$request->name;
+        $sub->categories_id=$request->categories_id;
+        $sub->slug=null;
+        $sub->save();
         return "Sửa thành công";
     }
 
@@ -102,32 +97,22 @@ class CategoryControllerAPI extends Controller
      */
     public function destroy($id)
     {
-        $category=Category::find($id);
-        if($category->delete())
+        $sub=SubCategory::find($id);
+        if($sub->delete())
         {
-            $subcate=SubCategory::where('categories_id',$id)->get();
-            if($subcate->count()>0)
+            $detail=DetailSubCategory::where('sub_categories_id',$sub->id)->get();
+            if($detail->count()>0)
             {
-                foreach($subcate as $sub)
+                foreach($detail as $de)
                 {
-                    if($sub->delete())
+                    if($de->delete())
                     {
-                        $detail=DetailSubCategory::where('sub_categories_id',$sub->id)->get();
-                        if($detail->count()>0)
+                        $product=Product::where('detail_sub_categories_id',$de->id)->get();
+                        if($product->count()>0)
                         {
-                            foreach($detail as $de)
+                            foreach($product as $pro)
                             {
-                                if($de->delete())
-                                {
-                                    $product=Product::where('detail_sub_categories_id',$de->id)->get();
-                                    if($product->count()>0)
-                                    {
-                                        foreach($product as $pro)
-                                        {
-                                            $pro->delete();
-                                        }
-                                    }
-                                }
+                                $pro->delete();
                             }
                         }
                     }
@@ -135,4 +120,6 @@ class CategoryControllerAPI extends Controller
             }
         }
     }
+
+
 }

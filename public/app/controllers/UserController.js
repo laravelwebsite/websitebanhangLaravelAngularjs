@@ -13,7 +13,7 @@ app.controller('UserController' ,function ($scope,$http,API) {
 	//sự kiện hiển thị model tùy theo add hay edit
 	$scope.modal = function (state,id) {
 		$scope.state = state;
-		
+		$scope.alert=false;
 		$http.get(API+ 'admin/user/tbRole').then(function(response){
 
 			$scope.role=response.data;
@@ -80,8 +80,8 @@ app.controller('UserController' ,function ($scope,$http,API) {
 				headers : {'Content-Type':'application/x-www-form-urlencoded'}
 			})
 			.then(function (response) {
-				
-				location.reload();
+				$scope.alert=true;
+				$scope.thongbao=response.data;
 			})
 			
 		}
@@ -102,9 +102,9 @@ app.controller('UserController' ,function ($scope,$http,API) {
 				headers : {'Content-Type':'application/x-www-form-urlencoded'}
 			})
 			.then(function (response) {
+				$scope.alert=true;
 				console.log(response.data);
 				$scope.thongbao=response.data;
-				location.reload();
 			})
 		}
 	}

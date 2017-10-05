@@ -73,7 +73,6 @@ app.controller('User_MenuController' ,function ($scope,$http,API) {
 				headers : {'Content-Type':'application/x-www-form-urlencoded'}
 			})
 			.then(function (response) {
-				
 				$scope.alert=true;
 				$scope.thongbao=response.data;
 

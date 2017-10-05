@@ -13,7 +13,7 @@
 @include('user.layout.sort')
   <div class="box1" >
     <div class="clear"></div>
-    <div class="col_1_of_single1 span_1_of_single1" dir-paginate="product in products|orderBy:sortKey:reverse|filter:searchproduct|itemsPerPage:perpage"><a href="san-pham/[[product.id]]/[[product.slug]]">
+    <div class="col_1_of_single1 span_1_of_single1" dir-paginate="product in products|orderBy:sortKey:reverse|filter:searchproduct|itemsPerPage:perpage"><a href="san-pham/[[product.slug]]">
      <div class="view1 view-fifth1">
       <div class="top_box">
         <h3 class="m_1">[[product.name]]</h3>

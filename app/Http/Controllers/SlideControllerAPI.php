@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Menu;
-use App\User_Menu;
-use Illuminate\Support\Facades\Auth;
-class MenuControllerAPI extends Controller
+
+class SlideControllerAPI extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class MenuControllerAPI extends Controller
      */
     public function index()
     {
-    	$menus=Menu::orderBy('id','DESC')->get();
-    	return json_encode($menus);
+        //
     }
 
     /**
@@ -25,7 +23,7 @@ class MenuControllerAPI extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -36,18 +34,7 @@ class MenuControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-    	$menu=new Menu;
-    	$menu->name=$request->name;
-    	$menu->src=$request->src;
-    	
-            if($menu->save())
-            {
-                $menuuser=new User_Menu;
-                $menuuser->user_id=Auth::user()->id;
-                $menuuser->menu_id=$menu->id;
-                $menuuser->save();
-            }
-    	return "Thêm thành công";
+        //
     }
 
     /**
@@ -58,8 +45,7 @@ class MenuControllerAPI extends Controller
      */
     public function show($id)
     {
-    	$menu=Menu::find($id);
-    	return json_encode($menu);
+        //
     }
 
     /**
@@ -82,10 +68,7 @@ class MenuControllerAPI extends Controller
      */
     public function update(Request $request, $id)
     {
-    	$menu=Menu::find($id);
-    	$menu->src=$request->src;
-    	$menu->save();
-    	return "Sửa thành công";
+        //
     }
 
     /**
@@ -96,18 +79,6 @@ class MenuControllerAPI extends Controller
      */
     public function destroy($id)
     {
-    	$menu=Menu::find($id);
-        if($menu->count()>0)
-        {
-
-            $usermenu=User_Menu::where('menu_id',$menu->id)->get();
-            foreach($usermenu as $u)
-            {
-                $u->delete();
-            }
-            
-        }
-    	$menu->delete();
-    	return "Xóa thành công";
+        //
     }
 }

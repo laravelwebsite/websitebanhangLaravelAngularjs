@@ -8,7 +8,7 @@ class ProductController extends Controller
 {
     public function getProduct($id)
     {
-    	$product=Product::find($id);
+    	$product=Product::findBySlug($id);
     	return view('user.page.chitiet',['product'=>$product]);
     }
 }

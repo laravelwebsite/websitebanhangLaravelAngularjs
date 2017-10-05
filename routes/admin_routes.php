@@ -38,4 +38,18 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::resource('tbUserMenu','User_MenuControllerAPI');
 		Route::post('checknamerole','RoleController@postChecknamerole');
 	});
+	Route::group(['prefix'=>'category','middleware'=>'admin'],function(){
+		Route::get('/',function(){
+			return view('admin.page.category.list');
+		});
+		Route::resource('tbCategory','CategoryControllerAPI');
+		Route::post('checknamecategory','CategoryController@postChecknamecategory');
+	});
+	Route::group(['prefix'=>'subcategory','middleware'=>'admin'],function(){
+		Route::get('/',function(){
+			return view('admin.page.subcategory.list');
+		});
+		Route::resource('tbSubcategory','SubcategoryControllerAPI');
+		Route::post('checknamesubcategory','SubcategoryController@postChecknamesubcategory');
+	});
 });

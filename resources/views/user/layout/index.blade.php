@@ -73,7 +73,7 @@
   @include('user.layout.headerbottom')
   @yield('slide')
   <div class="login">
-   <div class="wrap" >
+   <div class="wrap" ui-view>
    
     @yield('contentleft')
     @yield('contentright') 
