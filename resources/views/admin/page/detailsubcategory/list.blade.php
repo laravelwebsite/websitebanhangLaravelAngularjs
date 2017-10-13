@@ -4,7 +4,7 @@ User Menu | Admin
 @endsection
 @section('content')
 <!-- page start-->
-<div class="row" ng-controller="User_MenuController" ng-init="user='{{Auth::user()->id}}'">
+<div class="row" ng-controller="DetailSubcategoryController" ng-init="user='{{Auth::user()->id}}'">
   <div class="col-sm-12">
     <section class="panel">
       <div class="panel-heading">
@@ -32,29 +32,34 @@ User Menu | Admin
               <span class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
               </span>
             </th>
-            <th ng-click="sort('user_id')"><i class=" fa fa-user"></i>User
+            <th ng-click="sort('name')"><i class=" fa fa-user"></i>NAME
               <span class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
               </span>
             </th>    
-            <th ng-click="sort('menu_id')"><i class=" fa fa-user"></i>Menu
+            <th ng-click="sort('sub_categories_id')"><i class=" fa fa-user"></i>SUB CATEGORY
               <span class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
               </span>
-            </th>               
+            </th>    
+            <th ng-click="sort('slug')"><i class=" fa fa-user"></i>SLUG
+              <span class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+              </span>
+            </th>           
             <th class="text-center"><i class=" fa fa-edit"></i> </th>
           </tr>
         </thead>
         <tbody>
           <sample-text></sample-text>
           <div orientable></div>
-          <tr dir-paginate="um in usermenus|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
+          <tr dir-paginate="de in desubcategories|orderBy:sortKey:reverse|filter:search|itemsPerPage:10" >
             <td class="text-center" ><input type="checkbox" ng-checked="checkall" /></td>
             
-            <td class="text-center"><span>[[um.id]]</span></td>
-            <td class="text-center"><span>[[um.user.email]]</span></td>
-            <td class="text-center"><span>[[um.menu.name]]</span></td>
+            <td class="text-center"><span>[[de.id]]</span></td>
+            <td class="text-center"><span>[[de.name]]</span></td>
+            <td class="text-center"><span>[[de.subcategory.name]]</span></td>
+            <td class="text-center"><span>[[de.slug]]</span></td>
             <td class="text-center">
-              <a ng-click="modal('edit',um.id)" class="btn btn-primary btn-xs" id="edituser"><i class="fa fa-pencil"></i></a>      
-              <a class="btn btn-danger btn-xs tooltips btn-del-record" id="[[um.id]]" data-toggle="modal" data-placement="top" data-original-title="Delete record." ng-click="delete(um.id)"><i class="fa fa-trash-o "></i></a>
+              <a ng-click="modal('edit',de.slug)" class="btn btn-primary btn-xs" id="edituser"><i class="fa fa-pencil"></i></a>      
+              <a class="btn btn-danger btn-xs tooltips btn-del-record" id="[[de.id]]" data-toggle="modal" data-placement="top" data-original-title="Delete record." ng-click="delete(de.id)"><i class="fa fa-trash-o "></i></a>
             </td>
           </tr>
         </tbody>
@@ -64,7 +69,7 @@ User Menu | Admin
       direction-links="true"
       boundary-links="true" >
     </dir-pagination-controls>
-    <div style="float: right"><button id="btn-add" class="btn btn-primary btn-lg" ng-click="modal('add')">Phân Quyền</button></div>
+    <div style="float: right"><button id="btn-add" class="btn btn-primary btn-lg" ng-click="modal('add')">Thêm Detail Sub Category</button></div>
     <div class="row-fluid">
       <div class="col-sm-3 col-md-3 col-lg-3">
        <div class="dataTables_info">
@@ -91,7 +96,7 @@ User Menu | Admin
         <h4 class="modal-title" >[[frmTitle]] </h4>
       </div>
       <div class="modal-body" ng-init="add=[[add]]">
-        <form name="frmUserMenu" class="form-horizontal">
+        <form name="frmdesubcate" class="form-horizontal">
           <div ng-show="success" class="text-success text-center">
            [[thongbao]]
          </div>
@@ -99,32 +104,43 @@ User Menu | Admin
           <strong>[[thongbao]]</strong>
         </div>
         <div class="form-group">
-          <label for="user_id" class="col-sm-3 control-label">Chọn User</label>
+          <label for="user_id" class="col-sm-3 control-label">Chọn Category </label>
           <div class="col-sm-9">
-            <select  name="user_id" id="user_id" class="form-control" ng-model="user_id"
-            ng-options="item.email for item in users track by item.id" ng-required="true" >
+            <select  name="categories_id" id="categories_id" class="form-control" ng-model="catename" ng-change="getSubcate()"
+            ng-options="item.name for item in cate track by item.id" ng-required="true" >
 
           </select>
-          <i class="fa fa-check text-success" ng-show=" frmUserMenu.user_id.$valid"></i>
-          <span id="helpBlock2" class="help-block" ng-show="frmUserMenu.user_id.$error.required">Vui lòng chọn quyền người dùng</span>
+          <i class="fa fa-check text-success" ng-show=" frmdesubcate.categories_id.$valid"></i>
+          <span id="helpBlock2" class="help-block" ng-show="frmdesubcate.categories_id.$error.required">Vui lòng chọn quyền người dùng</span>
         </div>
       </div>
       <div class="form-group">
-        <label for="menu_id" class="col-sm-3 control-label">Chọn Menu</label>
-        <div class="col-sm-9">
-          <select  name="menu_id" id="menu_id" class="form-control" ng-model="menu_id"
-          ng-options="item.name for item in menus track by item.id" ng-required="true" >
+          <label for="user_id" class="col-sm-3 control-label">Chọn Sub Category </label>
+          <div class="col-sm-9">
+            <select  name="sub_categories_id" id="sub_categories_id" class="form-control" ng-model="subcatename"
+            ng-options="item.name for item in subcate track by item.id" ng-required="true" >
 
-        </select>
-        <i class="fa fa-check text-success" ng-show=" frmUserMenu.menu_id.$valid"></i>
-        <span id="helpBlock2" class="help-block" ng-show="frmUserMenu.menu_id.$error.required">Vui lòng chọn quyền người dùng</span>
+          </select>
+          <i class="fa fa-check text-success" ng-show=" frmdesubcate.sub_categories_id.$valid"></i>
+          <span id="helpBlock2" class="help-block" ng-show="frmdesubcate.sub_categories_id.$error.required">Vui lòng chọn Sub Category</span>
+        </div>
       </div>
-    </div>
+      <div class="form-group">
+          <label for="name" class="col-sm-3 control-label">Tên Detail Sub Category</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="name" name="name" ng-minlength="2" ng-maxlength="50" ng-required="true" placeholder="Vui lòng nhập tên Detail Sub Category" ng-model="detailsubcategorybyId.name" name-exist/>
+            <i class="fa fa-check text-success" ng-show=" frmdesubcate.name.$valid"></i>
+            <span id="helpBlock2" class="help-block"  ng-show="frmdesubcate.name.$error.required">Vui lòng nhập tên Sub Category</span>
+            <span id="helpBlock2" class="help-block"  ng-show="frmdesubcate.name.$error.minlength">Tên tối thiểu 2 ký tự</span>
+            <span id="helpBlock2" class="help-block"  ng-show="frmdesubcate.name.$error.maxlength">Không đưọc nhập quá 50 ký tự</span>
+            <span id="helpBlock2" class="help-block" ng-show="frmdesubcate.name.$error.nametaken" >Tên Detail Sub Category đã tồn tại</span>
+          </div>
+        </div>
   </form>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary" ng-click="close()">Cancle</button>
-  <button type="button" class="btn btn-primary" ng-disabled="frmUserMenu.$invalid" ng-click="save(state,id)">Lưu</button>
+  <button type="button" class="btn btn-primary" ng-disabled="frmdesubcate.$invalid" ng-click="save(state,id)">Lưu</button>
 </div>
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
@@ -159,5 +175,5 @@ User Menu | Admin
 @endsection
 
 @section('script')
-<script type="text/javascript" src="app/controllers/User_MenuController.js"></script>
+<script type="text/javascript" src="app/controllers/DetailsubcategoryController.js"></script>
 @endsection

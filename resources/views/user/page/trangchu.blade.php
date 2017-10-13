@@ -13,18 +13,18 @@
 @include('user.layout.sort')
   <div class="box1" >
     <div class="clear"></div>
-    <div class="col_1_of_single1 span_1_of_single1" dir-paginate="product in products|orderBy:sortKey:reverse|filter:searchproduct|itemsPerPage:perpage"><a href="san-pham/[[product.slug]]">
+    <div class="col_1_of_single1 span_1_of_single1" dir-paginate="pro in productt|orderBy:sortKey:reverse|filter:searchproduct|itemsPerPage:perpage"><a href="san-pham/[[pro.slug]]">
      <div class="view1 view-fifth1">
       <div class="top_box">
-        <h3 class="m_1">[[product.name]]</h3>
-        <p class="m_2">[[product.title]]</p>
+        <h3 class="m_1">[[pro.name]]</h3>
+        <p class="m_2">[[pro.title]]</p>
         <div class="grid_img">
-         <div class="css3"><img src="user/images/iphone6.jpg" alt="[[product.title]]" style="width: 280px;height: 190px" /></div>
+         <div class="css3"><img src="user/images/iphone6.jpg" alt="[[pro.title]]" style="width: 280px;height: 190px" /></div>
          <div class="mask1">
           <div class="info">Chi tiết</div>
         </div>
       </div>
-      <div class="price">[[product.price|number]] VND</div>
+      <div class="price">[[pro.price|number]] VND</div>
     </div>
   </div>
   <span class="rating1">

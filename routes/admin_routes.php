@@ -51,5 +51,25 @@ Route::group(['prefix'=>'admin'],function(){
 		});
 		Route::resource('tbSubcategory','SubcategoryControllerAPI');
 		Route::post('checknamesubcategory','SubcategoryController@postChecknamesubcategory');
+		Route::get('getSubByCate/{idCate}','SubcategoryController@getSubByCate');
+	});
+	Route::group(['prefix'=>'detailsubcategory','middleware'=>'admin'],function(){
+		Route::get('/',function(){
+			return view('admin.page.detailsubcategory.list');
+		});
+		Route::resource('tbDetailSubcategory','DetailSubcategoryControllerAPI');
+		Route::post('checknamedetailsubcategory','DetailSubcategoryController@postChecknamedetailsubcategory');
+		Route::get('getDeSubBySub/{idSubCate}','DetailSubcategoryController@getDeSubBySub');
+	});
+	Route::group(['prefix'=>'product','middleware'=>'admin'],function(){
+		Route::get('/',function(){
+			return view('admin.page.product.list');
+		});
+		Route::resource('tbProduct','ProductControllerAPI');
+		Route::post('checknamedetailsubcategory','ProductController@postChecknamedetailsubcategory');
+		Route::post('album/{id}','ProductController@postAlbum');
+		Route::post('deleteAlbum/{idd}/{stop}','ProductController@postdeleteAlbum');
+
+
 	});
 });

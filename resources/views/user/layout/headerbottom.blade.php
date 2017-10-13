@@ -3,7 +3,7 @@
 		<!-- start header menu -->
 		<ul class="megamenu skyblue" >
 			
-			<li class="grid"  ng-repeat="cate in categories" ng-init="$last && loadCompleted()"><a class="color2" href="#">[[cate.name]]</a>
+			<li class="grid"  ng-repeat="cate in category" ng-init="$last && loadCompleted()"><a class="color2" href="#">[[cate.name]]</a>
 				<div class="megapanel">
 					<div class="row">
 						<div class="col1" ng-repeat="sub in cate.subcategory">

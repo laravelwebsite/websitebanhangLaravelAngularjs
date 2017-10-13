@@ -110,8 +110,8 @@ User Menu | Admin
             ng-options="item.name for item in cate track by item.id" ng-required="true" >
 
           </select>
-          <i class="fa fa-check text-success" ng-show=" frmsubcate.role_id.$valid"></i>
-          <span id="helpBlock2" class="help-block" ng-show="frmsubcate.selectedItem.$error.required">Vui lòng chọn quyền người dùng</span>
+          <i class="fa fa-check text-success" ng-show=" frmsubcate.categories_id.$valid"></i>
+          <span id="helpBlock2" class="help-block" ng-show="frmsubcate.categories_id.$error.required">Vui lòng chọn quyền người dùng</span>
         </div>
       </div>
       <div class="form-group">
@@ -129,7 +129,7 @@ User Menu | Admin
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-primary" ng-click="close()">Cancle</button>
-  <button type="button" class="btn btn-primary" ng-disabled="frmRole.$invalid" ng-click="save(state,id)">Lưu</button>
+  <button type="button" class="btn btn-primary" ng-disabled="frmsubcate.$invalid" ng-click="save(state,id)">Lưu</button>
 </div>
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

@@ -9,7 +9,18 @@ class UserController extends Controller
 {
 	function getLogin()
 	{
-		return view('admin.login');
+		if(Auth::check())
+		{
+			if(Auth::user()->role_id==4 || Auth::user()->role_id==3)
+			{
+				return redirect('admin/user');
+			}
+		}
+		else
+		{
+			return view('admin.login');
+		}
+		
 	}
 	function postLogin(Request $request)
 	{

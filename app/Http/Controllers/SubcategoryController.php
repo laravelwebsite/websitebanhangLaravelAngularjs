@@ -18,4 +18,10 @@ class SubcategoryController extends Controller
 			return 1;
 		}
 	}
+
+	public function getSubByCate($idCate)
+	{
+		$de=SubCategory::where('categories_id',$idCate)->get();
+		return json_encode($de);
+	}
 }

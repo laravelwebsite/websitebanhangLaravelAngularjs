@@ -21,7 +21,10 @@
 <script src="js/angular-route.js"></script>
 <script src="js/dirPagination.js"></script>
 <!--this page plugins-->
-
+<script src="js/ng-file-upload-all.min.js"></script>
+<script src="js/ng-file-upload.min.js"></script>
+<script src="js/ng-file-upload-shim.js"></script>
+<script src="js/dropzone.min.js"></script>
 <script type="text/javascript" src="supadmin/style-shorten/assets/fuelux/js/spinner.min.js"></script>
 <script type="text/javascript" src="supadmin/style-shorten/assets/bootstrap-fileupload/bootstrap-fileupload.js"></script>
 

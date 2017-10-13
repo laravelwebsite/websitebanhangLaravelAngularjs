@@ -89,7 +89,7 @@ Menu List | Admin
 
       </div>
       <div class="modal-body" ng-init="add=[[add]]">
-        <form name="frmMenu" class="form-horizontal">
+        <form name="frmCate" class="form-horizontal">
           <div ng-show="success" class="text-success text-center">
            [[thongbao]]
          </div>
@@ -100,18 +100,18 @@ Menu List | Admin
           <label for="name" class="col-sm-3 control-label">Tên Category</label>
           <div class="col-sm-9" >
             <input type="text" class="form-control" id="name" name="name" ng-minlength="2" ng-maxlength="50" placeholder="Vui lòng nhập tên Category" ng-model="categorybyId.name" ng-required="true" name-exist/>
-            <i class="fa fa-check text-success" ng-show=" frmMenu.name.$valid"></i>
-            <span id="helpBlock2" class="help-block"  ng-show="frmMenu.name.$error.required">Vui lòng nhập tên Category</span>
-            <span id="helpBlock2" class="help-block"  ng-show="frmMenu.name.$error.minlength">Tên Category tối thiểu 2 ký tự</span>
-            <span id="helpBlock2" class="help-block"  ng-show="frmMenu.name.$error.maxlength">Không đưọc nhập quá 50 ký tự</span>
-            <span id="helpBlock2" class="help-block" ng-show="frmMenu.name.$error.nametaken" >Tên Category đã tồn tại</span>
+            <i class="fa fa-check text-success" ng-show=" frmCate.name.$valid"></i>
+            <span id="helpBlock2" class="help-block"  ng-show="frmCate.name.$error.required">Vui lòng nhập tên Category</span>
+            <span id="helpBlock2" class="help-block"  ng-show="frmCate.name.$error.minlength">Tên Category tối thiểu 2 ký tự</span>
+            <span id="helpBlock2" class="help-block"  ng-show="frmCate.name.$error.maxlength">Không đưọc nhập quá 50 ký tự</span>
+            <span id="helpBlock2" class="help-block" ng-show="frmCate.name.$error.nametaken" >Tên Category đã tồn tại</span>
           </div>
         </div>
       </form>
     </div>
     <div class="modal-footer">
     <button type="button" class="btn btn-primary" ng-click="close()">Cancle</button>
-      <button type="button" class="btn btn-primary" ng-disabled="frmMenu.$invalid" ng-click="save(state,id)">Lưu</button>
+      <button type="button" class="btn btn-primary" ng-disabled="frmCate.$invalid" ng-click="save(state,id)">Lưu</button>
     </div>
   </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

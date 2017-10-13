@@ -9,13 +9,14 @@
   <meta name="description" content="">
   <meta name="author" content="Mosaddek">
   <meta name="keyword" content="Website ban hang">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <link rel="shortcut icon" href="img/favicon.html">
 
   <title>@yield('title')</title>
   <base href="{{asset(' ')}}" >
   <!-- Bootstrap core CSS -->
   <!-- Bootstrap core CSS -->
-
+  
   <link href="supadmin/style-shorten/css/bootstrap.min.css" rel="stylesheet">
   <link href="supadmin/style-shorten/css/bootstrap-reset.css" rel="stylesheet">
   <!--external css-->
@@ -31,7 +32,7 @@
   <link rel="stylesheet" type="text/css" href="supadmin/style-shorten/assets/jquery-multi-select/css/multi-select.css" />
     <!--right slidebar-->
     <link href="supadmin/style-shorten/css/slidebars.css" rel="stylesheet">
-
+<link href="css/dropzone.min.css" rel="stylesheet">
     <!--  summernote -->
     
     <!-- Custom styles for this template -->

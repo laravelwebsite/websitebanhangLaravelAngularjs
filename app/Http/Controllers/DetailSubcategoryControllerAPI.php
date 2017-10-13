@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\DetailSubCategory;
+use App\SubCategory;
+use App\Product;
 class DetailSubcategoryControllerAPI extends Controller
 {
     /**
@@ -13,7 +15,12 @@ class DetailSubcategoryControllerAPI extends Controller
      */
     public function index()
     {
-        //
+        $detail=DetailSubCategory::orderBy('created_at','DESC')->get();
+        foreach($detail as $d)
+        {
+            $d->subcategory;
+        }
+        return json_encode($detail);
     }
 
     /**
@@ -34,7 +41,11 @@ class DetailSubcategoryControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $detail=new DetailSubCategory;
+        $detail->name=$request->name;
+        $detail->sub_categories_id=$request->sub_categories_id;
+        $detail->save();
+        return "Thêm thành công";
     }
 
     /**
@@ -45,7 +56,11 @@ class DetailSubcategoryControllerAPI extends Controller
      */
     public function show($id)
     {
-        //
+        $detail=DetailSubCategory::findBySlug($id);
+        
+        $detail->subcategory->category;
+        $detail->subcategory;
+        return json_encode($detail);
     }
 
     /**
@@ -68,7 +83,12 @@ class DetailSubcategoryControllerAPI extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $detail=DetailSubCategory::findBySlug($id);
+        $detail->name=$request->name;
+        $detail->sub_categories_id=$request->sub_categories_id;
+        $detail->slug=null;
+        $detail->save();
+        return "Sửa thành công";
     }
 
     /**
@@ -79,6 +99,17 @@ class DetailSubcategoryControllerAPI extends Controller
      */
     public function destroy($id)
     {
-        //
+        $detail=DetailSubCategory::find($id);
+        if($detail->delete())
+        {
+            $product=Product::where('detail_sub_categories_id',$detail->id)->get();
+            if($product->count()>0)
+            {
+                foreach($product as $pro)
+                {
+                    $pro->delete();
+                }
+            }
+        }
     }
 }
