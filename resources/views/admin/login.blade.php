@@ -31,8 +31,8 @@
        @endif
       <form method="post" action="admin/login-admin" name="frmLogin">
       {{csrf_field()}}
-        <input type="text" name="email" id="email" placeholder="Username" required="required" autofocus class="input-txt" />
-        <input type="password" name="password" placeholder="Password" required="required" class="input-txt" />
+        <input type="text" value="{!! old('email') !!}" name="email" id="email" placeholder="Your Email" required="required" autofocus class="input-txt" />
+        <input type="password" value="{!! old('password') !!}" name="password" placeholder="Password" required="required" class="input-txt" />
           <div class="login-footer">
             
             <button type="submit" class="btn btn--right">Sign in  </button>

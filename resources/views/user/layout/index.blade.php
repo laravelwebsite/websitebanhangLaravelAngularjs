@@ -2,14 +2,18 @@
 <!DOCTYPE HTML>
 <html ng-app="my-app">
 <head>
-  <title>Website</title>
+  <title>@yield('title')</title>
   <base href="{{asset(' ')}}" >
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link href="user/css/style.css" rel="stylesheet" type="text/css" media="all" />
   <link href="user/css/form.css" rel="stylesheet" type="text/css" media="all" />
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-  
+  <link href="supadmin/style-shorten/css/style.css" rel="stylesheet">
+  <link href="supadmin/style-shorten/css/style-responsive.css" rel="stylesheet" />
+  <link href="supadmin/style-shorten/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="supadmin/style-shorten/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
   <script type="text/javascript" src="js/jquery.min.js"></script>
   
 

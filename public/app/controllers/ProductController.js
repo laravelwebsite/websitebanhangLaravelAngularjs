@@ -6,6 +6,7 @@ app.controller('ProductController' ,['$scope','Upload','$http','API','$timeout',
 	});
 	$http.get(API + 'admin/product/tbProduct').then(function (response) {//index api
 		$scope.products = response.data;
+		
 	});
 
 	$http.get(API+ 'admin/category/tbCategory').then(function(response){
@@ -54,6 +55,7 @@ app.controller('ProductController' ,['$scope','Upload','$http','API','$timeout',
 		$scope.alert=false;
 		$scope.check=false;
 		$scope.file={};
+		$scope.files={};
 		switch (state) {
 			case "add" :
 			$scope.frmTitle = "Thêm Product";
@@ -66,6 +68,8 @@ app.controller('ProductController' ,['$scope','Upload','$http','API','$timeout',
 			$scope.id = id;
 			$http.get(API+ 'admin/product/tbProduct/'+$scope.id).then(function(response){
 				$scope.product=response.data;
+				$scope.split = $scope.product.album.split('|');
+				$scope.chuoi =$scope.split;
 				$scope.catename=$scope.product.detailsubcategory.subcategory.category;
 				$http.get(API+ 'admin/subcategory/getSubByCate/'+$scope.catename.id).then(function(response){
 					$scope.subcate=response.data;
@@ -84,8 +88,8 @@ app.controller('ProductController' ,['$scope','Upload','$http','API','$timeout',
 			$scope.album=true;
 			$scope.iddd = id;
 			$http.get(API+ 'admin/product/tbProduct/'+$scope.iddd).then(function(response){
-				$scope.productc=response.data;
-				$scope.split = $scope.productc.album.split('|');
+				$scope.product=response.data;
+				$scope.split = $scope.product.album.split('|');
 				$scope.chuoi =$scope.split;
 			})
 			$("#myModal2").modal('show');
@@ -108,7 +112,7 @@ app.controller('ProductController' ,['$scope','Upload','$http','API','$timeout',
 		$("#recordDel").modal("show");
 	}
 	$scope.deleteAlbum=function(stop,idd){
-		$http.post(API + 'admin/product/deleteAlbum/' + idd+'/'+stop)//destroy api
+		$http.post(API + 'admin/product/deleteAlbum/' + $scope.iddd+'/'+stop)//destroy api
 		.then(function (response) {
 			$http.get(API+ 'admin/product/tbProduct/'+$scope.iddd).then(function(response){
 				$scope.productc=response.data;
@@ -124,6 +128,10 @@ app.controller('ProductController' ,['$scope','Upload','$http','API','$timeout',
 	}
 	
 	$scope.save = function (state,id,file) {
+		if(file==null)
+		{
+			file={};
+		}
 		if (state == "add") {
 			var url = API + 'admin/product/tbProduct';//store api
 			file.upload = Upload.upload({
@@ -150,6 +158,7 @@ app.controller('ProductController' ,['$scope','Upload','$http','API','$timeout',
 		}
 		
 		if (state == "edit") {
+
 			var url = API + 'admin/product/tbProduct/' + id;//update api
 			file.upload = Upload.upload({
 				url: url,
@@ -194,14 +203,13 @@ app.controller('ProductController' ,['$scope','Upload','$http','API','$timeout',
                         $scope.uploadFiles = function(files, errFiles,iddd) {
                         	$scope.files = files;
                         	$scope.url='admin/product/album/'+iddd;
-                        	console.log($scope.url);
+                   
                         	$scope.errFiles = errFiles;
                         	angular.forEach(files, function(file) {
                         		file.upload = Upload.upload({
                         			url: $scope.url,
                         			method : 'POST',
                         			data: {
-
                         				file: file
                         			}
                         		});

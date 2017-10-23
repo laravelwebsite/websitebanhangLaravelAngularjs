@@ -42,6 +42,7 @@ class UserController extends Controller
 	}
 	function getLogout()
 	{
+
 		Auth::logout();
 		return redirect('admin/login-admin');
 	}
@@ -71,5 +72,68 @@ class UserController extends Controller
 			$list->role;
 		}
 		return $listUser;
+	}
+
+	public function getRegister()
+	{
+		return view('user.page.register');
+	}
+	public function postRegister(Request $request)
+	{
+		$this->validate($request,
+			[
+			'name'=>'required|min:5|max:50', 
+			'email'=>'required|email|unique:users,email', 
+			'password'=>'required|min:3|max:32',
+			'repassword'=>'required|same:password'
+			],
+			[
+			'name.required'=>'Vui  lòng nhập tên họ tên',
+			'name.min'=>'Họ tên tối thiểu 5 ký tự',
+			'name.max'=>'Tên quá dài',
+
+			'email.required'=>'Vui lòng nhập email',
+			'email.email'=>'Email không đúng định dạng',
+			'email.unique'=>'Email đã tồn tại',
+			'password.required'=>'Vui lòng nhập mật khẩu',
+			'password.min'=>'Mật khẩu tối thiểu 3 ký tự',
+			'password.max'=>'Mật khẩu tối đa 32 ký tự',
+			'repassword.required'=>'Vui lòng nhập xác nhận mật khẩu',
+			'repassword.same'=>'Mật khẩu xác nhận không đúng'
+			]);
+		$user = new User;
+		$user->name=$request->name;
+		$user->email=$request->email;
+		$user->role_id=1;
+		$user->password=bcrypt($request->password);
+		$user->save();
+		return redirect('dang-nhap')->with('dangky','Đăng ký tài khoản thành công');
+	}
+
+	public function getLoginUser()
+	{
+		return view('user.page.login');
+	}
+	public function postLoginUser(Request $request)
+	{
+		$this->validate($request,[
+			'email'=>'required|email|max:100',
+			'password'=>'required|min:5|max:100'
+			]);
+		if (Auth::attempt(['email' =>$request->email, 'password' => $request->password])) 
+		{
+			return redirect('/');
+		}
+		//neu dang nhap thanh cong
+		
+		else
+		{
+			return redirect('dang-nhap')->with('thongbao','Sai tên tài khoản hoặc mật khẩu');
+		}
+	}
+	function getLogoutUser()
+	{
+		Auth::logout();
+		return redirect('dang-nhap');
 	}
 }

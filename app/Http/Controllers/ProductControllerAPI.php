@@ -63,6 +63,7 @@ class ProductControllerAPI extends Controller
             {
              $hinh=str_random(10)."_".$name;
          }
+         $hinh=str_replace(" ","_",$hinh);
             $image->move('upload/product',$hinh);//vi tri luu va ten file
             $product->image=$hinh;
         }
@@ -135,6 +136,7 @@ class ProductControllerAPI extends Controller
             {
              $hinh=str_random(10)."_".$name;
             }
+            $hinh=str_replace(" ","_",$hinh);
             $image->move('upload/product',$hinh);//vi tri luu va ten file
             if($product->image!=null && file_exists("upload/product/".$product->image))
             {

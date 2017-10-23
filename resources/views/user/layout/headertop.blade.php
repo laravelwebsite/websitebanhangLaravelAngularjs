@@ -4,21 +4,27 @@
  			<a href="/"><img src="user/images/logo.png" alt=""/></a>
  		</div>
  		<div class="cssmenu">
- 			<ul>
- 				<li class="active"><a href="register.html">Sign up & Save</a></li> 
- 				<li><a href="shop.html">Store Locator</a></li> 
- 				<li><a href="login.html">My Account</a></li> 
- 				<li><a href="checkout.html">CheckOut</a></li> 
+ 			<ul>	
+ 				@if(!Auth::user()) 				<li class="active"><a href="dang-ky-tai-khoan">Đăng ký tài khoản</a></li> 
+ 				<li><a href="dang-nhap">Đăng nhập</a></li>
+ 				@else
+ 					<li><a>{{Auth::user()->name}}</a></li> 
+ 				@endif
+ 				<li><a href="san-pham">Sản phẩm</a></li> 
+ 				<li><a href="gio-hang">Giỏ hàng</a></li> 
+ 				<li><a href="lien-he">Liên hệ</a></li> 
  			</ul>
  		</div>
+ 		@if(Auth::user()) 
  		<ul class="icon2 sub-icon2 profile_img">
  			<li><a class="active-icon c2" href="#"> </a>
  				<ul class="sub-icon2 list">
- 					<li><h3>Products</h3><a href=""></a></li>
- 					<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+ 					<li><a href="user/log-out"><h3>Đăng xuất</h3></a></li>
+ 					<li><a href="tai-khoan"><h3>Tài khoản của bạn</h3></a></li>
  				</ul>
  			</li>
  		</ul>
+ 		@endif
  		<div class="clear"></div>
  	</div>
  </div>

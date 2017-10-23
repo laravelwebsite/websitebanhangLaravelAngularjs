@@ -69,7 +69,8 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('checknamedetailsubcategory','ProductController@postChecknamedetailsubcategory');
 		Route::post('album/{id}','ProductController@postAlbum');
 		Route::post('deleteAlbum/{idd}/{stop}','ProductController@postdeleteAlbum');
-
-
+		Route::get('search-product-cate/{slug}','ProductController@getProductbyCate');
+		Route::get('search-product-subcate/{slug}','ProductController@getProductbySubcate');
+		Route::get('search-product-detailcate/{slug}','ProductController@getProductbyDetailSubcate');
 	});
 });

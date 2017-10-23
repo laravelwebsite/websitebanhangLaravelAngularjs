@@ -9,34 +9,22 @@
 	<div class="labout span_1_of_a1" >
 		<!-- start product_slider -->
 		<ul id="etalage">
+			@if($product->album=='')
 			<li>
-				<img class="etalage_thumb_image" src="user/images/iphone6.jpg" />
-				<img class="etalage_source_image" src="user/images/iphone6.jpg" />
+			<img class="etalage_thumb_image" src="upload/product/{{$product->image}}" />
+			<img class="etalage_source_image" src="upload/product/{{$product->image}}" />
 			</li>
-			<li>
-				<img class="etalage_thumb_image" src="user/images/iphone6.jpg" />
-				<img class="etalage_source_image" src="user/images/iphone6.jpg" />
-			</li>
-			<li>
-				<img class="etalage_thumb_image" src="user/images/iphone6.jpg" />
-				<img class="etalage_source_image" src="user/images/iphone6.jpg" />
-			</li>
-			<li>
-				<img class="etalage_thumb_image" src="user/images/iphone6.jpg" />
-				<img class="etalage_source_image" src="user/images/iphone6.jpg" />
-			</li>
-			<li>
-				<img class="etalage_thumb_image" src="user/images/iphone6.jpg" />
-				<img class="etalage_source_image" src="user/images/iphone6.jpg" />
-			</li>
-			<li>
-				<img class="etalage_thumb_image" src="user/images/iphone6.jpg" />
-				<img class="etalage_source_image" src="user/images/iphone6.jpg" />
-			</li>
-			<li>
-				<img class="etalage_thumb_image" src="user/images/iphone6.jpg" />
-				<img class="etalage_source_image" src="user/images/iphone6.jpg" />
-			</li>
+			@else
+				@foreach($split as $sp)
+				<li>
+					<img class="etalage_thumb_image" src="upload/product/{{$sp}}" />
+					<img class="etalage_source_image" src="upload/product/{{$sp}}" />
+				</li>
+				@endforeach
+			@endif
+
+			
+			
 		</ul>
 
 
@@ -47,7 +35,7 @@
 
 		<div class="price_single">
 			<span class="reducedfrom">{{($product->price)*1.3}} VND</span>
-			<span class="actual">{{($product->price)}} VND</span><a href="#">Thêm vào giỏ hàng</a>
+			<span class="actual">{{($product->price)}} VND</span><a href="them-gio-hang/{{$product->slug}}">Thêm vào giỏ hàng</a>
 		</div>
 		<ul class="options">
 			<h4 class="m_9">Select a Size</h4>
@@ -59,11 +47,11 @@
 		</ul>
 		<div class="btn_form">
 			<form>
-				<input type="submit" value="Mua" title="">
+				<input type="submit" value="Mua" title="" onclick="window.location='them-gio-hang/{{$product->slug}}'">
 			</form>
 		</div>
 		<ul class="add-to-links">
-			<li><img src="images/wish.png" alt=""/><a href="#">Add to cart</a></li>
+			<li><img src="images/wish.png" alt=""/><a href="them-gio-hang/{{$product->slug}}">Add to cart</a></li>
 		</ul>
 		<p class="m_desc">{{$product->description}}</p>
 
@@ -80,11 +68,9 @@
 
 
 	<ul id="flexiselDemo3">
-		<li><img src="images/pic11.jpg" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-		<li><img src="images/pic10.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
-		<li><img src="images/pic9.jpg" /><div class="grid-flex"><a href="#">Zumba</a><p>Rs 850</p></div></li>
-		<li><img src="images/pic8.jpg" /><div class="grid-flex"><a href="#">Bloch</a><p>Rs 850</p></div></li>
-		<li><img src="images/pic7.jpg" /><div class="grid-flex"><a href="#">Capzio</a><p>Rs 850</p></div></li>
+		@foreach($productlienquan as $pr)
+		<li><img src="upload/product/{{$pr->image}}" style="height: 100px;width: 70px;" /><div class="grid-flex"><a href="san-pham/{{$pr->slug}}">{{$pr->name}}</a><p>{{$pr->price}}</p></div></li>
+		@endforeach
 	</ul>
 
 </div>
@@ -95,51 +81,51 @@
 <link rel="stylesheet" href="user/css/etalage.css">
 <script src="user/js/jquery.etalage.min.js"></script>
 <script type="text/javascript">
-		$(window).load(function() {
-			$("#flexiselDemo1").flexisel();
-			$("#flexiselDemo2").flexisel({
-				enableResponsiveBreakpoints: true,
-				responsiveBreakpoints: { 
-					portrait: { 
-						changePoint:480,
-						visibleItems: 1
-					}, 
-					landscape: { 
-						changePoint:640,
-						visibleItems: 2
-					},
-					tablet: { 
-						changePoint:768,
-						visibleItems: 3
-					}
+	$(window).load(function() {
+		$("#flexiselDemo1").flexisel();
+		$("#flexiselDemo2").flexisel({
+			enableResponsiveBreakpoints: true,
+			responsiveBreakpoints: { 
+				portrait: { 
+					changePoint:480,
+					visibleItems: 1
+				}, 
+				landscape: { 
+					changePoint:640,
+					visibleItems: 2
+				},
+				tablet: { 
+					changePoint:768,
+					visibleItems: 3
 				}
-			});
-
-			$("#flexiselDemo3").flexisel({
-				visibleItems: 5,
-				animationSpeed: 1000,
-				autoPlay: true,
-				autoPlaySpeed: 3000,    		
-				pauseOnHover: true,
-				enableResponsiveBreakpoints: true,
-				responsiveBreakpoints: { 
-					portrait: { 
-						changePoint:480,
-						visibleItems: 1
-					}, 
-					landscape: { 
-						changePoint:640,
-						visibleItems: 2
-					},
-					tablet: { 
-						changePoint:768,
-						visibleItems: 3
-					}
-				}
-			});
-
+			}
 		});
-	</script>
+
+		$("#flexiselDemo3").flexisel({
+			visibleItems: 5,
+			animationSpeed: 1000,
+			autoPlay: true,
+			autoPlaySpeed: 3000,    		
+			pauseOnHover: true,
+			enableResponsiveBreakpoints: true,
+			responsiveBreakpoints: { 
+				portrait: { 
+					changePoint:480,
+					visibleItems: 1
+				}, 
+				landscape: { 
+					changePoint:640,
+					visibleItems: 2
+				},
+				tablet: { 
+					changePoint:768,
+					visibleItems: 3
+				}
+			}
+		});
+
+	});
+</script>
 <!-- Include the Etalage files -->
 <script>
 	jQuery(document).ready(function($){
