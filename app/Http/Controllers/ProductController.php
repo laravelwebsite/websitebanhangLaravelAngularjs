@@ -8,6 +8,7 @@ use App\Category;
 use App\SubCategory;
 use App\DetailSubCategory;
 use DB;
+
 class ProductController extends Controller
 {
 	public function getProduct($id)
@@ -27,7 +28,7 @@ class ProductController extends Controller
 		->join('sub_categories','categories.id','=','sub_categories.categories_id')
 		->join('detail_sub_categories','sub_categories.id','=','detail_sub_categories.sub_categories_id')
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');
-		$product=$tbproduct->where('categories_id',$cate->id)->paginate(2);
+		$product=$tbproduct->where('categories_id',$cate->id)->paginate(10);
 		
 		return view('user.page.productCate',['productcate'=>$product]);
 		
@@ -53,6 +54,14 @@ class ProductController extends Controller
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');
 		$product=$tbproduct->where('detail_sub_categories_id',$detail->id)->paginate(10);
 		return view('user.page.productCate',['productcate'=>$product]);
+	}
+	public function productPerpage(Request $request)
+	{
+		if($request->ajax())
+		{
+			$productt=Product::orderBy('created_at','DESC')->paginate($request->soluong);
+			return json_encode($productt);
+		}
 	}
 	public function postAlbum($id,Request $request)
 	{

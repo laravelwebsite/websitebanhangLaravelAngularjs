@@ -7,10 +7,13 @@ use App\DetailSubCategory;
 use App\User;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+
+use Elasticquent\ElasticquentTrait;
 class Product extends Model
 {
     use Sluggable;
     use SluggableScopeHelpers;
+    use ElasticquentTrait;
     protected $table='products';
     protected $fillale=[];
     public function sluggable()

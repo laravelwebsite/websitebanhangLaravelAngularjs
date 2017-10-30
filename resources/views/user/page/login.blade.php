@@ -13,6 +13,7 @@
 			<div class="button1">
 				<a href="dang-ky-tai-khoan"><input type="submit" name="Submit" value="Continue"></a>
 			</div>
+			
 			<div class="clear"></div>
 		</div>
 		<div class="col_1_of_login span_1_of_login">

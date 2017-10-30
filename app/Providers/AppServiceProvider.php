@@ -8,6 +8,8 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\View;
 use App\User_Menu;
 use App\User;
+use App\Category;
+use App\Product;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -26,6 +28,12 @@ class AppServiceProvider extends ServiceProvider
                     $view->with('menuuser',$menuuser);
                 }
                 
+            });
+        View::composer('*',function($view){
+                $cate=Category::all();
+                $product=Product::paginate(15);
+                $view->with('cate',$cate);
+                $view->with('productt',$product);
             });
     }
     

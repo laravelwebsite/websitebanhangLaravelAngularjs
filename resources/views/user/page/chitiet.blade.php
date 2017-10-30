@@ -34,8 +34,8 @@
 		<h3 class="m_3">{{$product->name}}</h3>
 
 		<div class="price_single">
-			<span class="reducedfrom">{{($product->price)*1.3}} VND</span>
-			<span class="actual">{{($product->price)}} VND</span><a href="them-gio-hang/{{$product->slug}}">Thêm vào giỏ hàng</a>
+			<span class="reducedfrom">{{number_format(($product->price)*1.3)}} VND</span>
+			<span class="actual">{{number_format($product->price)}} VND</span><a href="them-gio-hang/{{$product->slug}}">Thêm vào giỏ hàng</a>
 		</div>
 		<ul class="options">
 			<h4 class="m_9">Select a Size</h4>
@@ -69,7 +69,7 @@
 
 	<ul id="flexiselDemo3">
 		@foreach($productlienquan as $pr)
-		<li><img src="upload/product/{{$pr->image}}" style="height: 100px;width: 70px;" /><div class="grid-flex"><a href="san-pham/{{$pr->slug}}">{{$pr->name}}</a><p>{{$pr->price}}</p></div></li>
+		<li><img src="upload/product/{{$pr->image}}" style="height: 100px;width: 70px;" /><div class="grid-flex"><a href="san-pham/{{$pr->slug}}">{{$pr->name}}</a><p>{{number_format($pr->price)}}</p></div></li>
 		@endforeach
 	</ul>
 

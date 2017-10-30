@@ -24,7 +24,7 @@
       $(".dropdown dt a").click(function() {
         $(".dropdown dd ul").toggle();
       });
-
+      $(".megamenu").megamenu();
       $(".dropdown dd ul li a").click(function() {
         var text = $(this).html();
         $(".dropdown dt a span").html(text);

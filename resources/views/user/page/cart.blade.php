@@ -32,10 +32,8 @@
 <td data-th="Quantity"><input id="{{$cart->rowId}}" class="qty" name="qty" class="form-control text-center" value="{{$cart->qty}}" type="number">
 </td> 
 <td data-th="Subtotal" class="text-center">{{number_format($cart->subtotal)}}</td> 
-<td class="actions" data-th="">
-  <button class="btn btn-info btn-sm"><i class="fa fa-edit"></i>
-  </button> 
-  <button class="btn btn-danger btn-sm" onclick="window.location='xoa-gio-hang/{{$cart->rowId}}'"><i class="fa fa-trash-o"></i>
+<td class="actions" data-th=""> 
+  <button class="btn btn-danger btn-sm" title="Xóa khỏi giỏ hàng" onclick="window.location='xoa-gio-hang/{{$cart->rowId}}'"><i class="fa fa-trash-o"></i>
   </button>
 </td> 
 </tr> 
@@ -46,16 +44,74 @@
   </td> 
 </tr> 
 <tr> 
-  <td><a href="http://hocwebgiare.com/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
+  <td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</a>
   </td> 
   <td colspan="2" class="hidden-xs"> </td> 
   <td class="hidden-xs text-center"><strong>Tổng tiền {{($total)}} đ</strong>
   </td> 
-  <td><a href="http://hocwebgiare.com/" class="btn btn-success btn-block">Thanh toán <i class="fa fa-angle-right"></i></a>
+  <td><a class="btn btn-success btn-block" id="thanhtoan">Thanh toán <i class="fa fa-angle-right"></i></a>
   </td> 
 </tr> 
 </tfoot> 
 </table>
+<div class="clear">
+      
+</div>  
+@if($count>0)
+<div class="wrap" id="thongtin" hidden>
+        <h2 class="title">Vui lòng điền đầy đủ thông tin để đặt hàng</h2>
+        <form name="frmThongtinhoadon" class="form-horizontal" action="hoa-don" method="POST">
+          @if(count($errors)>0)
+          <div class="alert alert-danger">
+            <strong>Whoops!</strong>There were some problems with your input! <br><br>
+            <ul>
+              @foreach($errors->all() as $error)
+              <li>{{$error}}</li>
+              @endforeach
+            </ul> 
+          </div>
+          <script  type="text/javascript">$("#thongtin").slideDown()</script>
+          @endif
+          <input type="hidden" name="_token" value="{{csrf_token()}}">
+          <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">Họ tên</label>
+            <div class="col-sm-7">
+              <input type="text" value="{!! old('name') !!}" required="true" class="form-control" id="name" name="name" placeholder="Vui lòng nhập họ tên" />
+            </div>
+
+          </div>
+          <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email</label>
+            <div class="col-sm-7">
+              <input type="text" value="{!! old('email') !!}" required="true" class="form-control" id="email" name="email" placeholder="Vui lòng nhập email" />
+            </div>
+
+          </div>
+          <div class="form-group">
+            <label for="phone" class="col-sm-3 control-label">Số điện thoại</label>
+            <div class="col-sm-7">
+              <input type="text" value="{!! old('phone') !!}" required="true" class="form-control" id="phone" name="phone" placeholder="Vui lòng nhập số điện thoại" />
+            </div>
+
+          </div>
+          <div class="form-group">
+            <label for="address" class="col-sm-3 control-label">Địa chỉ</label>
+            <div class="col-sm-7">
+              <input type="text" value="{!! old('address') !!}" required="true" class="form-control" id="address" name="address" placeholder="Vui lòng nhập địa chỉ" />
+            </div>
+
+          </div>
+          <div class="form-group">
+            <label for="repassword" class="col-sm-3 control-label"></label>
+            <div class="col-sm-7">
+              <button type="submit" class="btn btn-default">Xác nhận
+              </button>
+            </div>
+
+          </div>
+        </form>
+       </div> 
+@endif  
 </div>
 
 <style type="text/css">.table&amp;amp;gt;tbody&amp;amp;gt;tr&amp;amp;gt;td, .table&amp;amp;gt;tfoot&amp;amp;gt;tr&amp;amp;gt;td {  
@@ -115,7 +171,7 @@
 @section('script')
 <script type="text/javascript">
   jQuery(document).ready(function($) {
-    $(".qty").change(function(event){
+    $(".qty").keyup(function(event){
       var soluong = $(this).val();
       var id=this.id;
       $.ajax({
@@ -129,22 +185,14 @@
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         async: true,
         success: function(response){
-
-          if(response=="fail")
-          {
-            alert("Vui lòng nhập Số để tìm!!");
-          }
-          else if(response=="notfound")
-          {
-            $("#contentajax").html("<div class='alert alert-danger'><strong>Không tìm thấy dữ liệu</strong></div>");
-          }
-          else
-          {
-            $("#contentajax").html(response);
-          }
+          window.location.reload();
         }
       });
-    });  
+    }); 
+
+    $("#thanhtoan").click(function(event){
+        $("#thongtin").slideToggle("slow");
+    }); 
   });
 </script>
 @endsection
