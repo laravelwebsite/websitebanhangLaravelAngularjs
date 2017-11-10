@@ -11,6 +11,9 @@ use App\HoaDon;
 use App\HoaDonSanPham;
 use DB;
 use App\Category;
+use App\User;
+use App\DetailAccount;
+use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
 {
 	public function getGiohang()
@@ -18,7 +21,17 @@ class PageController extends Controller
 		$contentCart=Cart::content();
 		$total=Cart::total();
 		$count=Cart::count();
-		return view('user.page.cart',['cartContent'=>$contentCart,'total'=>$total,'count'=>$count]);
+		if(Auth::check())
+		{
+			$user=Auth::user();
+			$detailAc=DetailAccount::where('user_id',$user->id)->first();
+			return view('user.page.cart',['cartContent'=>$contentCart,'total'=>$total,'count'=>$count,'userLogin'=>$user,'detailAc'=>$detailAc]);
+		}
+		else
+		{
+			return view('user.page.cart',['cartContent'=>$contentCart,'total'=>$total,'count'=>$count]);
+		}
+		
 	}
 	public function getAddproduct($slug)
 	{

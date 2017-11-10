@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use App\DetailAccount;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 	function getLogin()
@@ -106,7 +108,12 @@ class UserController extends Controller
 		$user->email=$request->email;
 		$user->role_id=1;
 		$user->password=bcrypt($request->password);
-		$user->save();
+		if($user->save())
+		{
+			$detailac=new DetailAccount;
+			$detailac->user_id=$user->id;
+			$detailac->save();
+		}
 		return redirect('dang-nhap')->with('dangky','Đăng ký tài khoản thành công');
 	}
 
@@ -135,5 +142,78 @@ class UserController extends Controller
 	{
 		Auth::logout();
 		return redirect('dang-nhap');
+	}
+
+	public function getUpdateAccount()
+	{
+		$user=Auth::user();
+		$detailAc=DetailAccount::where('user_id',$user->id)->first();
+		return view('user.page.updateAccount',['userLogin'=>$user,'detailAc'=>$detailAc]);
+	}
+	public function postUpdateAccount(Request $request)
+	{
+		$this->validate($request,
+			[
+			'name'=>'required|min:5|max:50', 
+			'phone'=>'numeric'
+			],
+			[
+			'name.required'=>'Vui  lòng nhập tên họ tên',
+			'name.min'=>'Họ tên tối thiểu 5 ký tự',
+			'name.max'=>'Tên quá dài',
+			'phone.numeric'=>'Số điện thoại sai'
+			]);
+		$user_id=Auth::user()->id;
+		$user=User::find($user_id);
+		$user->name=$request->name;
+		$user->save();
+		$deatailAc=DetailAccount::where('user_id',$user_id)->first();
+		$deatailAc->phone=$request->phone;
+		$deatailAc->address=$request->address;
+		$deatailAc->sex=$request->sex;
+		$deatailAc->save();
+		return redirect('user/cap-nhat-tai-khoan')->with('thongbao','Cập nhật thành công');
+	}
+	public function getChangepass()
+	{
+		return view('user.page.changePass');
+	}
+	public function postChangepass(Request $request)
+	{
+		$this->validate($request,
+			[
+			'password'=>'required|min:3|max:32',
+			'repassword'=>'required|same:password'
+			],
+			[
+			'password.required'=>'Vui lòng nhập mật khẩu',
+			'password.min'=>'Mật khẩu tối thiểu 3 ký tự',
+			'password.max'=>'Mật khẩu tối đa 32 ký tự',
+			'repassword.required'=>'Vui lòng nhập xác nhận mật khẩu',
+			'repassword.same'=>'Mật khẩu xác nhận không đúng'
+			]);
+		$user=Auth::user();
+		if(Auth::user()->password == "")
+		{
+			$user=User::find($user->id);
+			$user->password=bcrypt($request->password);
+			$user->save();
+			return redirect('user/doi-mat-khau')->with('thongbao','Cập nhật thành công');
+		}
+		else
+		{
+			if(!Hash::check($request->oldpassword,$user->password))
+			{
+				return redirect('user/doi-mat-khau')->with('thongbao','Sai mật khẩu cũ');
+			}
+			else
+			{
+				$user=User::find($user->id);
+				$user->password=bcrypt($request->password);
+				$user->save();
+				return redirect('user/doi-mat-khau')->with('thongbao','Cập nhật thành công');
+			}
+		}
+		
 	}
 }

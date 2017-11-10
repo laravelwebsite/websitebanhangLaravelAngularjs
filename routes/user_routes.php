@@ -33,8 +33,12 @@ Route::post('hoa-don','PageController@getHoaDon');
 Route::get('tim-san-pham','PageController@getSearch');
 Route::post('tim-kiem-product','PageController@getProductSearch');
 Route::post('loc-san-pham','PageController@getLocproduct');
+Route::get('log-out','UserController@getLogoutUser');
 
 Route::group(['prefix'=>'user','middleware'=>'user'],function(){
-	Route::get('log-out','UserController@getLogoutUser');
+	Route::get('cap-nhat-tai-khoan','UserController@getUpdateAccount');
+	Route::post('cap-nhat-tai-khoan','UserController@postUpdateAccount');
+	Route::get('doi-mat-khau','UserController@getChangepass');
+	Route::post('doi-mat-khau','UserController@postChangepass');
 });
 ?>

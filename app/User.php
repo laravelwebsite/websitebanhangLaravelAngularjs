@@ -8,6 +8,7 @@ use App\Menu;
 use App\Role;
 use App\Product;
 use App\Store;
+use App\DetailAccount;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -42,5 +43,9 @@ class User extends Authenticatable
     public function store()
     {
         return $this->hasOne(Store::class,'user_id','id');
+    }
+    public function detailaccount()
+    {
+        return $this->hasOne(DetailAccount::class,'user_id','id');
     }
 }

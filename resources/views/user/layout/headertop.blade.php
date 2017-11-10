@@ -19,8 +19,9 @@
  		<ul class="icon2 sub-icon2 profile_img">
  			<li><a class="active-icon c2" href="#"> </a>
  				<ul class="sub-icon2 list">
- 					<li><a href="user/log-out"><h3>Đăng xuất</h3></a></li>
- 					<li><a href="tai-khoan"><h3>Tài khoản của bạn</h3></a></li>
+ 					<li><a href="log-out"><h3>Đăng xuất</h3></a></li>
+ 					<li><a href="user/cap-nhat-tai-khoan"><h3>Cập nhật thông tin</h3></a></li>
+ 					<li><a href="user/doi-mat-khau"><h3>Đổi mật khẩu</h3></a></li>
  				</ul>
  			</li>
  		</ul>

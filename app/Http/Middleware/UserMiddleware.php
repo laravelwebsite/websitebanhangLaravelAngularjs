@@ -17,7 +17,7 @@ class UserMiddleware
     {
         if(Auth::check())
         {
-            if(Auth::user()->role_id==1)
+            if(Auth::user()->role_id==1 || Auth::user()->role_id==2 || Auth::user()->role_id==3 || Auth::user()->role_id==4)
             {
                 return $next($request);
             }

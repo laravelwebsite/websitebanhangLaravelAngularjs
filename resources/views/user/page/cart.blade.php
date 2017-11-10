@@ -76,28 +76,28 @@
           <div class="form-group">
             <label for="name" class="col-sm-3 control-label">Họ tên</label>
             <div class="col-sm-7">
-              <input type="text" value="{!! old('name') !!}" required="true" class="form-control" id="name" name="name" placeholder="Vui lòng nhập họ tên" />
+              <input type="text" @if(Auth::check()) value="{{$userLogin->name}}" @endif required="true" class="form-control" id="name" name="name" placeholder="Vui lòng nhập họ tên" />
             </div>
 
           </div>
           <div class="form-group">
             <label for="email" class="col-sm-3 control-label">Email</label>
             <div class="col-sm-7">
-              <input type="text" value="{!! old('email') !!}" required="true" class="form-control" id="email" name="email" placeholder="Vui lòng nhập email" />
+              <input type="text" @if(Auth::check()) value="{{$userLogin->email}}" @endif required="true" class="form-control" id="email" name="email" placeholder="Vui lòng nhập email" />
             </div>
 
           </div>
           <div class="form-group">
             <label for="phone" class="col-sm-3 control-label">Số điện thoại</label>
             <div class="col-sm-7">
-              <input type="text" value="{!! old('phone') !!}" required="true" class="form-control" id="phone" name="phone" placeholder="Vui lòng nhập số điện thoại" />
+              <input type="text" @if(Auth::check()) value="{{$detailAc->phone}}" @endif required="true" class="form-control" id="phone" name="phone" placeholder="Vui lòng nhập số điện thoại" />
             </div>
 
           </div>
           <div class="form-group">
             <label for="address" class="col-sm-3 control-label">Địa chỉ</label>
             <div class="col-sm-7">
-              <input type="text" value="{!! old('address') !!}" required="true" class="form-control" id="address" name="address" placeholder="Vui lòng nhập địa chỉ" />
+              <input type="text" @if(Auth::check()) value="{{$detailAc->address}}" @endif required="true" class="form-control" id="address" name="address" placeholder="Vui lòng nhập địa chỉ" />
             </div>
 
           </div>

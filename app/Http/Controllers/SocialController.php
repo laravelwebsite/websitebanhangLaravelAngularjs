@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Socialite;
 use App\User;
 use DB;
+use App\DetailAccount;
 use Illuminate\Support\Facades\Auth;
 class SocialController extends Controller
 {
@@ -29,6 +30,12 @@ class SocialController extends Controller
 			$create['password'] = "";
 			$create['role_id'] = 1;
 			$id = DB::table('users')->insertGetId($create);
+			if($id)
+			{
+				$detailac=new DetailAccount;
+				$detailac->user_id=$id;
+				$detailac->save();
+			}
 			
 		}
 		Auth::loginUsingId($id);
@@ -55,7 +62,12 @@ class SocialController extends Controller
 			$create['password'] = "";
 			$create['role_id'] = 1;
 			$id = DB::table('users')->insertGetId($create);
-			
+			if($id)
+			{
+				$detailac=new DetailAccount;
+				$detailac->user_id=$id;
+				$detailac->save();
+			}
 		}
 		Auth::loginUsingId($id);
 		return redirect("/");
