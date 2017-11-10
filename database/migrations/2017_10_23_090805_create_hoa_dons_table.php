@@ -21,7 +21,7 @@ class CreateHoaDonsTable extends Migration
             $table->string('phone',255);
             $table->text('address');
             $table->integer('status');
-            $table->integer('price');
+            $table->string('price');
             $table->timestamps();
         });
     }

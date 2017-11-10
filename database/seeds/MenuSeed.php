@@ -52,6 +52,11 @@ class MenuSeed extends Seeder
             'name'=>'Product',
             'src'=>'product'
             ],
+            [
+            'id'=>9,
+            'name'=>'Bills',
+            'src'=>'hoadon'
+            ],
             ]);
     }
 }

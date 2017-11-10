@@ -18,7 +18,15 @@
 		</div>
 		<div class="col_1_of_login span_1_of_login">
 			<div class="login-title">
+				<button class="loginBtn loginBtn--facebook" onclick="window.location='facebook/redirect' ">
+					Login with Facebook
+				</button>
+
+				<button class="loginBtn loginBtn--google" onclick="window.location='google/redirect' ">
+					Login with Google
+				</button>
 				<h4 class="title">Đăng nhập</h4>
+
 				<div class="comments-area">
 					<form action="dang-nhap" method="post">
 						<!-- thong bao sai tai khoan mat khau-->
@@ -60,6 +68,7 @@
 						<p>
 							<input type="submit" value="Login">
 						</p>
+
 					</form>
 				</div>
 			</div>

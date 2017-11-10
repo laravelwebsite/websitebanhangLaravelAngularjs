@@ -77,7 +77,7 @@ class PageController extends Controller
 		$hoadon->phone=$request->phone;
 		$hoadon->address=$request->address;
 		$hoadon->status=1;
-		$hoadon->price=(int)$total;
+		$hoadon->price=Cart::total();
 		$hoadon->save();
 		
 		
@@ -86,8 +86,9 @@ class PageController extends Controller
 			$hoadonsanpham=new HoaDonSanPham;
 			$hoadonsanpham->mahoadon=$hoadon->Mahoadon;
 			$hoadonsanpham->product_id=$c->id;
+			$hoadonsanpham->price=$c->price;
 			$hoadonsanpham->qty=(int)$c->qty;
-			$hoadonsanpham->subtotal=(int)$c->subtotal;
+			$hoadonsanpham->subtotal=$c->subtotal;
 			$hoadonsanpham->save();
 		}
 		$data=[

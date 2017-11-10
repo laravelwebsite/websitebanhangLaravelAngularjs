@@ -18,7 +18,7 @@ class CreateHoaDonSanPhamsTable extends Migration
             $table->string('mahoadon')->references('Mahoadon')->on('hoa_dons')->onDelete('cascade');
             $table->integer('product_id')->references('id')->on('product')->onDelete('cascade');
             $table->integer('qty');
-            $table->integer('subtotal');
+            $table->string('subtotal');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\HoaDonSanPham;
+use App\Product;
 class HoaDon extends Model
 {
     protected $table = 'hoa_dons';
@@ -13,4 +14,5 @@ class HoaDon extends Model
     {
     	return $this->hasMany(HoaDonSanPham::class,'mahoadon','Mahoadon');
     }
+
 }

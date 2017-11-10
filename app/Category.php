@@ -32,6 +32,6 @@ class Category extends Model
     }
     public function detail()
     {
-    	return $this->hasManyThrough(DetailSubCategory::class,SubCategory::class,'categories_id','sub_categories_id','id');
+        return $this->hasManyThrough(DetailSubCategory::class,SubCategory::class,'categories_id','sub_categories_id','id');
     }
 }

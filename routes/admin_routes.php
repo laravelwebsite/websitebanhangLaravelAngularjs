@@ -231,4 +231,33 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('deleteAlbum/{idd}/{stop}','ProductController@postdeleteAlbum');
 
 	});
+
+	Route::group(['prefix'=>'hoadon','middleware'=>'admin'],function(){
+		//$user=Auth::user()->id;
+		$user="";
+		
+		Route::get('/',function(){
+			if(Auth::check())
+			{
+				$user=Auth::user()->id;
+			}
+			$menu=Menu::where('src','hoadon')->first();
+			$menu_id=$menu->id;
+			$user_menu=User_Menu::where('user_id',$user)->where('menu_id',$menu_id)->get();
+			if($user_menu->count()>0)
+			{
+				return view('admin.page.hoadon.list');
+			}
+			else
+			{
+				
+				return view('alertError');
+			}
+		});
+		Route::resource('tbHoadon','HoadonControllerAPI');
+		Route::post('checknamedetailsubcategory','ProductController@postChecknamedetailsubcategory');
+		Route::post('album/{id}','ProductController@postAlbum');
+		Route::post('deleteAlbum/{idd}/{stop}','ProductController@postdeleteAlbum');
+
+	});
 });

@@ -19,6 +19,11 @@ Route::post('dang-ky-tai-khoan','UserController@postRegister');
 Route::get('dang-nhap','UserController@getLoginUser');
 Route::post('dang-nhap','UserController@postLoginUser');
 
+Route::get('facebook/redirect', 'SocialController@redirectToProvider');
+Route::get('facebook/callback', 'SocialController@handleProviderCallback');
+Route::get('google/redirect', 'SocialController@redirectToProviderGoogle');
+Route::get('google/callback', 'SocialController@handleProviderCallbackGoogle');
+
 Route::get('gio-hang','PageController@getGiohang');
 Route::get('them-gio-hang/{slug}','PageController@getAddproduct');
 Route::post('sua-gio-hang','PageController@postSuagiohang');

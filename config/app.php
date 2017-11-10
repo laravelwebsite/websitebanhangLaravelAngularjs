@@ -165,6 +165,7 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Elasticquent\ElasticquentServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -229,7 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
-
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
