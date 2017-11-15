@@ -40,14 +40,14 @@ class MenuControllerAPI extends Controller
     	$menu->name=$request->name;
     	$menu->src=$request->src;
     	
-            if($menu->save())
-            {
-                $menuuser=new User_Menu;
-                $menuuser->user_id=Auth::user()->id;
-                $menuuser->menu_id=$menu->id;
-                $menuuser->save();
-            }
-    	return "Thêm thành công";
+        if($menu->save())
+        {
+            $menuuser=new User_Menu;
+            $menuuser->user_id=Auth::user()->id;
+            $menuuser->menu_id=$menu->id;
+            $menuuser->save();
+        }
+        return "Thêm thành công";
     }
 
     /**
@@ -96,7 +96,7 @@ class MenuControllerAPI extends Controller
      */
     public function destroy($id)
     {
-    	$menu=Menu::find($id);
+        $menu=Menu::find($id);
         if($menu->count()>0)
         {
 
@@ -107,7 +107,7 @@ class MenuControllerAPI extends Controller
             }
             
         }
-    	$menu->delete();
-    	return "Xóa thành công";
+        $menu->delete();
+        return "Xóa thành công";
     }
 }

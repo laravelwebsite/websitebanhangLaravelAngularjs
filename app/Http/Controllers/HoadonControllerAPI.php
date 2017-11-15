@@ -78,9 +78,17 @@ class HoadonControllerAPI extends Controller
     public function update(Request $request, $id)
     {
         $hoadon=HoaDon::find($id);
-        $hoadon->email=$request->email;
-        $hoadon->phone=$request->phone;
-        $hoadon->address=$request->address;
+        if(!$request->status)
+        {
+            $hoadon->email=$request->email;
+            $hoadon->phone=$request->phone;
+            $hoadon->address=$request->address;
+            
+        }
+        else
+        {
+             $hoadon->status=$request->status;
+        }
         $hoadon->save();
         return "Sửa thành công";
     }

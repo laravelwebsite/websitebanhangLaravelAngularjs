@@ -32,7 +32,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::resource('tbUser','UserControllerAPI');
 		Route::resource('tbRole','RoleControllerAPI');
 		Route::post('checkemail','UserController@postCheckemail');
-
+		Route::post('delete-multi-user','UserController@postdeleteUser');
 
 
 	});
@@ -63,7 +63,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::resource('tbMenu','MenuControllerAPI');
 		Route::post('checknamemenu','MenuController@postChecknamemenu');
 		Route::post('checksrcmenu','MenuController@postChecksrcmenu');
-		
+		Route::post('delete-multi-menu','MenuController@postdeleteMenu');
 		
 	});
 
@@ -91,7 +91,7 @@ Route::group(['prefix'=>'admin'],function(){
 		});
 		Route::resource('tbRole','RoleControllerAPI');
 		Route::post('checknamerole','RoleController@postChecknamerole');
-		
+		Route::post('delete-multi-role','RoleController@postdeleteRole');
 		
 	});
 	Route::group(['prefix'=>'UserMenu','middleware'=>'admin'],function(){
@@ -119,7 +119,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::get('get-User-admin','UserController@getUser');
 		Route::resource('tbUserMenu','User_MenuControllerAPI');
 		Route::post('checknamerole','RoleController@postChecknamerole');
-		
+		Route::post('delete-multi-usermenu','User_MenuController@postdeleteUsermenu');
 		
 	});
 	Route::group(['prefix'=>'category','middleware'=>'admin'],function(){
@@ -146,7 +146,7 @@ Route::group(['prefix'=>'admin'],function(){
 		});
 		Route::resource('tbCategory','CategoryControllerAPI');
 		Route::post('checknamecategory','CategoryController@postChecknamecategory');
-		
+		Route::post('delete-multi-category','CategoryController@postdeleteCategory');
 		
 	});
 	Route::group(['prefix'=>'subcategory','middleware'=>'admin'],function(){
@@ -174,7 +174,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::resource('tbSubcategory','SubcategoryControllerAPI');
 		Route::post('checknamesubcategory','SubcategoryController@postChecknamesubcategory');
 		Route::get('getSubByCate/{idCate}','SubcategoryController@getSubByCate');
-		
+		Route::post('delete-multi-subcategory','SubcategoryController@postdeleteSubcategory');
 	});
 	Route::group(['prefix'=>'detailsubcategory','middleware'=>'admin'],function(){
 		//$user=Auth::user()->id;
@@ -201,7 +201,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::resource('tbDetailSubcategory','DetailSubcategoryControllerAPI');
 		Route::post('checknamedetailsubcategory','DetailSubcategoryController@postChecknamedetailsubcategory');
 		Route::get('getDeSubBySub/{idSubCate}','DetailSubcategoryController@getDeSubBySub');
-		
+		Route::post('delete-multi-detailsubcategory','DetailSubcategoryController@postdeleteDetailsubcategory');
 	});
 	Route::group(['prefix'=>'product','middleware'=>'admin'],function(){
 		//$user=Auth::user()->id;
@@ -229,7 +229,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('checknamedetailsubcategory','ProductController@postChecknamedetailsubcategory');
 		Route::post('album/{id}','ProductController@postAlbum');
 		Route::post('deleteAlbum/{idd}/{stop}','ProductController@postdeleteAlbum');
-
+		Route::post('delete-multi-product','ProductController@postdeleteProduct');
 	});
 
 	Route::group(['prefix'=>'hoadon','middleware'=>'admin'],function(){
@@ -255,9 +255,8 @@ Route::group(['prefix'=>'admin'],function(){
 			}
 		});
 		Route::resource('tbHoadon','HoadonControllerAPI');
-		Route::post('checknamedetailsubcategory','ProductController@postChecknamedetailsubcategory');
-		Route::post('album/{id}','ProductController@postAlbum');
-		Route::post('deleteAlbum/{idd}/{stop}','ProductController@postdeleteAlbum');
+		Route::post('update-bill','HoadonController@postUpdateBill');
+		Route::post('delete-hoadon','HoadonController@postdeleteHoadon');
 
 	});
 });

@@ -27,7 +27,7 @@ Bill | Admin
         <thead>
           <tr>
 
-            <th ><i class="fa fa-bookmark"></i>CheckAll <input type="checkbox" id="checkall" name="checkall" ng-model="checkall" /></th>
+            <th ><i class="fa fa-bookmark"></i>CheckAll <input type="checkbox" id="checkall" ng-model="checkall" /></th>
             <th ng-click="sort('Mahoadon')"><i class="fa fa-bookmark"></i>ID
               <span class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
               </span>
@@ -55,17 +55,17 @@ Bill | Admin
           <sample-text></sample-text>
           <div orientable></div>
           <tr dir-paginate="hd in hoadons|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
-            <td class="text-center" ><input type="checkbox" ng-checked="checkall" /></td>
+            <td class="text-center" ><input type="checkbox" class="id" id="id" name="id" ng-checked="checkall" value="[[hd.id]]" /></td>
             
             <td class="text-center"><span>[[hd.Mahoadon]]</span></td>
             <td class="text-center"><span>[[hd.email]]</span></td>
             <td class="text-center"><span>[[hd.phone]]</span></td>
             <td class="text-center"><span>[[hd.price]]</span></td>
-            <td class="text-center" ng-if="[[hd.status]]==1"><span style="color: green;font-weight: bold;">Đang đợi xác nhận</span></td>
-            <td class="text-center" ng-if="[[hd.status]]==2"><span style="color: green;font-weight: bold;">Đang gửi hàng</span></td>
+            <td class="text-center" ng-if="[[hd.status]]==1"><span style="color: red;font-weight: bold;">Đang đợi xác nhận</span></td>
+            <td class="text-center" ng-if="[[hd.status]]==2"><span style="color: blue;font-weight: bold;">Đang gửi hàng</span></td>
             <td class="text-center" ng-if="[[hd.status]]==3"><span style="color: green;font-weight: bold;">Đã nhận hàng</span></td>
             <td class="text-center">
-              <a ng-click="modal('edit',hd.id)" class="btn btn-warning btn-xs" id="edituser" title="Click to detail"><i class="fa fa-eye"></i></a>
+              <a ng-click="modal('status',hd.id)" class="btn btn-warning btn-xs" id="edituser" title="Click to detail"><i class="fa fa-eye"></i></a>
               <a ng-click="modal('edit',hd.id)" class="btn btn-primary btn-xs" id="edituser"><i class="fa fa-pencil"></i></a>      
               <a class="btn btn-danger btn-xs tooltips btn-del-record" id="[[hd.id]]" data-toggle="modal" data-placement="top" data-original-title="Delete record." ng-click="delete(hd.id)"><i class="fa fa-trash-o "></i></a>
             </td>
@@ -77,6 +77,7 @@ Bill | Admin
       direction-links="true"
       boundary-links="true" >
     </dir-pagination-controls>
+    <div style="float: left"><button id="btn-delete-all" class="btn btn-primary btn-lg" >Xóa mục đã chọn</button></div>
     <div class="row-fluid">
       <div class="col-sm-3 col-md-3 col-lg-3">
        <div class="dataTables_info">
@@ -177,7 +178,7 @@ Bill | Admin
               <tr ng-repeat="prohd in hoadonbyId.hoadonsanpham"> 
                <td data-th="Product">[[prohd.product.name]]</td> 
                <td data-th="Price">[[prohd.price]]</td> 
-               <td data-th="Quantity"><input class="qty" name="qty" class="form-control text-center" ng-model="prohd.qty" type="number">
+               <td data-th="Quantity"><input class="qty" ng-keyup="getProductid(prohd.product.id)" name="qty" update-hd class="form-control text-center" ng-model="prohd.qty" type="number">
                </td> 
                <td data-th="Subtotal" class="text-center">[[prohd.subtotal]]</td> 
 
@@ -196,62 +197,39 @@ Bill | Admin
 </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!-- Modal Add-->
-<div class="modal fade" tabindex="-1" role="dialog" id="myModal2">
+
+<!-- Modal Add 2-->
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal3">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" >[[frmTitle]] </h4>
       </div>
-      <div class="modal-body">
-        <form name="frmalbum" class="form-horizontal" >
-          <table class="table table-hover display table-bordered">
-            <thead>
-              <tr>
-                <th ><i class=" fa fa-user"></i>IMAGE </th>  
-                <th class="text-center"><i class=" fa fa-edit"></i> </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr  ng-repeat="stop in chuoi" ng-if="stop!=''">
-                <td class="text-center" ><img src="upload/product/[[stop]]" style="height: 100px;width: 100px" />
-                  <td class="text-center">      
-                    <a class="btn btn-danger btn-xs tooltips btn-del-record" ng-click="deleteAlbum(stop,productc.id)" data-toggle="modal" data-placement="top" data-original-title="Delete record." ><i class="fa fa-trash-o "></i></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-          </form>
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Chọn hình ảnh chính</label>
-            <button class="btn btn-primary" ngf-select="uploadFiles($files, $invalidFiles,iddd)" multiple
-            accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-            Select Files</button>
-            <br><br>
-            Files:
-            <ul>
-              <li ng-repeat="f in files" style="font:smaller">[[f.name]] [[f.$errorParam]]
-                <span class="progress" ng-show="f.progress >= 0">
-                  <div style="width:[[f.progress]]%"  
-                  ng-bind="f.progress + '%'">
-                </div>
-              </span>
-            </li>
-            <li ng-repeat="f in errFiles" style="font:smaller">[[f.name]] [[f.$error]] [[f.$errorParam]]
-            </li> 
-          </ul>
-          [[errorMsg]]
+      <div class="modal-body" ng-init="add=[[add]]">
+        <form name="frmHoadon" class="form-horizontal" enctype="multipart/form-data">
+          <div ng-show="success" class="text-success text-center">
+           [[thongbao]]
+         </div>
+         <div class="alert alert-success" ng-show="alert">
+          <strong>[[thongbao]]</strong>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" ng-click="close()">Cancle</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        <div class="form-group">
+         <label for="name" class="col-sm-3 control-label">Trạng thái</label>
+         <input type="radio" name="sex"   ng-checked="hoadonbyId.status==1" value="1" ng-model="status" ng-click="getVal()"> <span style="color: red">Đang đợi xác nhận</span>
+         <input type="radio" name="sex"  ng-checked="hoadonbyId.status==2" value="2" ng-model="status" ng-click="getVal()"> <span style="color: blue">Đã gửi hàng</span>
+         <input type="radio" name="sex" ng-checked="hoadonbyId.status==3" value="3" ng-model="status" ng-click="getVal()"> <span style="color: green">Đã nhận hàng</span>
+         <br>
 
+       </div>
+     </div>
+     <div class="modal-footer">
+      <button type="button" class="btn btn-primary" ng-click="close()">Cancle</button>
+      <button type="button" class="btn btn-primary" ng-disabled="frmproduct.$invalid" ng-click="save(state,id,picFile)">Lưu</button>
+    </div>
+  </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 
 <!-- Modal recordDel-->
@@ -284,4 +262,44 @@ Bill | Admin
 
 @section('script')
 <script type="text/javascript" src="app/controllers/HoadonController.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $("#btn-delete-all").click(function(event){
+
+      var val=[];
+      $(".id:checkbox:checked").each(function(i)
+      {
+        val[i]=$(this).val();
+      });
+      if(val=="")
+      {
+        alert("Vui lòng chọn mục để xóa!!");
+        return;
+      }
+      else
+      {
+        var comfirm=confirm("Bạn có chắc chắn muốn xóa !!");
+        if(comfirm)
+        {
+          $.ajax({
+            url: 'admin/hoadon/delete-hoadon',
+            type:"POST", 
+            cache:false,
+            data: {
+              "val": val
+            },
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            async: true,
+            success: function(response){
+              location.reload();
+            }
+          });
+        }
+      }
+    }); 
+
+  });
+</script>
+
+
 @endsection

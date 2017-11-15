@@ -27,7 +27,7 @@ User Menu | Admin
         <thead>
           <tr>
 
-            <th ><i class="fa fa-bookmark"></i>CheckAll <input type="checkbox" id="checkall" name="checkall" ng-model="checkall" /></th>
+            <th ><i class="fa fa-bookmark"></i>CheckAll <input type="checkbox" id="checkall" ng-model="checkall" /></th>
             <th ng-click="sort('id')"><i class="fa fa-bookmark"></i>ID
               <span class="glyphicon sort-icon" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
               </span>
@@ -55,7 +55,7 @@ User Menu | Admin
           <sample-text></sample-text>
           <div orientable></div>
           <tr dir-paginate="pro in products|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
-            <td class="text-center" ><input type="checkbox" ng-checked="checkall" /></td>
+            <td class="text-center" ><input type="checkbox" class="id" id="id" name="id" ng-checked="checkall" value="[[pro.id]]" /></td>
             
             <td class="text-center"><span>[[pro.id]]</span></td>
             <td class="text-center"><img src="upload/product/[[pro.image]]" ng-if="[[pro.image]]!=''" style="height: 100px;width: 100px" /><div ng-if="[[pro.image]]==''">Không có hình ảnh</div><br />
@@ -76,6 +76,7 @@ User Menu | Admin
         direction-links="true"
         boundary-links="true" >
       </dir-pagination-controls>
+      <div style="float: left"><button id="btn-delete-all" class="btn btn-primary btn-lg" >Xóa mục đã chọn</button></div>
       <div style="float: right"><button id="btn-add" class="btn btn-primary btn-lg" ng-click="modal('add')">Thêm Product</button></div>
       <div class="row-fluid">
         <div class="col-sm-3 col-md-3 col-lg-3">
@@ -295,4 +296,42 @@ User Menu | Admin
 
 @section('script')
 <script type="text/javascript" src="app/controllers/ProductController.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $("#btn-delete-all").click(function(event){
+
+      var val=[];
+      $(".id:checkbox:checked").each(function(i)
+      {
+        val[i]=$(this).val();
+      });
+      if(val=="")
+      {
+        alert("Vui lòng chọn mục để xóa!!");
+        return;
+      }
+      else
+      {
+        var comfirm=confirm("Bạn có chắc chắn muốn xóa !!");
+        if(comfirm)
+        {
+          $.ajax({
+            url: 'admin/product/delete-multi-product',
+            type:"POST", 
+            cache:false,
+            data: {
+              "val": val
+            },
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            async: true,
+            success: function(response){
+              location.reload();
+            }
+          });
+        }
+      }
+    }); 
+
+  });
+</script>
 @endsection

@@ -67,6 +67,11 @@ class User_MenuSeed extends Seeder
           'user_id'=>1,
           'menu_id'=>8
           ],
+            [
+          'id'=>12,
+          'user_id'=>1,
+          'menu_id'=>9
+          ],
           ]);
     }
 }

@@ -21,6 +21,34 @@ class ProductController extends Controller
 		$product_lienquan=Product::where('detail_sub_categories_id',$detail_sub_cate->id)->limit(10)->get();
 		return view('user.page.chitiet',['product'=>$product,'split'=>$sp,'productlienquan'=>$product_lienquan]);
 	}
+	public function postdeleteProduct(Request $request)
+	{
+		if($request->ajax())
+		{
+			$product=Product::whereIn('id',$request->val)->get();
+
+			foreach($product as $pro)
+			{
+				if($pro->image!=null && file_exists("upload/product/".$pro->image))
+				{
+					unlink('upload/product/'.$pro->image);
+				}
+				$album=$pro->album;
+				if($album !="")
+				{
+					$split=explode('|',$album);
+					foreach($split as $key=>$value){
+						if(file_exists("upload/product/".$value))
+						{
+							unlink('upload/product/'.$value);
+						}		    	
+					}
+				}
+				
+				$pro->delete();
+			}
+		}
+	}
 	public function getProductbyCate($slug)
 	{
 		$cate=Category::findBySlug($slug);
@@ -40,7 +68,6 @@ class ProductController extends Controller
 		->join('sub_categories','categories.id','=','sub_categories.categories_id')
 		->join('detail_sub_categories','sub_categories.id','=','detail_sub_categories.sub_categories_id')
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');
-		//detail_sub_categories_id
 		
 		$product=$tbproduct->where('sub_categories_id',$sub->id)->paginate(10);
 		return view('user.page.productCate',['productcate'=>$product]);
@@ -102,19 +129,24 @@ class ProductController extends Controller
 		    	$product=Product::findBySlug($idd);
 		    	$album=$product->album;
 		    	//dd($product);
-		    	$split=explode('|',$album);
-		    	foreach($split as $key=>$value){
-		    		if($value==$stop)
-		    		{
-		    			unset($split[$key]);
-		    			if(file_exists("upload/product/".$stop))
+		    	
+		    	if($album != "")
+		    	{
+		    		$split=explode('|',$album);
+		    		foreach($split as $key=>$value){
+		    			if($value==$stop)
 		    			{
-		    				unlink('upload/product/'.$stop);
-		    			}
-		    		}		    	
+			    			unset($split[$key]);//xoa phan tu trong mang
+			    			if(file_exists("upload/product/".$stop))
+			    			{
+			    				unlink('upload/product/'.$stop);
+			    			}
+		    			}		    	
+			    	}
+			    	$album=implode('|',$split);
+			    	$product->album=$album;
+			    	$product->save();
 		    	}
-		    	$album=implode('|',$split);
-		    	$product->album=$album;
-		    	$product->save();
-		    }
+
 		}
+	}

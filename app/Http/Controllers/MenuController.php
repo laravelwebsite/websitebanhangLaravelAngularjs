@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Menu;
+use App\User_Menu;
 class MenuController extends Controller
 {
     public function postChecknamemenu(Request $request)
@@ -29,5 +30,24 @@ class MenuController extends Controller
     	{
     		return 1;
     	}
+    }
+
+    public function postdeleteMenu(Request $request)
+    {
+        if($request->ajax())
+        {
+            $menu=Menu::whereIn('id',$request->val)->get();
+            foreach($menu as $mn)
+            {
+                $usermenu=User_Menu::where('menu_id',$mn->id)->get();
+                if($mn->delete())
+                {
+                    foreach($usermenu as $u)
+                    {
+                        $u->delete();
+                    }
+                }
+            }
+        }
     }
 }

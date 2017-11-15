@@ -90,7 +90,8 @@ class PageController extends Controller
 		$hoadon->phone=$request->phone;
 		$hoadon->address=$request->address;
 		$hoadon->status=1;
-		$hoadon->price=Cart::total();
+		$price=Cart::total();
+		$hoadon->price=str_replace(',','',$price);
 		$hoadon->save();
 		
 		

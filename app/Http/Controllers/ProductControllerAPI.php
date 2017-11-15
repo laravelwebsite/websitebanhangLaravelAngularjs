@@ -135,8 +135,8 @@ class ProductControllerAPI extends Controller
             while(file_exists("upload/product/".$hinh))//neu van trung thi random tiep
             {
              $hinh=str_random(10)."_".$name;
-            }
-            $hinh=str_replace(" ","_",$hinh);
+         }
+         $hinh=str_replace(" ","_",$hinh);
             $image->move('upload/product',$hinh);//vi tri luu va ten file
             if($product->image!=null && file_exists("upload/product/".$product->image))
             {
@@ -164,7 +164,19 @@ class ProductControllerAPI extends Controller
         {
             unlink('upload/product/'.$product->image);
         }
-        $product->delete();
-        return "Xóa thành công";
+        $album=$product->album;
+        if($album !="")
+        {
+           $split=explode('|',$album);
+           foreach($split as $key=>$value){
+            if(file_exists("upload/product/".$value))
+            {
+                unlink('upload/product/'.$value);
+            }               
+        }
     }
+    
+    $product->delete();
+    return "Xóa thành công";
+}
 }

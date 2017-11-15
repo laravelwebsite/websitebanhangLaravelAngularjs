@@ -216,4 +216,15 @@ class UserController extends Controller
 		}
 		
 	}
+	public function postdeleteUser(Request $request)
+	{
+		if($request->ajax())
+		{
+			$user=User::whereIn('id',$request->val)->get();
+			foreach($user as $u)
+			{
+				$u->delete();
+			}
+		}
+	}
 }

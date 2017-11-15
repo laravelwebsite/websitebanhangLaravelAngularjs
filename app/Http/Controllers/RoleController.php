@@ -18,4 +18,15 @@ class RoleController extends Controller
 			return 1;
 		}
 	}
+	public function postdeleteRole(Request $request)
+	{
+		if($request->ajax())
+		{
+			$role=Role::whereIn('id',$request->val)->get();
+			foreach($role as $r)
+			{
+				$r->delete();
+			}
+		}
+	}
 }
