@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 use App\User_Menu;
 use App\Menu;
+use App\HoaDon;
 Route::group(['prefix'=>'admin'],function(){
 	Route::get('login-admin','UserController@getLogin');
 	Route::post('login-admin','UserController@postLogin');
@@ -246,6 +247,7 @@ Route::group(['prefix'=>'admin'],function(){
 			$user_menu=User_Menu::where('user_id',$user)->where('menu_id',$menu_id)->get();
 			if($user_menu->count()>0)
 			{
+
 				return view('admin.page.hoadon.list');
 			}
 			else
@@ -258,5 +260,53 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::post('update-bill','HoadonController@postUpdateBill');
 		Route::post('delete-hoadon','HoadonController@postdeleteHoadon');
 
+	});
+	Route::group(['prefix'=>'thongke','middleware'=>'admin'],function(){
+		//$user=Auth::user()->id;
+		$user="";
+		
+		Route::get('/',function(){
+			if(Auth::check())
+			{
+				$user=Auth::user()->id;
+			}
+			$menu=Menu::where('src','thongke')->first();
+			$menu_id=$menu->id;
+			$user_menu=User_Menu::where('user_id',$user)->where('menu_id',$menu_id)->get();
+			if($user_menu->count()>0)
+			{
+				return view('admin.page.thongke.list');
+			}
+			else
+			{
+				
+				return view('alertError');
+			}
+		});
+		Route::post('xem-thu-chi','HoadonController@postXemthuchi');
+
+	});
+	Route::group(['prefix'=>'truycap','middleware'=>'admin'],function(){
+		//$user=Auth::user()->id;
+		$user="";
+		
+		Route::get('/',function(){
+			if(Auth::check())
+			{
+				$user=Auth::user()->id;
+			}
+			$menu=Menu::where('src','truycap')->first();
+			$menu_id=$menu->id;
+			$user_menu=User_Menu::where('user_id',$user)->where('menu_id',$menu_id)->get();
+			if($user_menu->count()>0)
+			{
+				return view('admin.page.truycap.list');
+			}
+			else
+			{
+				
+				return view('alertError');
+			}
+		});
 	});
 });

@@ -29,6 +29,7 @@ class PageController extends Controller
 		}
 		else
 		{
+
 			return view('user.page.cart',['cartContent'=>$contentCart,'total'=>$total,'count'=>$count]);
 		}
 		
@@ -113,16 +114,28 @@ class PageController extends Controller
 		'total'=>Cart::total(),
 		'cart'=>Cart::content()
 		];
-		Mail::send('user.page.mailthanks',['data'=>$data],function($msg) use ($data){
+		try
+		{
+			Mail::send('user.page.mailthanks',['data'=>$data],function($msg) use ($data){
 			$msg->from('huynhphihung0401@gmail.com','Website bán hàng');
 			$msg->to($data["email"])->subject('Thông tin hóa đơn');
-		});
+			});
+		}
+		catch
+		{
+			return route("errorMail");
+		}
+		
 		Cart::destroy();
 		echo "<script>
 		alert('Cảm ơn bạn đã mua hàng,chúng tôi sẽ liên hệ để xác nhận đơn hàng sớm nhất!! Vui lòng kiểm tra email để theo dõi tình trạng đơn hàng');
 		window.location='".url('/')."'
 	</script>";
 
+}
+public function errorMail()
+{
+	return view("errorMail");
 }
 public function postLienhe(Request $request)
 {
@@ -146,14 +159,22 @@ public function postLienhe(Request $request)
 	'title'=>$request->title,
 	'content'=>$request->content
 	];
-	Mail::send('user.page.mail',$data,function($msg){
-		$msg->from('huynhphihung0401@gmail.com','Website bán hàng');
-		$msg->to('huynhphihung1995@gmail.com')->subject('Bạn nhận được một email phản hồi từ website của bạn');
-	});
+	try
+	{
+		Mail::send('user.page.mail',$data,function($msg){
+			$msg->from('huynhphihung0401@gmail.com','Website bán hàng');
+			$msg->to('huynhphihung1995@gmail.com')->subject('Bạn nhận được một email phản hồi từ website của bạn');
+		});
+	}
+	catch
+	{
+		return route("errorMail");
+	}
+
 	echo "<script>
 	alert('Cảm ơn email góp ý của bạn,chúng tôi sẽ phản hồi sớm nhất có thể!');
 	window.location='".url('/')."'
-</script>";
+	</script>";
 }
 
 public function getSearch(Request $request)

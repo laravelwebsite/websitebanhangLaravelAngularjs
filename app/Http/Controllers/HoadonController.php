@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\HoaDon;
+use View;
 use App\HoaDonSanPham;
+use Carbon\Carbon;
 class HoadonController extends Controller
 {
 	public function postUpdateBill(Request $request)
@@ -55,6 +57,40 @@ class HoadonController extends Controller
 					}
 				}
 			}
+		}
+	}
+	public function postXemthuchi(Request $request)
+	{
+		if($request->ajax())
+		{
+			$year=$request->year;
+			$month=$request->month;
+			$date=$request->date;
+			if($request->date)
+			{
+				$hoadon=HoaDon::whereYear('updated_at', '=', $year)
+				->whereMonth('created_at', '=', $month)
+				->whereDay('created_at', '=', $date)->where("status",3)->get();
+			}
+			else
+			{
+				if($request->month)
+				{
+					$hoadon=HoaDon::whereYear('updated_at', '=', $year)
+					->whereMonth('created_at', '=', $month)->where("status",3)->get();
+				}
+				else
+				{
+					$hoadon=HoaDon::whereYear('updated_at', '=', $year)->where("status",3)->get();
+				}
+			}
+			$tongtien=0;
+			foreach($hoadon as $hd)
+			{
+				$tien=(int)$hd->price;
+				$tongtien=$tongtien+$tien;
+			}
+			return View::make('admin.page.thongke.hoadonsearch',['hoadonsearch'=>$hoadon,'tongtien'=>$tongtien]);
 		}
 	}
 }

@@ -14,48 +14,58 @@ class MenuSeed extends Seeder
         DB::table('menus')->insert([
         	[
             'id'=>1,
-            'name'=>'User',
+            'name'=>'Quản lý người dùng',
             'src'=>'user'
             ],
             [
             'id'=>2,
-            'name'=>'Menu',
+            'name'=>'Quản lý Menu',
             'src'=>'menu'
             ],
             [
             'id'=>3,
-            'name'=>'Role',
+            'name'=>'Quản lý Quyền',
             'src'=>'role'
             ],
             [
             'id'=>4,
-            'name'=>'User_Menu',
+            'name'=>'Phân quyền',
             'src'=>'UserMenu'
             ],
             [
             'id'=>5,
-            'name'=>'Category',
+            'name'=>'Danh mục cấp 1',
             'src'=>'category'
             ],
             [
             'id'=>6,
-            'name'=>'Sub Category',
+            'name'=>'Danh mục cấp 2',
             'src'=>'subcategory'
             ],
             [
             'id'=>7,
-            'name'=>'Detail Sub Category',
+            'name'=>'Danh mục cấp 3',
             'src'=>'detailsubcategory'
             ],
             [
             'id'=>8,
-            'name'=>'Product',
+            'name'=>'Sản phẩm',
             'src'=>'product'
             ],
             [
             'id'=>9,
-            'name'=>'Bills',
+            'name'=>'Hóa đơn',
             'src'=>'hoadon'
+            ],
+            [
+            'id'=>10,
+            'name'=>'Thống kê',
+            'src'=>'thongke'
+            ],
+            [
+            'id'=>11,
+            'name'=>'Truy cập',
+            'src'=>'truycap'
             ],
             ]);
     }

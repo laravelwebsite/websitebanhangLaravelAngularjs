@@ -41,4 +41,6 @@ Route::group(['prefix'=>'user','middleware'=>'user'],function(){
 	Route::get('doi-mat-khau','UserController@getChangepass');
 	Route::post('doi-mat-khau','UserController@postChangepass');
 });
+
+Route::get('errorMail','PageController@errorMail');
 ?>

@@ -7,6 +7,8 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\DetailAccount;
 use Illuminate\Support\Facades\Hash;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 class UserController extends Controller
 {
 	function getLogin()
