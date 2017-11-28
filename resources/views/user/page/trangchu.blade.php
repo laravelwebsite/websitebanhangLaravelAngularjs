@@ -1,5 +1,7 @@
 @extends('user.layout.index')
-
+@section('title')
+Website bán hàng
+@endsection
 @section('slide')
 @include('user.layout.slide')
 @endsection

@@ -112,6 +112,8 @@
 <script src="js/ng-file-upload.min.js"></script>
 <script src="js/ng-file-upload-shim.js"></script>
 <script src="js/dropzone.min.js"></script>
+<!-- typeHead -->
+<script src="js/typeahead.bundle.min.js"></script>
 <!-- start menu -->     
 <link href="user/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="user/js/megamenu.js"></script>
