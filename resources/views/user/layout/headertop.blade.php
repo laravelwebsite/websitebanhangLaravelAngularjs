@@ -1,7 +1,7 @@
  <div class="header-top">
  	<div class="wrap"> 
  		<div class="logo">
- 			<a href="/"><img src="user/images/logo.png" alt=""/></a>
+ 			<a href="/"><img src="public/user/images/logo.png" alt=""/></a>
  		</div>
  		<div class="cssmenu">
  			<ul>	

@@ -66,29 +66,16 @@
  > Nữ<br>
 
 </div>
-       		<!-- <div class="form-group">
-                            <label for="password"  class="col-sm-3 control-label">Mật khẩu</label>
-                            <div class="col-sm-7">
-                                   <input type="password" required="true" class="form-control" id="password" name="password" placeholder="Vui lòng nhập mật khẩu" />
-                            </div>
-                     
-                     </div>
-                     <div class="form-group">
-                            <label for="repassword" class="col-sm-3 control-label">Mật khẩu</label>
-                            <div class="col-sm-7">
-                                   <input type="password" required="true" class="form-control" id="repassword" name="repassword" placeholder="Vui lòng nhập lại mật khẩu" />
-                            </div>
-                     
-                          </div> -->
-                          <div class="form-group">
-                            <label for="repassword" class="col-sm-3 control-label"></label>
-                            <div class="col-sm-7">
-                             <button type="submit" class="btn btn-default">Xác nhận
-                             </button>
-                           </div>
 
-                         </div>
-                       </form>
-                     </div> 
+<div class="form-group">
+  <label for="repassword" class="col-sm-3 control-label"></label>
+  <div class="col-sm-7">
+   <button type="submit" class="btn btn-default">Xác nhận
+   </button>
+ </div>
 
-                     @endsection
+</div>
+</form>
+</div> 
+
+@endsection

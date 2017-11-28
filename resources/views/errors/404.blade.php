@@ -13,13 +13,13 @@
     <title>404</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="admin2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="admin2/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="public/admin2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/admin2/css/bootstrap-reset.css" rel="stylesheet">
     <!--external css-->
-    <link href="admin2/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="public/admin2/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    <link href="admin2/css/style.css" rel="stylesheet">
-    <link href="admin2/css/style-responsive.css" rel="stylesheet" />
+    <link href="public/admin2/css/style.css" rel="stylesheet">
+    <link href="public/admin2/css/style-responsive.css" rel="stylesheet" />
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
     <!--[if lt IE 9]>

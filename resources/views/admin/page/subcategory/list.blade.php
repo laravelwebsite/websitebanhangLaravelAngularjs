@@ -165,7 +165,7 @@ User Menu | Admin
 @endsection
 
 @section('script')
-<script type="text/javascript" src="app/controllers/SubcategoryController.js"></script>
+<script type="text/javascript" src="public/app/controllers/SubcategoryController.js"></script>
 <script type="text/javascript">
   jQuery(document).ready(function($) {
     $("#btn-delete-all").click(function(event){

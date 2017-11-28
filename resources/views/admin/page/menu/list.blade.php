@@ -177,7 +177,7 @@ Menu List | Admin
 @endsection
 
 @section('script')
-<script type="text/javascript" src="app/controllers/MenuController.js"></script>
+<script type="text/javascript" src="public/app/controllers/MenuController.js"></script>
 <script type="text/javascript">
   jQuery(document).ready(function($) {
     $("#btn-delete-all").click(function(event){

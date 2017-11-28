@@ -114,17 +114,11 @@ class PageController extends Controller
 		'total'=>Cart::total(),
 		'cart'=>Cart::content()
 		];
-		try
-		{
 			Mail::send('user.page.mailthanks',['data'=>$data],function($msg) use ($data){
 			$msg->from('huynhphihung0401@gmail.com','Website bán hàng');
 			$msg->to($data["email"])->subject('Thông tin hóa đơn');
 			});
-		}
-		catch
-		{
-			return route("errorMail");
-		}
+		
 		
 		Cart::destroy();
 		echo "<script>
@@ -132,7 +126,7 @@ class PageController extends Controller
 		window.location='".url('/')."'
 	</script>";
 
-}
+	}
 public function errorMail()
 {
 	return view("errorMail");
@@ -159,17 +153,12 @@ public function postLienhe(Request $request)
 	'title'=>$request->title,
 	'content'=>$request->content
 	];
-	try
-	{
 		Mail::send('user.page.mail',$data,function($msg){
 			$msg->from('huynhphihung0401@gmail.com','Website bán hàng');
 			$msg->to('huynhphihung1995@gmail.com')->subject('Bạn nhận được một email phản hồi từ website của bạn');
 		});
-	}
-	catch
-	{
-		return route("errorMail");
-	}
+
+
 
 	echo "<script>
 	alert('Cảm ơn email góp ý của bạn,chúng tôi sẽ phản hồi sớm nhất có thể!');

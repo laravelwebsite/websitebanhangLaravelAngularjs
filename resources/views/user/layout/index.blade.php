@@ -6,15 +6,15 @@
   <base href="{{asset(' ')}}" >
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link href="user/css/style.css" rel="stylesheet" type="text/css" media="all" />
-  <link href="user/css/form.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="public/user/css/style.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="public/user/css/form.css" rel="stylesheet" type="text/css" media="all" />
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-  <link href="supadmin/style-shorten/css/style.css" rel="stylesheet">
-  <link href="supadmin/style-shorten/css/style-responsive.css" rel="stylesheet" />
-  <link href="supadmin/style-shorten/css/bootstrap-reset.css" rel="stylesheet">
-    <link href="supadmin/style-shorten/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link href="public/supadmin/style-shorten/css/style.css" rel="stylesheet">
+  <link href="public/supadmin/style-shorten/css/style-responsive.css" rel="stylesheet" />
+  <link href="public/supadmin/style-shorten/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="public/supadmin/style-shorten/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="public/js/jquery.min.js"></script>
   
 
   <script type="text/javascript">
@@ -51,7 +51,7 @@
   
   
 
-  <script type="text/javascript" src="user/js/jquery.jscrollpane.min.js"></script>
+  <script type="text/javascript" src="public/user/js/jquery.jscrollpane.min.js"></script>
   <script type="text/javascript" id="sourcecode">
     $(function()
     {
@@ -60,8 +60,8 @@
   </script>
 
   <!-- top scrolling -->
-  <script type="text/javascript" src="user/js/move-top.js"></script>
-  <script type="text/javascript" src="user/js/easing.js"></script>
+  <script type="text/javascript" src="public/user/js/move-top.js"></script>
+  <script type="text/javascript" src="public/user/js/easing.js"></script>
   <script type="text/javascript">
     jQuery(document).ready(function($) {
       $(".scroll").click(function(event){   
@@ -70,7 +70,7 @@
       });
     });
   </script>  
-<link href="supadmin/style-shorten/css/bootstrap.min.css" rel="stylesheet">
+<link href="public/supadmin/style-shorten/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
   @include('user.layout.headertop')
@@ -102,22 +102,21 @@
 </script>
 <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 </body>
-<script type="text/javascript" src="app/lib/angular.min.js"></script>
-<script type="text/javascript" src="js/angular-ui-router.min.js"></script>
-<script src="supadmin/style-shorten/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="app/app.js"></script>
-<script src="js/angular-route.js"></script>
-<script src="js/dirPagination.js"></script>
-<script src="js/ng-file-upload-all.min.js"></script>
-<script src="js/ng-file-upload.min.js"></script>
-<script src="js/ng-file-upload-shim.js"></script>
-<script src="js/dropzone.min.js"></script>
+<script type="text/javascript" src="public/app/lib/angular.min.js"></script>
+<script type="text/javascript" src="public/js/angular-ui-router.min.js"></script>
+<script src="public/supadmin/style-shorten/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="public/app/app.js"></script>
+<script src="public/js/angular-route.js"></script>
+<script src="public/js/dirPagination.js"></script>
+<script src="public/js/ng-file-upload-all.min.js"></script>
+<script src="public/js/ng-file-upload.min.js"></script>
+<script src="public/js/ng-file-upload-shim.js"></script>
+<script src="public/js/dropzone.min.js"></script>
 <!-- typeHead -->
-<script src="js/typeahead.bundle.min.js"></script>
+<script src="public/js/typeahead.bundle.min.js"></script>
 <!-- start menu -->     
-<link href="user/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="user/js/megamenu.js"></script>
-<script type="text/javascript" src="app/controllers/CategoryController.js"></script>
+<link href="public/user/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="public/user/js/megamenu.js"></script>
 
 @yield('script')
 </html>

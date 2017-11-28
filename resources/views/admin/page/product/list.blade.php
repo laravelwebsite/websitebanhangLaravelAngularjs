@@ -58,7 +58,7 @@ User Menu | Admin
             <td class="text-center" ><input type="checkbox" class="id" id="id" name="id" ng-checked="checkall" value="[[pro.id]]" /></td>
             
             <td class="text-center"><span>[[pro.id]]</span></td>
-            <td class="text-center"><img src="upload/product/[[pro.image]]" ng-if="[[pro.image]]!=''" style="height: 100px;width: 100px" /><div ng-if="[[pro.image]]==''">Không có hình ảnh</div><br />
+            <td class="text-center"><img src="public/upload/product/[[pro.image]]" ng-if="[[pro.image]]!=''" style="height: 100px;width: 100px" /><div ng-if="[[pro.image]]==''">Không có hình ảnh</div><br />
               <button type="button" ng-click="modal('album',pro.slug)" class="btn btn-primary btn-sm">Update Album</button></td>
               <td class="text-center"><span>[[pro.name]]</span></td>
               <td class="text-center"><span>[[pro.detailsubcategory.name]]</span></td>
@@ -196,7 +196,7 @@ User Menu | Admin
       ngf-model-invalid="errorFile" onchange="angular.element(this).scope().checked()">
       <span ng-show="frmproduct.file.$error.maxSize"  id="helpBlock2" class="help-block">File too large  max 2M</span>
       <img style="width: 400px;height:400px;" ng-show="frmproduct.file.$valid"  ngf-thumbnail="picFile" class="thumb" > 
-      <img style="width: 400px;height:400px;" ng-show="!add && check==false" ng-hide="check==true" ng-src="upload/product/[[product.image]]" class="thumb" >
+      <img style="width: 400px;height:400px;" ng-show="!add && check==false" ng-hide="check==true" ng-src="public/upload/product/[[product.image]]" class="thumb" >
       <button ng-click="picFile = null" ng-show="picFile">Remove</button>
       <br>
     </div>
@@ -229,7 +229,7 @@ User Menu | Admin
           </thead>
           <tbody>
             <tr  ng-repeat="stop in chuoi" ng-if="stop!=''">
-              <td class="text-center" ><img src="upload/product/[[stop]]" style="height: 100px;width: 100px" />
+              <td class="text-center" ><img src="public/upload/product/[[stop]]" style="height: 100px;width: 100px" />
               <td class="text-center">      
                   <a class="btn btn-danger btn-xs tooltips btn-del-record" ng-click="deleteAlbum(stop,productc.id)" data-toggle="modal" data-placement="top" data-original-title="Delete record." ><i class="fa fa-trash-o "></i></a>
               </td>
@@ -295,7 +295,7 @@ User Menu | Admin
 @endsection
 
 @section('script')
-<script type="text/javascript" src="app/controllers/ProductController.js"></script>
+<script type="text/javascript" src="public/app/controllers/ProductController.js"></script>
 <script type="text/javascript">
   jQuery(document).ready(function($) {
     $("#btn-delete-all").click(function(event){

@@ -20,7 +20,7 @@
   <tr> 
    <td data-th="Product"> 
     <div class="row"> 
-     <div class="col-sm-2 hidden-xs"><img src="upload/product/{{$cart->options->image}}" alt="{{$cart->name}}" class="img-responsive" width="100">
+     <div class="col-sm-2 hidden-xs"><img src="public/upload/product/{{$cart->options->image}}" alt="{{$cart->name}}" class="img-responsive" width="100">
      </div> 
      <div class="col-sm-10"> 
       <h4 class="nomargin">{{$cart->name}}</h4> 
@@ -33,7 +33,7 @@
 </td> 
 <td data-th="Subtotal" class="text-center">{{number_format($cart->subtotal)}}</td> 
 <td class="actions" data-th=""> 
-  <button class="btn btn-danger btn-sm" title="Xóa khỏi giỏ hàng" onclick="window.location='xoa-gio-hang/{{$cart->rowId}}'"><i class="fa fa-trash-o"></i>
+  <button class="btn btn-danger btn-sm" title="Xóa khỏi giỏ hàng" onclick="window.location='xoa-gio-hang/{{$cart->rowId}}'"><i class="fa fa-trash-o "></i>
   </button>
 </td> 
 </tr> 
