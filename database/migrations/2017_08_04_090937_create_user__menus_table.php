@@ -17,6 +17,7 @@ class CreateUserMenusTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('menu_id');
+            $table->integer('delete');
             $table->timestamps();
         });
     }

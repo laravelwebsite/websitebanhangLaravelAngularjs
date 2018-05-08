@@ -14,7 +14,7 @@ class MenuControllerAPI extends Controller
      */
     public function index()
     {
-    	$menus=Menu::orderBy('id','DESC')->get();
+    	$menus=Menu::where('delete',1)->orderBy('id','DESC')->get();
     	return json_encode($menus);
     }
 
@@ -36,18 +36,51 @@ class MenuControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-    	$menu=new Menu;
-    	$menu->name=$request->name;
-    	$menu->src=$request->src;
-    	
-        if($menu->save())
+        $find=Menu::where('name',$request->name)->first();
+        if($find)
         {
-            $menuuser=new User_Menu;
-            $menuuser->user_id=Auth::user()->id;
-            $menuuser->menu_id=$menu->id;
-            $menuuser->save();
+            $find->src=$request->src;
+            $find->delete=1;
+             if($find->save())
+            {
+                $user_id=Auth::user()->id;
+                $menu_id=$find->id;
+                $find=User_Menu::where('user_id',$user_id)->where('menu_id',$menu_id)->first();
+                if($find->count()>0)
+                {
+                    $find->delete=1;
+                    $find->save();
+                }
+                else
+                {
+                    $menuuser=new User_Menu;
+                    $menuuser->user_id=Auth::user()->id;
+                    $menuuser->menu_id=$find->id;
+                    $menuuser->delete=1;
+                    $menuuser->save();
+                }
+                
+            }
+            return "Thêm thành công";
         }
-        return "Thêm thành công";
+        else
+        {
+            $menu=new Menu;
+            $menu->name=$request->name;
+            $menu->src=$request->src;
+            $menu->delete=1;
+             if($menu->save())
+            {
+                $menuuser=new User_Menu;
+                $menuuser->user_id=Auth::user()->id;
+                $menuuser->menu_id=$menu->id;
+                $menuuser->delete=1;
+                $menuuser->save();
+            }
+            return "Thêm thành công";
+        }	
+       
+        
     }
 
     /**
@@ -97,17 +130,18 @@ class MenuControllerAPI extends Controller
     public function destroy($id)
     {
         $menu=Menu::find($id);
-        if($menu->count()>0)
+        $menu->delete=0;
+        if($menu->save())
         {
 
             $usermenu=User_Menu::where('menu_id',$menu->id)->get();
             foreach($usermenu as $u)
             {
-                $u->delete();
+                $u->delete=0;
+                $u->save();
             }
             
         }
-        $menu->delete();
         return "Xóa thành công";
     }
 }

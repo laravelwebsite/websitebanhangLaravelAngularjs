@@ -6,7 +6,7 @@
         <h3 class="m_1">{{$pro->name}}</h3>
         <p class="m_2">{{$pro->title}}</p>
         <div class="grid_img">
-         <div class="css3"><img src="public/upload/product/{{$pro->image}}" alt="{{$pro->title}}" style="width: 280px;height: 190px" /></div>
+         <div class="css3"><img src="upload/product/{{$pro->image}}" alt="{{$pro->title}}" style="width: 280px;height: 190px" /></div>
          <div class="mask1">
           <div class="info">Chi tiết</div>
         </div>

@@ -17,28 +17,28 @@
   <!-- Bootstrap core CSS -->
   <!-- Bootstrap core CSS -->
   
-  <link href="public/supadmin/style-shorten/css/bootstrap.min.css" rel="stylesheet">
-  <link href="public/supadmin/style-shorten/css/bootstrap-reset.css" rel="stylesheet">
+  <link href="supadmin/style-shorten/css/bootstrap.min.css" rel="stylesheet">
+  <link href="supadmin/style-shorten/css/bootstrap-reset.css" rel="stylesheet">
   <!--external css-->
-  <link href="public/supadmin/style-shorten/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link href="supadmin/style-shorten/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
   @yield('header')
-  <link rel="stylesheet" type="text/css" href="public/supadmin/style-shorten/assets/bootstrap-fileupload/bootstrap-fileupload.css" />
+  <link rel="stylesheet" type="text/css" href="supadmin/style-shorten/assets/bootstrap-fileupload/bootstrap-fileupload.css" />
   
-  <link rel="stylesheet" type="text/css" href="public/supadmin/style-shorten/assets/bootstrap-datepicker/css/datepicker.css" />
-  <link rel="stylesheet" type="text/css" href="public/supadmin/style-shorten/assets/bootstrap-timepicker/compiled/timepicker.css" />
-  <link rel="stylesheet" type="text/css" href="public/supadmin/style-shorten/assets/bootstrap-colorpicker/css/colorpicker.css" />
-  <link rel="stylesheet" type="text/css" href="public/supadmin/style-shorten/assets/bootstrap-daterangepicker/daterangepicker-bs3.css" />
-  <link rel="stylesheet" type="text/css" href="public/supadmin/style-shorten/assets/bootstrap-datetimepicker/css/datetimepicker.css" />
-  <link rel="stylesheet" type="text/css" href="public/supadmin/style-shorten/assets/jquery-multi-select/css/multi-select.css" />
+  <link rel="stylesheet" type="text/css" href="supadmin/style-shorten/assets/bootstrap-datepicker/css/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="supadmin/style-shorten/assets/bootstrap-timepicker/compiled/timepicker.css" />
+  <link rel="stylesheet" type="text/css" href="supadmin/style-shorten/assets/bootstrap-colorpicker/css/colorpicker.css" />
+  <link rel="stylesheet" type="text/css" href="supadmin/style-shorten/assets/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+  <link rel="stylesheet" type="text/css" href="supadmin/style-shorten/assets/bootstrap-datetimepicker/css/datetimepicker.css" />
+  <link rel="stylesheet" type="text/css" href="supadmin/style-shorten/assets/jquery-multi-select/css/multi-select.css" />
     <!--right slidebar-->
-    <link href="public/supadmin/style-shorten/css/slidebars.css" rel="stylesheet">
-<link href="public/css/dropzone.min.css" rel="stylesheet">
+    <link href="supadmin/style-shorten/css/slidebars.css" rel="stylesheet">
+<link href="css/dropzone.min.css" rel="stylesheet">
     <!--  summernote -->
     
     <!-- Custom styles for this template -->
-    <link href="public/supadmin/style-shorten/css/style.css" rel="stylesheet">
-    <link href="public/supadmin/style-shorten/css/style-responsive.css" rel="stylesheet" />
-    <script type="text/javascript" src="public/supadmin/style-shorten/assets/ckeditor/ckeditor.js"></script>
+    <link href="supadmin/style-shorten/css/style.css" rel="stylesheet">
+    <link href="supadmin/style-shorten/css/style-responsive.css" rel="stylesheet" />
+    <script type="text/javascript" src="supadmin/style-shorten/assets/ckeditor/ckeditor.js"></script>
     <style type="text/css" media="screen">
       .btn-file-style{display: block;border: 1px solid rgba(150, 160, 180, 0.3);padding: 6px;border-radius: 4px;}
       .help-block-style{color: #a94442;font-size: 10px;}

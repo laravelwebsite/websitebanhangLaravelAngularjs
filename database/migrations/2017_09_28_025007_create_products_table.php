@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->integer('detail_sub_categories_id')->references('id')->on('detail_sub_categories')->onDelete('cascade');
             $table->string('key',255);//từ khóa seo
             $table->integer('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('delete');
             $table->timestamps();
         });
     }

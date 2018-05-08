@@ -10,7 +10,7 @@ class SubcategoryController extends Controller
 {
 	public function postChecknamesubcategory(Request $request)
 	{
-		$sub=SubCategory::where('name',$request->name)->get();
+		$sub=SubCategory::where('delete',1)->where('name',$request->name)->get();
 		if($sub->count()>0)
 		{
 			return 0;
@@ -33,21 +33,24 @@ class SubcategoryController extends Controller
 			$sub=SubCategory::whereIn('id',$request->val)->get();
 			foreach($sub as $s)
 			{
-				if($s->delete())
+				$s->delete=0;
+				if($s->save())
 				{
 					$detail=DetailSubCategory::where('sub_categories_id',$s->id)->get();
 					if($detail->count()>0)
 					{
 						foreach($detail as $de)
 						{
-							if($de->delete())
+							$de->delete=0;
+							if($de->save())
 							{
 								$product=Product::where('detail_sub_categories_id',$de->id)->get();
 								if($product->count()>0)
 								{
 									foreach($product as $pro)
 									{
-										$pro->delete();
+										$pro->delete=0;
+										$pro->save();
 									}
 								}
 							}

@@ -9,7 +9,7 @@ class MenuController extends Controller
 {
     public function postChecknamemenu(Request $request)
     {
-    	$menu=Menu::where('name',$request->name)->get();
+    	$menu=Menu::where('delete',1)->where('name',$request->name)->get();
     	if($menu->count()>0)
     	{
     		return 0;
@@ -21,7 +21,7 @@ class MenuController extends Controller
     }
     public function postChecksrcmenu(Request $request)
     {
-    	$menu=Menu::where('src',$request->src)->get();
+    	$menu=Menu::where('delete',1)->where('src',$request->src)->get();
     	if($menu->count()>0)
     	{
     		return 0;
@@ -40,11 +40,13 @@ class MenuController extends Controller
             foreach($menu as $mn)
             {
                 $usermenu=User_Menu::where('menu_id',$mn->id)->get();
-                if($mn->delete())
+                $mn->delete=0;
+                if($mn->save())
                 {
                     foreach($usermenu as $u)
                     {
-                        $u->delete();
+                        $u->delete=0;
+                        $u->save();
                     }
                 }
             }

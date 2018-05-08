@@ -13,7 +13,7 @@ class User_MenuControllerAPI extends Controller
      */
     public function index()
     {
-        $usermenu=User_Menu::orderBy('user_id','ASC')->get();
+        $usermenu=User_Menu::where('delete',1)->orderBy('user_id','ASC')->get();
         foreach($usermenu as $u)
         {
             $u->menu;
@@ -42,16 +42,27 @@ class User_MenuControllerAPI extends Controller
     {
         $user_id=$request->user_id;
         $menu_id=$request->menu_id;
-        $find=User_Menu::where('user_id',$user_id)->where('menu_id',$menu_id)->get();
-        if($find->count()>0)
+        $find=User_Menu::where('user_id',$user_id)->where('menu_id',$menu_id)->first();
+        if($find)
         {
-            return "Đã tồn tại trong dữ liệu";
+            if($find->delete==1)
+            {
+                return "Đã tồn tại trong dữ liệu";
+            }
+            else
+            {
+                $find->delete=1;
+                $find->save();
+                return "Thêm thành công";
+            }
+            
         }
         else
         {
             $usermenu=new User_Menu;
             $usermenu->user_id=$request->user_id;
             $usermenu->menu_id=$request->menu_id;
+            $usermenu->delete=1;
             $usermenu->save();
             return "Thêm thành công";
         }
@@ -120,7 +131,8 @@ class User_MenuControllerAPI extends Controller
     public function destroy($id)
     {
         $usermenu=User_Menu::find($id);
-        $usermenu->delete();
+        $usermenu->delete=0;
+        $usermenu->save();
         return "Xóa thành công";
     }
 }

@@ -25,7 +25,8 @@ class ProductSeed extends Seeder
         		'active'=>1,
         		'detail_sub_categories_id'=>1,
         		'key'=>'iphone 6 plus',
-        		'user_id'=>5
+        		'user_id'=>5,
+                         'delete'=>1,
         	],
         	[
         		'id'=>2,
@@ -40,7 +41,8 @@ class ProductSeed extends Seeder
         		'active'=>1,
         		'detail_sub_categories_id'=>2,
         		'key'=>'iphone 6 plus',
-        		'user_id'=>5
+        		'user_id'=>5,
+                            'delete'=>1,
         	],
         	[
         		'id'=>3,
@@ -55,7 +57,8 @@ class ProductSeed extends Seeder
         		'active'=>1,
         		'detail_sub_categories_id'=>1,
         		'key'=>'iphone 6 plus',
-        		'user_id'=>5
+        		'user_id'=>5,
+                            'delete'=>1,
         	],
         	[
         		'id'=>4,
@@ -70,7 +73,8 @@ class ProductSeed extends Seeder
         		'active'=>1,
         		'detail_sub_categories_id'=>1,
         		'key'=>'iphone 6 plus',
-        		'user_id'=>5
+        		'user_id'=>5,
+                            'delete'=>1,
         	],
             [
                 'id'=>5,
@@ -85,7 +89,8 @@ class ProductSeed extends Seeder
                 'active'=>1,
                 'detail_sub_categories_id'=>1,
                 'key'=>'iphone 6 plus',
-                'user_id'=>5
+                'user_id'=>5,
+                'delete'=>1,
             ],
             [
                 'id'=>6,
@@ -100,7 +105,8 @@ class ProductSeed extends Seeder
                 'active'=>1,
                 'detail_sub_categories_id'=>1,
                 'key'=>'iphone 6 plus',
-                'user_id'=>5
+                'user_id'=>5,
+                'delete'=>1,
             ],
             [
                 'id'=>7,
@@ -115,7 +121,8 @@ class ProductSeed extends Seeder
                 'active'=>1,
                 'detail_sub_categories_id'=>1,
                 'key'=>'iphone 6 plus',
-                'user_id'=>5
+                'user_id'=>5,
+                'delete'=>1,
             ],
             [
                 'id'=>8,
@@ -130,7 +137,8 @@ class ProductSeed extends Seeder
                 'active'=>1,
                 'detail_sub_categories_id'=>2,
                 'key'=>'iphone 6 plus',
-                'user_id'=>5
+                'user_id'=>5,
+                'delete'=>1,
             ],
             [
                 'id'=>9,
@@ -145,7 +153,8 @@ class ProductSeed extends Seeder
                 'active'=>1,
                 'detail_sub_categories_id'=>2,
                 'key'=>'iphone 6 plus',
-                'user_id'=>5
+                'user_id'=>5,
+                'delete'=>1,
             ],
             [
                 'id'=>10,
@@ -160,7 +169,8 @@ class ProductSeed extends Seeder
                 'active'=>1,
                 'detail_sub_categories_id'=>2,
                 'key'=>'iphone 6 plus',
-                'user_id'=>5
+                'user_id'=>5,
+                'delete'=>1,
             ],
        ]);
     }

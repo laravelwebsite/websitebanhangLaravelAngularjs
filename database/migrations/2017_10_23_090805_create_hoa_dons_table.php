@@ -15,13 +15,14 @@ class CreateHoaDonsTable extends Migration
     {
         Schema::create('hoa_dons', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('Mahoadon',255)->unique();
+            $table->string('Mahoadon',255)->roles_Mahoadon_unique('Mahoadon');
             $table->string('name',255);
             $table->string('email',255);
             $table->string('phone',255);
             $table->text('address');
             $table->integer('status');
             $table->string('price');
+            $table->integer('delete');
             $table->timestamps();
         });
     }

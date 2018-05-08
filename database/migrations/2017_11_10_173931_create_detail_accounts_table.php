@@ -19,6 +19,7 @@ class CreateDetailAccountsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('sex')->nullable();
+            $table->integer('delete');
             $table->timestamps();
         });
     }

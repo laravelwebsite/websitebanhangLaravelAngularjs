@@ -24,15 +24,17 @@ class AppServiceProvider extends ServiceProvider
                 if(Auth::check())
                 {
                     $iduser=Auth::user()->id;
-                    $menuuser=User_Menu::where('user_id',$iduser)->get();
+                    $menuuser=User_Menu::where('delete',1)->where('user_id',$iduser)->get();
                     $view->with('menuuser',$menuuser);
                 }
                 
             });
         View::composer('*',function($view){
-                $cate=Category::all();
-                $product=Product::paginate(15);
+                $cate=Category::where('delete',1)->limit(7)->get();
+                $product=Product::where('delete',1)->paginate(15);
+                $allcate=Category::where('delete',1)->get();
                 $view->with('cate',$cate);
+                $view->with('allCate',$allcate);
                 $view->with('productt',$product);
             });
     }

@@ -11,14 +11,14 @@
 		<ul id="etalage">
 			@if($product->album=='')
 			<li>
-			<img class="etalage_thumb_image" src="public/upload/product/{{$product->image}}" />
-			<img class="etalage_source_image" src="public/upload/product/{{$product->image}}" />
+			<img class="etalage_thumb_image" src="upload/product/{{$product->image}}" />
+			<img class="etalage_source_image" src="upload/product/{{$product->image}}" />
 			</li>
 			@else
 				@foreach($split as $sp)
 				<li>
-					<img class="etalage_thumb_image" src="public/upload/product/{{$sp}}" />
-					<img class="etalage_source_image" src="public/upload/product/{{$sp}}" />
+					<img class="etalage_thumb_image" src="upload/product/{{$sp}}" />
+					<img class="etalage_source_image" src="upload/product/{{$sp}}" />
 				</li>
 				@endforeach
 			@endif
@@ -69,7 +69,7 @@
 
 	<ul id="flexiselDemo3">
 		@foreach($productlienquan as $pr)
-		<li><img src="public/upload/product/{{$pr->image}}" style="height: 100px;width: 70px;" /><div class="grid-flex"><a href="san-pham/{{$pr->slug}}">{{$pr->name}}</a><p>{{number_format($pr->price)}}</p></div></li>
+		<li><img src="upload/product/{{$pr->image}}" style="height: 100px;width: 70px;" /><div class="grid-flex"><a href="san-pham/{{$pr->slug}}">{{$pr->name}}</a><p>{{number_format($pr->price)}}</p></div></li>
 		@endforeach
 	</ul>
 
@@ -78,8 +78,8 @@
 @endsection
 
 @section('script')
-<link rel="stylesheet" href="public/user/css/etalage.css">
-<script src="public/user/js/jquery.etalage.min.js"></script>
+<link rel="stylesheet" href="user/css/etalage.css">
+<script src="user/js/jquery.etalage.min.js"></script>
 <script type="text/javascript">
 	$(window).load(function() {
 		$("#flexiselDemo1").flexisel();
@@ -146,7 +146,7 @@
 
 						});
 </script>
-<script type="text/javascript" src="public/user/js/jquery.flexisel.js"></script>
+<script type="text/javascript" src="user/js/jquery.flexisel.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		

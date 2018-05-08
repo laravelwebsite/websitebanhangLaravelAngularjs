@@ -16,7 +16,7 @@ class CategoryControllerAPI extends Controller
      */
     public function index()
     {
-        $categories=Category::orderBy('created_at','DESC')->get();
+        $categories=Category::where('delete',1)->orderBy('created_at','DESC')->get();
         foreach($categories as $cate)
         {
             foreach($cate->subcategory as $sub)
@@ -49,9 +49,20 @@ class CategoryControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-        $category=new Category;
-        $category->name=$request->name;
-        $category->save();
+        $find=Category::where('name',$request->name)->first();
+        if($find)
+        {
+            $find->delete=1;
+            $find->save();
+        }
+        else
+        {
+            $category=new Category;
+            $category->name=$request->name;
+            $category->delete=1;
+            $category->save();
+        }
+        
         return "Thêm thành công";
     }
 
@@ -103,28 +114,32 @@ class CategoryControllerAPI extends Controller
     public function destroy($id)
     {
         $category=Category::find($id);
-        if($category->delete())
+        $category->delete=0;
+        if($category->save())
         {
             $subcate=SubCategory::where('categories_id',$id)->get();
             if($subcate->count()>0)
             {
                 foreach($subcate as $sub)
                 {
-                    if($sub->delete())
+                    $sub->delete=0;
+                    if($sub->save())
                     {
                         $detail=DetailSubCategory::where('sub_categories_id',$sub->id)->get();
                         if($detail->count()>0)
                         {
                             foreach($detail as $de)
                             {
-                                if($de->delete())
+                                $de->delete=0;
+                                if($de->save())
                                 {
                                     $product=Product::where('detail_sub_categories_id',$de->id)->get();
                                     if($product->count()>0)
                                     {
                                         foreach($product as $pro)
                                         {
-                                            $pro->delete();
+                                            $pro->delete=0;
+                                            $pro->save();
                                         }
                                     }
                                 }

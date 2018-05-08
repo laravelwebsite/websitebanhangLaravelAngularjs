@@ -20,6 +20,7 @@ class CreateHoaDonSanPhamsTable extends Migration
             $table->string('price');
             $table->integer('qty');
             $table->string('subtotal');
+            $table->integer('delete');
             $table->timestamps();
         });
     }

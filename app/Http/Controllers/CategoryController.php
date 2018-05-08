@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
 	public function postChecknamecategory(Request $request)
 	{
-		$cate=Category::where('name',$request->name)->get();
+		$cate=Category::where('delete',1)->where('name',$request->name)->get();
 		if($cate->count()>0)
 		{
 			return 0;
@@ -29,33 +29,34 @@ class CategoryController extends Controller
 			$cate=Category::whereIn('id',$request->val)->get();
 			foreach($cate as $c)
 			{
-				if($c->delete())
+				$c->delete=0;
+				$c->save();
+				$subcate=SubCategory::where('categories_id',$c->id)->get();
+				if($subcate->count()>0)
 				{
-					$subcate=SubCategory::where('categories_id',$c->id)->get();
-					if($subcate->count()>0)
+					foreach($subcate as $sub)
 					{
-						foreach($subcate as $sub)
+						$sub->delete=0;
+						$sub->save();
+						$detail=DetailSubCategory::where('sub_categories_id',$sub->id)->get();
+						if($detail->count()>0)
 						{
-							if($sub->delete())
+							foreach($detail as $de)
 							{
-								$detail=DetailSubCategory::where('sub_categories_id',$sub->id)->get();
-								if($detail->count()>0)
+								$de->delete=0;
+								$de->save();
+								$product=Product::where('detail_sub_categories_id',$de->id)->get();
+								if($product->count()>0)
 								{
-									foreach($detail as $de)
+									foreach($product as $pro)
 									{
-										if($de->delete())
-										{
-											$product=Product::where('detail_sub_categories_id',$de->id)->get();
-											if($product->count()>0)
-											{
-												foreach($product as $pro)
-												{
-													$pro->delete();
-												}
-											}
-										}
+										$pro->delete=0;
+										$pro->save();
 									}
 								}
+
+
+
 							}
 						}
 					}

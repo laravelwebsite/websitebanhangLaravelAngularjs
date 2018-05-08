@@ -89,6 +89,7 @@ class PageController extends Controller
 		$hoadon->name=$request->name;
 		$hoadon->email=$request->email;
 		$hoadon->phone=$request->phone;
+		$hoadon->delete=1;
 		$hoadon->address=$request->address;
 		$hoadon->status=1;
 		$price=Cart::total();
@@ -169,7 +170,7 @@ public function postLienhe(Request $request)
 public function getSearch(Request $request)
 {
 	$tukhoa=$request->tukhoa;
-	$productsearch=Product::where('name','like','%'.$tukhoa.'%')->orWhere('price','like','%'.$tukhoa.'%')->orWhere('slug','like','%'.$tukhoa.'%')->orWhere('title','like','%'.$tukhoa.'%')->paginate(15);
+	$productsearch=Product::where('delete','=',1)->where('name','like','%'.$tukhoa.'%')->orWhere('price','like','%'.$tukhoa.'%')->orWhere('slug','like','%'.$tukhoa.'%')->orWhere('title','like','%'.$tukhoa.'%')->paginate(15);
 	return view('user.page.searchproduct',['searchproduct'=>$productsearch]);
 }
 public function getProductSearch(Request $request)
@@ -178,7 +179,7 @@ public function getProductSearch(Request $request)
 	{
 		$tukhoa=$request->tukhoa;
 
-		$productsearch=Product::where('name','like','%'.$tukhoa.'%')->orWhere('price','like','%'.$tukhoa.'%')->orWhere('slug','like','%'.$tukhoa.'%')->orWhere('title','like','%'.$tukhoa.'%')->paginate(15);
+		$productsearch=Product::where('delete','=',1)->where('name','like','%'.$tukhoa.'%')->orWhere('price','like','%'.$tukhoa.'%')->orWhere('slug','like','%'.$tukhoa.'%')->orWhere('title','like','%'.$tukhoa.'%')->paginate(15);
 		return View::make('user.page.searchproductrender',['productsearch'=>$productsearch]);
 	}
 }
@@ -187,6 +188,8 @@ public function getLocproduct(Request $request)
 	if($request->ajax())
 	{
 		$tbproduct=DB::table('categories')
+		->where('categories.delete', 1)->where('sub_categories.delete', 1)
+		->where('detail_sub_categories.delete', 1)->where('products.delete', 1)
 		->join('sub_categories','categories.id','=','sub_categories.categories_id')
 		->join('detail_sub_categories','sub_categories.id','=','detail_sub_categories.sub_categories_id')
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');

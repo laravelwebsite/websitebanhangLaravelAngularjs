@@ -68,7 +68,7 @@ class UserController extends Controller
 	{
 		if(Auth::user()->role_id==4)
 		{
-			$listUser=User::where('role_id',3)->orWhere('role_id',4)->get();
+			$listUser=User::where('delete',1)->where('role_id',3)->orWhere('role_id',4)->get();
 
 		}
 		foreach($listUser as $list)
@@ -225,7 +225,8 @@ class UserController extends Controller
 			$user=User::whereIn('id',$request->val)->get();
 			foreach($user as $u)
 			{
-				$u->delete();
+				$u->delete=0;
+				$u->save();
 			}
 		}
 	}

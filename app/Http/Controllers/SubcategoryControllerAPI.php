@@ -15,7 +15,7 @@ class SubcategoryControllerAPI extends Controller
      */
     public function index()
     {
-        $sub=SubCategory::orderBy('created_at','DESC')->get();
+        $sub=SubCategory::where('delete',1)->orderBy('created_at','DESC')->get();
         foreach($sub as $s)
         {
             $s->category;
@@ -41,10 +41,21 @@ class SubcategoryControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-        $sub=new SubCategory;
-        $sub->name=$request->name;
-        $sub->categories_id=$request->categories_id;
-        $sub->save();
+        $find=SubCategory::where('name',$request->name)->first();
+        if($find)
+        {
+            $find->delete=1;
+            $find->save();
+        }
+        else
+        {
+            $sub=new SubCategory;
+            $sub->name=$request->name;
+            $sub->categories_id=$request->categories_id;
+            $sub->delete=1;
+            $sub->save();
+        }
+        
         return "Thêm thành công";
     }
 
@@ -98,21 +109,24 @@ class SubcategoryControllerAPI extends Controller
     public function destroy($id)
     {
         $sub=SubCategory::find($id);
-        if($sub->delete())
+        $sub->delete=0;
+        if($sub->save())
         {
             $detail=DetailSubCategory::where('sub_categories_id',$sub->id)->get();
             if($detail->count()>0)
             {
                 foreach($detail as $de)
                 {
-                    if($de->delete())
+                    $de->delete=0;
+                    if($de->save())
                     {
                         $product=Product::where('detail_sub_categories_id',$de->id)->get();
                         if($product->count()>0)
                         {
                             foreach($product as $pro)
                             {
-                                $pro->delete();
+                                $pro->delete=0;
+                                $pro->save();
                             }
                         }
                     }

@@ -15,31 +15,38 @@ class CategorySeed extends Seeder
         DB::table('categories')->insert([
         	[
         		'name'=>'Điện tử',
-                        'slug'=>'dien-tu'
+                        'slug'=>'dien-tu',
+                        'delete'=>1,
         	],
         	[
         		'name'=>'Thời trang',
-                        'slug'=>'thoi-trang'
+                        'slug'=>'thoi-trang',
+                        'delete'=>1,
         	],
         	[
         		'name'=>'Đồng hồ,Túi và Phụ kiện',
-                        'slug'=>'dong-ho-va-phu-kien'
+                        'slug'=>'dong-ho-va-phu-kien',
+                        'delete'=>1,
         	],
         	[
         		'name'=>'Nhà cửa và Đời sống',
-                        'slug'=>'nha-cua-va-doi-song'
+                        'slug'=>'nha-cua-va-doi-song',
+                        'delete'=>1,
         	],
         	[
         		'name'=>'Sức khỏe và sắc đẹp',
-                        'slug'=>'suc-khoe-va-sac-dep'
+                        'slug'=>'suc-khoe-va-sac-dep',
+                        'delete'=>1,
         	],
         	[
         		'name'=>'Bách hóa gia đình',
-                        'slug'=>'bach-hoa-gia-dinh'
+                        'slug'=>'bach-hoa-gia-dinh',
+                        'delete'=>1,
         	],
         	[
         		'name'=>'Thể thao và Du lịch',
-                        'slug'=>'the-thao-va-du-lich'
+                        'slug'=>'the-thao-va-du-lich',
+                        'delete'=>1,
         	],
         ]);
     }

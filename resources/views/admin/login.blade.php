@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Simple login form</title>
   <base href="{{asset(' ')}}">
-  <link rel="stylesheet" href="public/supadmin/login/css/style.css">
+  <link rel="stylesheet" href="supadmin/login/css/style.css">
   
 </head>
 
@@ -41,10 +41,10 @@
       </form>
   </div>
    
-   <script src="public/js/jquery.min.js"></script>
-   <script src="public/js/bootstrap.min.js"></script>
-  <script src="public/app/lib/angular.min.js"></script>
-  <script src="public/app/app.js"></script>
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+  <script src="app/lib/angular.min.js"></script>
+  <script src="app/app.js"></script>
 
 </div>
 </body>

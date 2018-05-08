@@ -18,7 +18,7 @@ class ProductController extends Controller
 		$sp=explode('|',$album);
 
 		$detail_sub_cate=$product->detailsubcategory;
-		$product_lienquan=Product::where('detail_sub_categories_id',$detail_sub_cate->id)->limit(10)->get();
+		$product_lienquan=Product::where('delete',1)->where('detail_sub_categories_id',$detail_sub_cate->id)->limit(10)->get();
 		return view('user.page.chitiet',['product'=>$product,'split'=>$sp,'productlienquan'=>$product_lienquan]);
 	}
 	public function postdeleteProduct(Request $request)
@@ -45,7 +45,8 @@ class ProductController extends Controller
 					}
 				}
 				
-				$pro->delete();
+				$pro->delete=0;
+    				$pro->save();
 			}
 		}
 	}
@@ -53,6 +54,8 @@ class ProductController extends Controller
 	{
 		$cate=Category::findBySlug($slug);
 		$tbproduct=DB::table('categories')
+		->where('categories.delete', 1)->where('sub_categories.delete', 1)
+		->where('detail_sub_categories.delete', 1)->where('products.delete', 1)
 		->join('sub_categories','categories.id','=','sub_categories.categories_id')
 		->join('detail_sub_categories','sub_categories.id','=','detail_sub_categories.sub_categories_id')
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');
@@ -65,6 +68,8 @@ class ProductController extends Controller
 	{
 		$sub=SubCategory::findBySlug($slug);
 		$tbproduct=DB::table('categories')
+		->where('categories.delete', 1)->where('sub_categories.delete', 1)
+		->where('detail_sub_categories.delete', 1)->where('products.delete', 1)
 		->join('sub_categories','categories.id','=','sub_categories.categories_id')
 		->join('detail_sub_categories','sub_categories.id','=','detail_sub_categories.sub_categories_id')
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');
@@ -76,6 +81,8 @@ class ProductController extends Controller
 	{
 		$detail=DetailSubCategory::findBySlug($slug);
 		$tbproduct=DB::table('categories')
+		->where('categories.delete', 1)->where('sub_categories.delete', 1)
+		->where('detail_sub_categories.delete', 1)->where('products.delete', 1)
 		->join('sub_categories','categories.id','=','sub_categories.categories_id')
 		->join('detail_sub_categories','sub_categories.id','=','detail_sub_categories.sub_categories_id')
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');

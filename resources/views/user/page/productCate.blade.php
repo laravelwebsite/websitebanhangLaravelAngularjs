@@ -18,7 +18,7 @@ Product by Category
         <h3 class="m_1">{{$pro->name}}</h3>
         <p class="m_2">{{$pro->title}}</p>
         <div class="grid_img">
-         <div class="css3"><img src="public/upload/product/{{$pro->image}}" alt="{{$pro->title}}" style="width: 280px;height: 190px" /></div>
+         <div class="css3"><img src="upload/product/{{$pro->image}}" alt="{{$pro->title}}" style="width: 280px;height: 190px" /></div>
          <div class="mask1">
           <div class="info">Chi tiết</div>
         </div>
@@ -68,4 +68,46 @@ Product by Category
 @endsection
 
 @section('script')
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $("#tukhoa").keyup(function(event){
+      var tukhoa = $(this).val();
+      $.ajax({
+        url: 'tim-kiem-product',
+        type:"POST", 
+        cache:false,
+        data: {
+          "tukhoa": tukhoa
+        },
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        async: true,
+        success: function(response){
+          $("#contentajax").html(response);
+        }
+      });
+    }); 
+
+
+    $("input[type=checkbox]").change(function(event){
+      var val=[];
+      $(":checkbox:checked").each(function(i)
+      {
+          val[i]=$(this).val();
+      });
+      $.ajax({
+        url: 'loc-san-pham',
+        type:"POST", 
+        cache:false,
+        data: {
+          "val": val
+        },
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        async: true,
+        success: function(response){
+          $("#contentajax").html(response);
+        }
+      });
+    }); 
+
+  });
 @endsection

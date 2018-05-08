@@ -15,9 +15,10 @@ class CreateDetailSubCategoriesTable extends Migration
     {
         Schema::create('detail_sub_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',255)->unique();
+            $table->string('name',255)->roles_name_unique('name');
             $table->string('slug',255);
             $table->integer('sub_categories_id');
+            $table->integer('delete');
             $table->timestamps();
         });
     }

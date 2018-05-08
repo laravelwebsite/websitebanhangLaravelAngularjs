@@ -15,72 +15,86 @@ class User_MenuSeed extends Seeder
         	[
           'id'=>1,
           'user_id'=>1,
-          'menu_id'=>1
+          'menu_id'=>1,
+          'delete'=>1,
           ],
           [
           'id'=>2,
           'user_id'=>1,
-          'menu_id'=>2
+          'menu_id'=>2,
+          'delete'=>1,
           ],
           [
           'id'=>3,
           'user_id'=>1,
-          'menu_id'=>3
+          'menu_id'=>3,
+          'delete'=>1,
           ],
           [
           'id'=>4,
           'user_id'=>1,
-          'menu_id'=>4
+          'menu_id'=>4,
+          'delete'=>1,
           ],
           [
           'id'=>5,
           'user_id'=>2,
-          'menu_id'=>1
+          'menu_id'=>1,
+          'delete'=>1,
           ],
           [
           'id'=>6,
           'user_id'=>2,
-          'menu_id'=>2
+          'menu_id'=>2,
+          'delete'=>1,
           ],
           [
           'id'=>7,
           'user_id'=>2,
-          'menu_id'=>3
+          'menu_id'=>3,
+          'delete'=>1,
           ],
           [
           'id'=>8,
           'user_id'=>1,
-          'menu_id'=>5
+          'menu_id'=>5,
+          'delete'=>1,
           ],
           [
           'id'=>9,
           'user_id'=>1,
-          'menu_id'=>6
+          'menu_id'=>6,
+          'delete'=>1,
           ],
           [
           'id'=>10,
           'user_id'=>1,
-          'menu_id'=>7
+          'menu_id'=>7,
+          'delete'=>1,
           ],
           [
           'id'=>11,
           'user_id'=>1,
-          'menu_id'=>8
+          'menu_id'=>8,
+          'delete'=>1,
           ],
             [
           'id'=>12,
           'user_id'=>1,
-          'menu_id'=>9
+          'menu_id'=>9,
+          'delete'=>1,
           ],
           [
           'id'=>13,
           'user_id'=>1,
-          'menu_id'=>10
+          'menu_id'=>10,
+          'delete'=>1,
           ],
           [
           'id'=>14,
           'user_id'=>1,
-          'menu_id'=>11
+          'menu_id'=>11,
+          'delete'=>1,
           ],
           ]);
     }

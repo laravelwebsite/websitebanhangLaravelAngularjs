@@ -3,6 +3,7 @@ app.controller('HoadonController' ,function ($scope,$http,API) {
 	//hiển thị danh sách
 	$http.get(API + 'admin/hoadon/tbHoadon').then(function (response) {//index api
 		$scope.hoadons = response.data;
+		console.log($scope.hoadons);
 	});
 
 

@@ -6,15 +6,16 @@
   <base href="{{asset(' ')}}" >
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <link href="public/user/css/style.css" rel="stylesheet" type="text/css" media="all" />
-  <link href="public/user/css/form.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="user/css/style.css" rel="stylesheet" type="text/css" media="all" />
+  <link href="user/css/form.css" rel="stylesheet" type="text/css" media="all" />
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-  <link href="public/supadmin/style-shorten/css/style.css" rel="stylesheet">
-  <link href="public/supadmin/style-shorten/css/style-responsive.css" rel="stylesheet" />
-  <link href="public/supadmin/style-shorten/css/bootstrap-reset.css" rel="stylesheet">
-    <link href="public/supadmin/style-shorten/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link href="supadmin/style-shorten/css/style.css" rel="stylesheet">
+  <link href="supadmin/style-shorten/css/style-responsive.css" rel="stylesheet" />
+  <link href="supadmin/style-shorten/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="supadmin/style-shorten/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-  <script type="text/javascript" src="public/js/jquery.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="js/jquery.min.js"></script>
   
 
   <script type="text/javascript">
@@ -51,7 +52,7 @@
   
   
 
-  <script type="text/javascript" src="public/user/js/jquery.jscrollpane.min.js"></script>
+  <script type="text/javascript" src="user/js/jquery.jscrollpane.min.js"></script>
   <script type="text/javascript" id="sourcecode">
     $(function()
     {
@@ -60,8 +61,8 @@
   </script>
 
   <!-- top scrolling -->
-  <script type="text/javascript" src="public/user/js/move-top.js"></script>
-  <script type="text/javascript" src="public/user/js/easing.js"></script>
+  <script type="text/javascript" src="user/js/move-top.js"></script>
+  <script type="text/javascript" src="user/js/easing.js"></script>
   <script type="text/javascript">
     jQuery(document).ready(function($) {
       $(".scroll").click(function(event){   
@@ -70,7 +71,7 @@
       });
     });
   </script>  
-<link href="public/supadmin/style-shorten/css/bootstrap.min.css" rel="stylesheet">
+<link href="supadmin/style-shorten/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
   @include('user.layout.headertop')
@@ -102,21 +103,70 @@
 </script>
 <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 </body>
-<script type="text/javascript" src="public/app/lib/angular.min.js"></script>
-<script type="text/javascript" src="public/js/angular-ui-router.min.js"></script>
-<script src="public/supadmin/style-shorten/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="public/app/app.js"></script>
-<script src="public/js/angular-route.js"></script>
-<script src="public/js/dirPagination.js"></script>
-<script src="public/js/ng-file-upload-all.min.js"></script>
-<script src="public/js/ng-file-upload.min.js"></script>
-<script src="public/js/ng-file-upload-shim.js"></script>
-<script src="public/js/dropzone.min.js"></script>
+<script type="text/javascript" src="app/lib/angular.min.js"></script>
+<script type="text/javascript" src="js/angular-ui-router.min.js"></script>
+<script src="supadmin/style-shorten/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="app/app.js"></script>
+<script src="js/angular-route.js"></script>
+<script src="js/dirPagination.js"></script>
+<script src="js/ng-file-upload-all.min.js"></script>
+<script src="js/ng-file-upload.min.js"></script>
+<script src="js/ng-file-upload-shim.js"></script>
+<script src="js/dropzone.min.js"></script>
 <!-- typeHead -->
-<script src="public/js/typeahead.bundle.min.js"></script>
+<script src="js/typeahead.bundle.min.js"></script>
 <!-- start menu -->     
-<link href="public/user/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="public/user/js/megamenu.js"></script>
+<link href="user/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="user/js/megamenu.js"></script>
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $("#tukhoa").keyup(function(event){
+      var tukhoa = $(this).val();
+      $.ajax({
+        url: 'tim-kiem-product',
+        type:"POST", 
+        cache:false,
+        data: {
+          "tukhoa": tukhoa
+        },
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        async: true,
+        success: function(response){
+          $("#contentajax").html(response);
+        }
+      });
+    }); 
+$(document).on("click","#left ul.nav li.parent > a > span.sign", function(){          
+        $(this).find('i:first').toggleClass("icon-minus");      
+    }); 
+    
+    // Open Le current menu
+    $("#left ul.nav li.parent.active > a > span.sign").find('i:first').addClass("icon-minus");
+    $("#left ul.nav li.current").parents('ul.children').addClass("in"); 
+
+    $("input[type=checkbox]").change(function(event){
+      var val=[];
+      $(":checkbox:checked").each(function(i)
+      {
+          val[i]=$(this).val();
+      });
+      $.ajax({
+        url: 'loc-san-pham',
+        type:"POST", 
+        cache:false,
+        data: {
+          "val": val
+        },
+        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+        async: true,
+        success: function(response){
+          $("#contentajax").html(response);
+        }
+      });
+    }); 
+
+  });
+</script>
 
 @yield('script')
 </html>

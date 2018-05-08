@@ -15,7 +15,7 @@ class DetailSubcategoryControllerAPI extends Controller
      */
     public function index()
     {
-        $detail=DetailSubCategory::orderBy('created_at','DESC')->get();
+        $detail=DetailSubCategory::where('delete',1)->orderBy('created_at','DESC')->get();
         foreach($detail as $d)
         {
             $d->subcategory;
@@ -41,10 +41,21 @@ class DetailSubcategoryControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-        $detail=new DetailSubCategory;
-        $detail->name=$request->name;
-        $detail->sub_categories_id=$request->sub_categories_id;
-        $detail->save();
+        $find=DetailSubCategory::where('name',$request->name)->first();
+        if($find)
+        {
+            $find->delete=1;
+            $find->save();
+        }
+        else
+        {
+            $detail=new DetailSubCategory;
+            $detail->name=$request->name;
+            $detail->sub_categories_id=$request->sub_categories_id;
+            $detail->delete=1;
+            $detail->save();
+        }
+        
         return "Thêm thành công";
     }
 
@@ -100,14 +111,16 @@ class DetailSubcategoryControllerAPI extends Controller
     public function destroy($id)
     {
         $detail=DetailSubCategory::find($id);
-        if($detail->delete())
+        $detail->delete=0;
+        if($detail->save())
         {
             $product=Product::where('detail_sub_categories_id',$detail->id)->get();
             if($product->count()>0)
             {
                 foreach($product as $pro)
                 {
-                    $pro->delete();
+                    $pro->delete=0;
+                    $pro->save();
                 }
             }
         }

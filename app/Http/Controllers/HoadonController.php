@@ -49,11 +49,14 @@ class HoadonController extends Controller
 			foreach($hoadon as $hd)
 			{
 				$hoadonsanpham=HoaDonSanPham::where('mahoadon',$hd->Mahoadon)->get();
-				if($hd->delete())
+				$hd->delete=0;
+
+				if($hd->save())
 				{
 					foreach($hoadonsanpham as $hd_sp)
 					{
-						$hd_sp->delete();
+						$hd_sp->delete=0;
+						$hd_sp->save();
 					}
 				}
 			}

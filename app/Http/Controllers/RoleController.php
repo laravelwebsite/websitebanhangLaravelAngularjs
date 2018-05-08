@@ -8,7 +8,7 @@ class RoleController extends Controller
 {
 	public function postChecknamerole(Request $request)
 	{
-		$role=Role::where('name',$request->name)->get();
+		$role=Role::where('delete',1)->where('name',$request->name)->get();
 		if($role->count()>0)
 		{
 			return 0;
@@ -25,7 +25,8 @@ class RoleController extends Controller
 			$role=Role::whereIn('id',$request->val)->get();
 			foreach($role as $r)
 			{
-				$r->delete();
+				$r->delete=0;
+				$r->save();
 			}
 		}
 	}

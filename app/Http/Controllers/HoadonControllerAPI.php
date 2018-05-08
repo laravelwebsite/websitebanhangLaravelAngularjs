@@ -16,7 +16,7 @@ class HoadonControllerAPI extends Controller
     public function index()
     {
 
-        $hoadons=HoaDon::orderBy('created_at','DESC')->get();
+        $hoadons=HoaDon::where('delete',1)->orderBy('created_at','DESC')->get();
         return json_encode($hoadons);
     }
 
@@ -102,14 +102,16 @@ class HoadonControllerAPI extends Controller
     public function destroy($id)
     {
         $hoadon=HoaDon::find($id);
-        if($hoadon->delete())
+        $hoadon->delete=0;
+        if($hoadon->save())
         {
             $hd_sp=HoaDonSanPham::where('mahoadon',$hoadon->Mahoadon)->get();
             if($hd_sp->count()>0)
             {
                 foreach($hd_sp as $hd)
                 {
-                    $hd->delete();
+                    $hd->delete=0;
+                    $hd->save();
                 }
             }
             return "Xóa thành công";

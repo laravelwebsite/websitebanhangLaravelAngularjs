@@ -22,7 +22,7 @@ Website bán hàng
         <h3 class="m_1">{{$pro->name}}</h3>
         <p class="m_2">{{$pro->title}}</p>
         <div class="grid_img">
-         <div class="css3"><img src="public/upload/product/{{$pro->image}}" alt="{{$pro->title}}" style="width: 280px;height: 190px" /></div>
+         <div class="css3"><img src="upload/product/{{$pro->image}}" alt="{{$pro->title}}" style="width: 280px;height: 190px" /></div>
          <div class="mask1">
           <div class="info">Chi tiết</div>
         </div>
@@ -45,7 +45,7 @@ Website bán hàng
 
   <ul class="list2" >
     <li>
-      <img src="public/user/images/plus.png" alt=""/>
+      <img src="user/images/plus.png" alt=""/>
       <ul class="icon1 sub-icon1 profile_img">
         <li><a class="active-icon c1" href="them-gio-hang/{{$pro->slug}}">Add cart </a>
           <ul class="sub-icon1 list">

@@ -1,4 +1,4 @@
-var app = angular.module('my-app',['ngFileUpload','angularUtils.directives.dirPagination']).constant('API', 'http://cv.vn/');
+var app = angular.module('my-app',['ngFileUpload','angularUtils.directives.dirPagination']).constant('API', 'http://127.0.0.1:8000/');
 app.config(function($interpolateProvider) {
 	$interpolateProvider.startSymbol('[[');
 	$interpolateProvider.endSymbol(']]');

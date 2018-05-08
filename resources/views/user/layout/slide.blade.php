@@ -4,7 +4,7 @@
 				  <article style="position: relative; width: 100%; opacity: 1;"> 
 				   	<div class="banner-wrap">
 					   	<div class="slider-left">
-							<img src="public/user/images/banner1.jpg" alt=""/> 
+							<img src="user/images/banner1.jpg" alt=""/> 
 						</div>
 						 <div class="slider-right">
 						    <h1>Classic</h1>
@@ -18,7 +18,7 @@
 				   <article style="position: absolute; width: 100%; opacity: 0;"> 
 				   	 <div class="banner-wrap">
 					   	<div class="slider-left">
-							<img src="public/user/images/banner2.jpg" alt=""/> 
+							<img src="user/images/banner2.jpg" alt=""/> 
 						</div>
 						 <div class="slider-right">
 						    <h1>Classic</h1>
@@ -32,7 +32,7 @@
 				   <article style="position: absolute; width: 100%; opacity: 0;">
 				   	<div class="banner-wrap">
 					   	<div class="slider-left">
-							<img src="public/user/images/banner1.jpg" alt=""/> 
+							<img src="user/images/banner1.jpg" alt=""/> 
 						</div>
 						 <div class="slider-right">
 						    <h1>Classic</h1>
@@ -46,7 +46,7 @@
 				   <article style="position: absolute; width: 100%; opacity: 0;">
 				   	<div class="banner-wrap">
 					   	<div class="slider-left">
-							<img src="public/user/images/banner2.jpg" alt=""/> 
+							<img src="user/images/banner2.jpg" alt=""/> 
 						</div>
 						 <div class="slider-right">
 						    <h1>Classic</h1>
@@ -60,7 +60,7 @@
 				   <article style="position: absolute; width: 100%; opacity: 0;"> 
 				   	 <div class="banner-wrap">
 					   	<div class="slider-left">
-							<img src="public/user/images/banner1.jpg" alt=""/> 
+							<img src="user/images/banner1.jpg" alt=""/> 
 						</div>
 						 <div class="slider-right">
 						    <h1>Classic</h1>
@@ -81,7 +81,7 @@
                 	<li><a href="#">4</a></li>
                   </ul>
                  <a class="wmuSliderPrev">Previous</a><a class="wmuSliderNext">Next</a><ul class="wmuSliderPagination"><li><a href="#" class="wmuActive">0</a></li><li><a href="#" class="">1</a></li><li><a href="#" class="">2</a></li><li><a href="#" class="">3</a></li><li><a href="#" class="">4</a></li></ul></div>
-            	 <script src="public/user/js/jquery.wmuSlider.js"></script> 
+            	 <script src="user/js/jquery.wmuSlider.js"></script> 
 				
 						<script>
        						 $('.example1').wmuSlider();         

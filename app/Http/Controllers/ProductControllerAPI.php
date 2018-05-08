@@ -14,7 +14,7 @@ class ProductControllerAPI extends Controller
      */
     public function index()
     {
-        $product=Product::orderBy('created_at','DESC')->get();
+        $product=Product::where('delete',1)->orderBy('created_at','DESC')->get();
         foreach($product as $pro)
         {
             $pro->detailsubcategory;
@@ -74,6 +74,7 @@ class ProductControllerAPI extends Controller
         $product->album="";
         $product->status="Khuyến mãi";
         $product->active=1;
+        $product->delete=1;
         $product->user_id=Auth::user()->id;
         $product->save();
         return "Thêm thành công";
@@ -176,7 +177,8 @@ class ProductControllerAPI extends Controller
         }
     }
     
-    $product->delete();
+    $product->delete=0;
+    $product->save();
     return "Xóa thành công";
 }
 }

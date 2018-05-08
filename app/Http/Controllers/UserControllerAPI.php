@@ -17,12 +17,12 @@ class UserControllerAPI extends Controller
     {
         if(Auth::user()->role_id==4)
         {
-            $listUser=User::orderBy('created_at','DESC')->get();
+            $listUser=User::where('delete',1)->orderBy('created_at','DESC')->get();
             
         }
         if(Auth::user()->role_id==3)
         {
-            $listUser=User::where('role_id',1)->orWhere('role_id',2)->orderBy('created_at','DESC')->get();
+            $listUser=User::where('delete',1)->where('role_id',1)->orWhere('role_id',2)->orderBy('created_at','DESC')->get();
         }
         foreach($listUser as $list)
         {
@@ -53,12 +53,23 @@ class UserControllerAPI extends Controller
     public function store(Request $request)
     {
         //bcrypt($request->password);
-        $user=new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->role_id=$request->role_id;
-        $user->password=bcrypt($request->password);
-        $user->save();
+        $find=User::where('email',$request->email)->first();
+        if($find)
+        {
+            $find->delete=1;
+            $find->save();
+        }
+        else
+        {
+            $user=new User;
+            $user->name=$request->name;
+            $user->email=$request->email;
+            $user->role_id=$request->role_id;
+            $user->password=bcrypt($request->password);
+            $user->delete=1;
+            $user->save();
+        }
+        
         return "Thêm thành công";
     }
 
@@ -118,7 +129,8 @@ class UserControllerAPI extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        $user->delete();
+        $user->delete=0;
+        $user->save();
         return "Xóa thành công";
     }
 }

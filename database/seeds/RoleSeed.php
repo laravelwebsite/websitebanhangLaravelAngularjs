@@ -13,22 +13,26 @@ class RoleSeed extends Seeder
     {
         DB::table('roles')->insert([
         	[
-                            'id'=>4,
-        		'name'=>'Super Admin'
-        	],
-        	[
-                            'id'=>3,
-        		'name'=>'Admin'
-        	],
-             [
-                        'id'=>2,
-                        'name'=>'Store'
+            'id'=>4,
+            'name'=>'Super Admin',
+            'delete'=>1,
             ],
-        	[
-                            'id'=>1,
-        		'name'=>'User'
-        	]
-           
-        ]);
+            [
+            'id'=>3,
+            'name'=>'Admin',
+            'delete'=>1,
+            ],
+            [
+            'id'=>2,
+            'name'=>'Store',
+            'delete'=>1,
+            ],
+            [
+            'id'=>1,
+            'name'=>'User',
+            'delete'=>1,
+            ]
+            
+            ]);
     }
 }

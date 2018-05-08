@@ -13,7 +13,7 @@ class RoleControllerAPI extends Controller
      */
     public function index()
     {
-        return json_encode(Role::all());
+        return json_encode(Role::where('delete',1)->get());
     }
 
     /**
@@ -34,9 +34,20 @@ class RoleControllerAPI extends Controller
      */
     public function store(Request $request)
     {
-        $role=new Role;
-        $role->name=$request->name;
-        $role->save();
+        $find=Role::where('name',$request->name)->first();
+        if($find)
+        {
+            $find->delete=1;
+            $find->save();
+        }
+        else
+        {
+             $role=new Role;
+            $role->name=$request->name;
+            $role->delete=1;
+            $role->save();
+        }
+       
         return "Thêm thành công";
     }
 
@@ -87,7 +98,8 @@ class RoleControllerAPI extends Controller
     public function destroy($id)
     {
         $role=Role::find($id);
-        $role->delete();
+        $role->delete=0;
+        $role->save();
          return "Xóa thành công";
     }
 }

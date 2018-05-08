@@ -17,43 +17,49 @@ class Detail_AccountSeed extends Seeder
     		'user_id'=>1,
     		'phone'=>'0963560780',
     		'address'=>'',
-    		'sex'=>1
+    		'sex'=>1,
+                            'delete'=>1,
     		],
     		[
     		'id'=>2,
     		'user_id'=>2,
     		'phone'=>'0963560780',
     		'address'=>'',
-    		'sex'=>1
+    		'sex'=>1,
+                            'delete'=>1,
     		],
     		[
     		'id'=>3,
     		'user_id'=>3,
     		'phone'=>'0963560780',
     		'address'=>'',
-    		'sex'=>1
+    		'sex'=>1,
+                            'delete'=>1,
     		],
     		[
     		'id'=>4,
     		'user_id'=>4,
     		'phone'=>'0963560780',
     		'address'=>'',
-    		'sex'=>1
+    		'sex'=>1,
+                            'delete'=>1,
     		],
     		[
     		'id'=>5,
     		'user_id'=>5,
     		'phone'=>'0963560780',
     		'address'=>'',
-    		'sex'=>1
+    		'sex'=>1,
+                            'delete'=>1,
     		],
     		[
     		'id'=>6,
     		'user_id'=>6,
     		'phone'=>'0963560780',
     		'address'=>'',
-    		'sex'=>1
+    		'sex'=>1,
+                            'delete'=>1,
     		],
-    	]);
+           ]);
     }
 }

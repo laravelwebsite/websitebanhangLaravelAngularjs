@@ -13,7 +13,8 @@ class User_MenuController extends Controller
 			$usermenu=User_Menu::whereIn('id',$request->val)->get();
 			foreach($usermenu as $um)
 			{
-				$um->delete();
+				$um->delete=0;
+				$um->save();
 			}
 		}
 	}
