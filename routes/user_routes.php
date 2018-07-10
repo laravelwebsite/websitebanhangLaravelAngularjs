@@ -1,6 +1,6 @@
 <?php
 Route::get('/',function(){
-	return view('user.page.trangchu');
+	return view('user.page1.trangchu');
 });
 Route::get('search-product-cate/{slug}','ProductController@getProductbyCate');
 Route::get('search-product-subcate/{slug}','ProductController@getProductbySubcate');

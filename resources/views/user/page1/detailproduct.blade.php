@@ -1,10 +1,6 @@
-@extends('user.layout.index')
+@extends('user.layout1.index')
 
-
-@section('contentleft')
-@include('user.layout.contentleft')
-@endsection
-@section('contentright')
+@section('content')
 <div class="cont span_2_of_3" >
 	<div class="labout span_1_of_a1" >
 		<!-- start product_slider -->
@@ -30,21 +26,23 @@
 
 		<!-- end product_slider -->
 	</div>
-	<div class="cont1 span_2_of_a1" style="padding: 20px">
+
+	<div class="cont1 span_2_of_a1" style="padding-left: 90px">
 		<h3 class="m_3">{{$product->name}}</h3>
 
 		<div class="price_single">
 			<span class="reducedfrom">{{number_format(($product->price)*1.3)}} VND</span>
 			<span class="actual">{{number_format($product->price)}} VND</span><a href="them-gio-hang/{{$product->slug}}">Thêm vào giỏ hàng</a>
 		</div>
-		
+		<input type="hidden" name="_token" value="{{csrf_token()}}">
 		<div class="btn_form">
-			<form>
-				<input type="submit" value="Mua" title="" onclick="window.location='them-gio-hang/{{$product->slug}}'">
-			</form>
+			
+
+				<input  style="padding-left:30px;padding-right: 30px;color: red" type="submit" value="Mua" title="" onclick="window.location='them-gio-hang/{{$product->slug}}'">
+			
 		</div>
 		<ul class="add-to-links">
-			<li><img src="images/wish.png" alt=""/><a href="them-gio-hang/{{$product->slug}}">Add to cart</a></li>
+			<li>Mô tả</li>
 		</ul>
 		<p class="m_desc">{{$product->description}}</p>
 
@@ -71,8 +69,9 @@
 @endsection
 
 @section('script')
-<link rel="stylesheet" href="user/css/etalage.css">
-<script src="user/js/jquery.etalage.min.js"></script>
+
+<link rel="stylesheet" href="{{ asset('user/css/etalage.css')}}">
+<script src="{{ asset('user/js/jquery.etalage.min.js')}}"></script>
 <script type="text/javascript">
 	$(window).load(function() {
 		$("#flexiselDemo1").flexisel();
@@ -119,6 +118,7 @@
 
 	});
 </script>
+
 <!-- Include the Etalage files -->
 <script>
 	jQuery(document).ready(function($){
@@ -139,7 +139,7 @@
 
 						});
 </script>
-<script type="text/javascript" src="user/js/jquery.flexisel.js"></script>
+<script type="text/javascript" src="{{ asset('user/js/jquery.flexisel.js')}}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		
@@ -155,4 +155,7 @@
 				
 			});
 </script>
+@endsection
+@section('css')
+	<link href="{{ asset('user/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
 @endsection

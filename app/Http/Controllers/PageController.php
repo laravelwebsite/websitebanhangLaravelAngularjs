@@ -25,12 +25,12 @@ class PageController extends Controller
 		{
 			$user=Auth::user();
 			$detailAc=DetailAccount::where('user_id',$user->id)->first();
-			return view('user.page.cart',['cartContent'=>$contentCart,'total'=>$total,'count'=>$count,'userLogin'=>$user,'detailAc'=>$detailAc]);
+			return view('user.page1.cart',['cartContent'=>$contentCart,'total'=>$total,'count'=>$count,'userLogin'=>$user,'detailAc'=>$detailAc]);
 		}
 		else
 		{
 
-			return view('user.page.cart',['cartContent'=>$contentCart,'total'=>$total,'count'=>$count]);
+			return view('user.page1.cart',['cartContent'=>$contentCart,'total'=>$total,'count'=>$count]);
 		}
 		
 	}
@@ -54,7 +54,7 @@ class PageController extends Controller
 	}
 	public function getLienhe()
 	{
-		return view('user.page.lienhe');
+		return view('user.page1.contact');
 	}
 
 	public function getHoaDon(Request $request)
@@ -115,7 +115,7 @@ class PageController extends Controller
 		'total'=>Cart::total(),
 		'cart'=>Cart::content()
 		];
-			Mail::send('user.page.mailthanks',['data'=>$data],function($msg) use ($data){
+			Mail::send('user.page1.mailthanks',['data'=>$data],function($msg) use ($data){
 			$msg->from('huynhphihung0401@gmail.com','Website bán hàng');
 			$msg->to($data["email"])->subject('Thông tin hóa đơn');
 			});
@@ -154,7 +154,7 @@ public function postLienhe(Request $request)
 	'title'=>$request->title,
 	'content'=>$request->content
 	];
-		Mail::send('user.page.mail',$data,function($msg){
+		Mail::send('user.page1.mail',$data,function($msg){
 			$msg->from('huynhphihung0401@gmail.com','Website bán hàng');
 			$msg->to('huynhphihung1995@gmail.com')->subject('Bạn nhận được một email phản hồi từ website của bạn');
 		});
@@ -180,7 +180,7 @@ public function getProductSearch(Request $request)
 		$tukhoa=$request->tukhoa;
 
 		$productsearch=Product::where('delete','=',1)->where('name','like','%'.$tukhoa.'%')->orWhere('price','like','%'.$tukhoa.'%')->orWhere('slug','like','%'.$tukhoa.'%')->orWhere('title','like','%'.$tukhoa.'%')->paginate(15);
-		return View::make('user.page.searchproductrender',['productsearch'=>$productsearch]);
+		return View::make('user.page1.searchproductrender',['productsearch'=>$productsearch]);
 	}
 }
 public function getLocproduct(Request $request)

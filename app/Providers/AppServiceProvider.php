@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
                 
             });
         View::composer('*',function($view){
-                $cate=Category::where('delete',1)->limit(7)->get();
+                $cate=Category::where('delete',1)->limit(4)->get();
                 $product=Product::where('delete',1)->paginate(15);
                 $allcate=Category::where('delete',1)->get();
                 $view->with('cate',$cate);

@@ -15,6 +15,7 @@
     <link href="supadmin/style-shorten/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.css" rel="stylesheet" type="text/css">
+
   <script type="text/javascript" src="js/jquery.min.js"></script>
   
 

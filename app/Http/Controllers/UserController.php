@@ -80,7 +80,7 @@ class UserController extends Controller
 
 	public function getRegister()
 	{
-		return view('user.page.register');
+		return view('user.page1.register');
 	}
 	public function postRegister(Request $request)
 	{
@@ -121,7 +121,7 @@ class UserController extends Controller
 
 	public function getLoginUser()
 	{
-		return view('user.page.login');
+		return view('user.page1.login');
 	}
 	public function postLoginUser(Request $request)
 	{
@@ -150,7 +150,7 @@ class UserController extends Controller
 	{
 		$user=Auth::user();
 		$detailAc=DetailAccount::where('user_id',$user->id)->first();
-		return view('user.page.updateAccount',['userLogin'=>$user,'detailAc'=>$detailAc]);
+		return view('user.page1.updateAccount',['userLogin'=>$user,'detailAc'=>$detailAc]);
 	}
 	public function postUpdateAccount(Request $request)
 	{
@@ -178,7 +178,7 @@ class UserController extends Controller
 	}
 	public function getChangepass()
 	{
-		return view('user.page.changePass');
+		return view('user.page1.changePass');
 	}
 	public function postChangepass(Request $request)
 	{

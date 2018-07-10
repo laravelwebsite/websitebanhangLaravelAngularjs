@@ -19,7 +19,7 @@ class ProductController extends Controller
 
 		$detail_sub_cate=$product->detailsubcategory;
 		$product_lienquan=Product::where('delete',1)->where('detail_sub_categories_id',$detail_sub_cate->id)->limit(10)->get();
-		return view('user.page.chitiet',['product'=>$product,'split'=>$sp,'productlienquan'=>$product_lienquan]);
+		return view('user.page1.detailproduct',['product'=>$product,'split'=>$sp,'productlienquan'=>$product_lienquan]);
 	}
 	public function postdeleteProduct(Request $request)
 	{
@@ -61,7 +61,7 @@ class ProductController extends Controller
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');
 		$product=$tbproduct->where('categories_id',$cate->id)->paginate(10);
 		
-		return view('user.page.productCate',['productcate'=>$product]);
+		return view('user.page1.productBy',['productcate'=>$product]);
 		
 	}
 	public function getProductbySubcate($slug)
@@ -75,7 +75,7 @@ class ProductController extends Controller
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');
 		
 		$product=$tbproduct->where('sub_categories_id',$sub->id)->paginate(10);
-		return view('user.page.productCate',['productcate'=>$product]);
+		return view('user.page1.productBy',['productcate'=>$product]);
 	}
 	public function getProductbyDetailSubcate($slug)
 	{
@@ -87,7 +87,7 @@ class ProductController extends Controller
 		->join('detail_sub_categories','sub_categories.id','=','detail_sub_categories.sub_categories_id')
 		->join('products','detail_sub_categories.id','=','products.detail_sub_categories_id');
 		$product=$tbproduct->where('detail_sub_categories_id',$detail->id)->paginate(10);
-		return view('user.page.productCate',['productcate'=>$product]);
+		return view('user.page1.productBy',['productcate'=>$product]);
 	}
 	public function productPerpage(Request $request)
 	{
