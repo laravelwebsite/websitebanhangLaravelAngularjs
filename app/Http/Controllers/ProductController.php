@@ -11,6 +11,16 @@ use DB;
 
 class ProductController extends Controller
 {
+	public function getTrangchu()
+	{
+		$dienthoai=Product::where('delete',1)->where('detail_sub_categories_id',1)->limit(3)->get();
+		$macbook=Product::where('delete',1)->where('detail_sub_categories_id',10)->limit(3)->get();
+		$trangphucnam=Product::where('delete',1)->where('detail_sub_categories_id',44)->limit(3)->get();
+		$aokhoacnam=Product::where('delete',1)->where('detail_sub_categories_id',45)->limit(3)->get();
+		$trangphucnu=Product::where('delete',1)->where('detail_sub_categories_id',56)->limit(3)->get();
+		$aokhoacnu=Product::where('delete',1)->where('detail_sub_categories_id',57)->limit(3)->get();
+		return view('user.page1.trangchu',['dienthoai'=>$dienthoai,'macbook'=>$macbook,'trangphucnam'=>$trangphucnam,'aokhoacnam'=>$aokhoacnam,'trangphucnu'=>$trangphucnu,'aokhoacnu'=>$aokhoacnu]);
+	}
 	public function getProduct($id)
 	{
 		$product=Product::findBySlug($id);

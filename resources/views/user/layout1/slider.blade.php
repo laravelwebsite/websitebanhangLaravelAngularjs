@@ -12,9 +12,9 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-6">
-									<h1><span>E</span>-SHOPPER</h1>
-									<h2>Free E-Commerce Template</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<h1><span>Shop</span>-PH</h1>
+									<h2>Mua sắm thả ga tại Shop-PH</h2>
+									<p>Hàng trăm sản phẩm thời trang nam nữ đều có mặt tại Shop-PH.Nhanh tay đặt hàng để được hưởng nhiều ưu đãi hấp dẫn</p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
@@ -25,8 +25,8 @@
 							<div class="item">
 								<div class="col-sm-6">
 									<h1><span>E</span>-SHOPPER</h1>
-									<h2>100% Responsive Design</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<h2>Mua sắm thả ga tại Shop-PH</h2>
+									<p>Cùng nhau mua sắm những sản phẩm có giá hot nhất và chất lượng nhất chỉ có tại Shop-PH</p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
@@ -38,8 +38,8 @@
 							<div class="item">
 								<div class="col-sm-6">
 									<h1><span>E</span>-SHOPPER</h1>
-									<h2>Free Ecommerce Template</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<h2>Mua sắm thả ga tại Shop-PH</h2>
+									<p>Các sản phẩm điện tử,thời trang và hàng trăm mặt hàng khác luôn được cập nhật.Không đâu có thể mua sắm tiện lợi và rẻ như ở Shop-PH</p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
