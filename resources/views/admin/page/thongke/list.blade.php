@@ -117,6 +117,7 @@ User List | Admin
                         <th ><i class=" fa fa-user"></i>EMAIL</th>    
                         <th ><i class=" fa fa-user"></i>PHONE</th>   
                         <th><i class=" fa fa-user"></i>PRICE</th> 
+                        <th><i class=" fa fa-user"></i>NGÀY TẠO</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -124,6 +125,7 @@ User List | Admin
                       <div orientable></div>
 
                       <tr>
+                        <td class="text-center"><span></span></td>
                         <td class="text-center"><span></span></td>
                         <td class="text-center"><span></span></td>
                         <td class="text-center"><span></span></td>

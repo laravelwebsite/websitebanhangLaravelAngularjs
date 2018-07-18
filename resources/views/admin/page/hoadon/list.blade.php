@@ -57,7 +57,7 @@ Bill | Admin
           <tr dir-paginate="hd in hoadons|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
             <td class="text-center" ><input type="checkbox" class="id" id="id" name="id" ng-checked="checkall" value="[[hd.id]]" /></td>
             
-            <td class="text-center"><span>[[hd.Mahoadon]]</span></td>
+            <td class="text-center"><span><a target="_blank" href="admin/hoadon/chi-tiet-hoa-don/[[hd.Mahoadon]]" title="xem chi tiết hóa đơn">[[hd.Mahoadon]]</a></span></td>
             <td class="text-center"><span>[[hd.email]]</span></td>
             <td class="text-center"><span>[[hd.phone]]</span></td>
             <td class="text-center"><span>[[hd.price]]</span></td>

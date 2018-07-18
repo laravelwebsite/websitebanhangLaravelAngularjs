@@ -62,6 +62,13 @@ class HoadonController extends Controller
 			}
 		}
 	}
+	public function chitiethoadon(Request $request)
+	{
+		$mahoadon=$request->id;
+		$hoadon=HoaDon::where('Mahoadon',$mahoadon)->first();
+		$sanphamhoadon=HoaDonSanPham::where('mahoadon',$mahoadon)->get();
+		return view('admin.page.thongke.chitiethoadon',['hoadon'=>$hoadon,'sanphamhoadon'=>$sanphamhoadon]);
+	}
 	public function postXemthuchi(Request $request)
 	{
 		if($request->ajax())
@@ -96,4 +103,5 @@ class HoadonController extends Controller
 			return View::make('admin.page.thongke.hoadonsearch',['hoadonsearch'=>$hoadon,'tongtien'=>$tongtien]);
 		}
 	}
+	
 }

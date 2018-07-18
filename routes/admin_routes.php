@@ -259,6 +259,7 @@ Route::group(['prefix'=>'admin'],function(){
 		Route::resource('tbHoadon','HoadonControllerAPI');
 		Route::post('update-bill','HoadonController@postUpdateBill');
 		Route::post('delete-hoadon','HoadonController@postdeleteHoadon');
+		Route::get('chi-tiet-hoa-don/{id}','HoadonController@chitiethoadon');
 
 	});
 	Route::group(['prefix'=>'thongke','middleware'=>'admin'],function(){
@@ -284,6 +285,7 @@ Route::group(['prefix'=>'admin'],function(){
 			}
 		});
 		Route::post('xem-thu-chi','HoadonController@postXemthuchi');
+		Route::get('chi-tiet-hoa-don/{id}','HoadonController@chitiethoadon');
 
 	});
 	Route::group(['prefix'=>'truycap','middleware'=>'admin'],function(){
