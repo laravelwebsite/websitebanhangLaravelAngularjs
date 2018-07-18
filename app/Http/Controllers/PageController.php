@@ -179,7 +179,7 @@ public function getProductSearch(Request $request)
 	{
 		$tukhoa=$request->tukhoa;
 
-		$productsearch=Product::where('delete','=',1)->where('name','like','%'.$tukhoa.'%')->orWhere('price','like','%'.$tukhoa.'%')->orWhere('slug','like','%'.$tukhoa.'%')->orWhere('title','like','%'.$tukhoa.'%')->paginate(15);
+		$productsearch=Product::where('name','like','%'.$tukhoa.'%')->orWhere('price','like','%'.$tukhoa.'%')->orWhere('slug','like','%'.$tukhoa.'%')->orWhere('title','like','%'.$tukhoa.'%')->paginate(15);
 		return View::make('user.page1.searchproductrender',['productsearch'=>$productsearch]);
 	}
 }

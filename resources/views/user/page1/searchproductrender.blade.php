@@ -3,6 +3,7 @@
 						<h2 class="title text-center">Sản phẩm</h2>
 						@if($productsearch->count()>0)
 						@foreach($productsearch as $pro)
+						@if($pro->delete==1)
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
@@ -28,6 +29,7 @@
 								</div>
 							</div>
 						</div>
+						@endif
 							@endforeach
 						@else
 							<p>Không có sản phẩm nào.Mời bạn tìm sản phẩm khác.Hàng nghìn sản phẩm giá ưu đãi đang đợi bạn</p>	
